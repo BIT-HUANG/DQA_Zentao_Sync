@@ -10,7 +10,7 @@ from tkinter import *
 from tkinter.ttk import *
 
 import mconfig
-from utils.common import history
+from utils import common
 
 class WinGUI(Tk):
 
@@ -213,7 +213,7 @@ class WinGUI(Tk):
                     show_values.append(idx)
                 elif col_name == "禅道最新历史(点击查看所有)":
                     # 禅道历史列：调用方法显示最新历史
-                    show_values.append(show_latest_zentao_history(row.get("zentao_history", {})))
+                    show_values.append(common.show_latest_zentao_history(row.get("zentao_history", {})))
                 elif col_name == "Jira最新备注(点击查看所有)":
                     # Jira备注列：直接取值
                     show_values.append(row.get("jira_latest_note", ""))
@@ -298,7 +298,7 @@ class WinGUI(Tk):
             return
 
         # 4. 获取原始历史字典 → 调用你的方法生成完整历史文本
-        all_history_list = show_all_zentao_history(raw_history_dict)
+        all_history_list = common.show_all_zentao_history(raw_history_dict)
         # 拼接完整历史为换行文本，方便弹窗展示
         all_history_text = '\n\n'.join(all_history_list)
 
@@ -443,28 +443,3 @@ class Win(WinGUI):
         pass
     def __style_config(self):
         pass
-
-
-
-# ========== table data transfer ==========
-def transfer_single_zentao_history(history_content):
-    history_str = (history_content['id'] + ": "
-                    + history_content['date'] + ", "
-                    + history_content['actor'] + " "
-                   + history_content['action'] + ", Comment: "
-                   + history_content['comment'])
-    return history_str
-
-def show_latest_zentao_history(history_dict):
-    if not history_dict:
-        return ""
-    latest_history_id = max(history_dict, key=lambda k: int(k))
-    latest_history_content = history_dict[latest_history_id]
-    history_str = transfer_single_zentao_history(latest_history_content)
-    return history_str
-
-def show_all_zentao_history(history_dict):
-    history_list = list()
-    for history_id, history_content in history_dict.items():
-        history_list.append(transfer_single_zentao_history(history_content))
-    return history_list
