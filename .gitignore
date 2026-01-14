@@ -18,7 +18,7 @@ build/
 dist/
 test.json
 test.py
-.config
+
 
 # 系统无用文件
 Thumbs.db
