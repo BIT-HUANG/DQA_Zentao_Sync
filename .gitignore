@@ -1,0 +1,24 @@
+# PyCharm工程配置（必忽略）
+.idea/
+*.iml
+
+# Python虚拟环境（绝对不上传，几百MB）
+.venv
+venv/
+env/
+ENV/
+
+# Python缓存文件（所有子文件夹都过滤）
+__pycache__/
+*.pyc
+*.pyd
+
+# 自定义忽略的目录/子文件夹 ↓↓↓ 这里改你自己要忽略的名字就行
+build/
+dist/
+test.json
+test.py
+.config
+
+# 系统无用文件
+Thumbs.db
