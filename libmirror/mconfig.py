@@ -361,3 +361,17 @@ def get_issue_field() -> list:
             LOGGER.error(f'请补充配置"{__CONFIG_KEY_ISSUE_FIELD}"到.config\n')
         __CONFIG_VALUE_ISSUE_FIELD = __CONFIG_JSON[__CONFIG_KEY_ISSUE_FIELD]
     return __CONFIG_VALUE_ISSUE_FIELD
+
+
+# ========== 读取.config中的禅道创建模块映射 create_zentao_map ==========
+__CONFIG_KEY_CREATE_ZENTAO_MAP = "create_zentao_map"
+__CONFIG_VALUE_CREATE_ZENTAO_MAP = None
+
+def get_create_zentao_map() -> dict:
+    global __CONFIG_VALUE_CREATE_ZENTAO_MAP
+    if __CONFIG_VALUE_CREATE_ZENTAO_MAP is None:
+        if __CONFIG_KEY_CREATE_ZENTAO_MAP not in __CONFIG_JSON:
+            LOGGER.error(f'请补充配置"{__CONFIG_KEY_CREATE_ZENTAO_MAP}"到.config\n')
+            __CONFIG_VALUE_CREATE_ZENTAO_MAP = {}
+        __CONFIG_VALUE_CREATE_ZENTAO_MAP = __CONFIG_JSON[__CONFIG_KEY_CREATE_ZENTAO_MAP]
+    return __CONFIG_VALUE_CREATE_ZENTAO_MAP

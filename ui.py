@@ -26,8 +26,8 @@ class WinGUI(Tk):
     TABLE_COLUMNS_MAP = {
         TABLE_TYPE_DEFAULT: {"ID": 30, "标题": 300, "JiraID": 130, "Jira状态": 60, "禅道ID": 60, "禅道状态": 60,
                          "禅道对策": 60, "禅道最新历史(点击查看所有)": 450},
-        TABLE_TYPE_CREATE_ZENTAO: {"ID": 30, "标题": 300, "JiraID": 130, "禅道模块": 60, "禅道指派人": 60,
-                            "禅道创建结果":60, "禅道创建备注": 450},
+        TABLE_TYPE_CREATE_ZENTAO: {"ID": 30, "标题": 300, "JiraID": 130, "禅道模块": 130, "禅道指派人": 130,
+                            "禅道创建结果":130, "禅道创建备注": 450},
         TABLE_TYPE_JIRA: {"ID": 30, "标题": 300, "JiraID": 130, "Jira状态": 60,"Jira最新备注(点击查看所有)":450},
         TABLE_TYPE_ZENTAO: {"ID": 30, "标题": 300, "禅道ID": 60, "禅道状态": 60, "禅道对策": 60, "禅道最新历史(点击查看所有)": 450},
         TABLE_TYPE_ERROR: {"查询结果提示": 1180},
@@ -52,9 +52,20 @@ class WinGUI(Tk):
         "查询结果提示": "tips"
     }
 
+    # ======== 禅道创建弹窗 固定常量 ========
+    CREATE_ZENTAO_POPUP_WIDTH = 800
+    CREATE_ZENTAO_POPUP_HEIGHT = 320
+    CREATE_ZENTAO_POPUP_TITLE = "添加创建禅道-添加记录"
+
     def __init__(self):
         super().__init__()
         self.__win()
+
+        # ========== 禅道创建相关变量 ==========
+        self.zentao_create_map = mconfig.get_create_zentao_map()  # 读取.config的禅道模块映射
+        self.create_zentao_popup = None  # 禅道创建表单弹窗对象
+        self.create_form_widgets = {}  # 存储表单内所有控件，方便清空/取值
+
         self.tk_label_label_1 = self.__tk_label_label_1(self)
         self.tk_table_table_1 = self.__tk_table_table_1(self)
         self.tk_button_button_search = self.__tk_button_button_search(self)
@@ -227,7 +238,7 @@ class WinGUI(Tk):
 
     # ========== 提交创建 按钮 定义 ==========
     def __tk_button_submit_create(self, parent):
-        btn = Button(parent, text="提交记录", takefocus=False)
+        btn = Button(parent, text="确认提交", takefocus=False)
         btn.place(x=1190, y=760, width=100, height=30)
         return btn
 
@@ -334,7 +345,6 @@ class WinGUI(Tk):
         self.tk_input_jql.delete(0, END)  # 删除从索引0到末尾的所有内容
 
     # ========== 点击单元格展示完整历史 ==========
-    # ========== 点击单元格展示完整历史 ✅精准修改：仅默认表格的历史列触发弹窗 ==========
     def show_history_detail(self, event):
         """点击表格单元格，【仅默认表格】的【禅道最新历史】列则弹窗展示完整内容"""
         table = self.tk_table_table_1
@@ -513,6 +523,175 @@ class WinGUI(Tk):
         self.tooltip_label.place_forget()
         self.tooltip_label.place(relx=0.5, rely=1.0, y=-20, anchor="s")
 
+    # ========== 新增：禅道创建-添加记录 核心方法开始 ==========
+    def open_create_zentao_popup(self):
+        """打开【添加创建禅道-添加记录】表单弹窗 800*320 可拉伸 + 完美排版不贴边"""
+        # ========== 兜底切换表头，双重保障 ==========
+        self.reset_table_style(self.TABLE_TYPE_CREATE_ZENTAO)
+
+        # 先关闭已存在的弹窗，避免重复打开
+        if self.create_zentao_popup and self.create_zentao_popup.winfo_exists():
+            self.create_zentao_popup.destroy()
+
+        # 创建弹窗主窗口 + 新尺寸 + 置顶 + 模态框（关键：无法点击主窗口）
+        self.create_zentao_popup = tk.Toplevel(self)
+        self.create_zentao_popup.title(self.CREATE_ZENTAO_POPUP_TITLE)
+        self.create_zentao_popup.geometry(f"{self.CREATE_ZENTAO_POPUP_WIDTH}x{self.CREATE_ZENTAO_POPUP_HEIGHT}")
+        self.create_zentao_popup.resizable(width=True, height=True)  # 允许弹窗拉伸大小
+        self.create_zentao_popup.attributes("-topmost", True)
+        self.create_zentao_popup.grab_set()  # 模态框：锁定主窗口操作
+
+        # 弹窗居中显示
+        self.create_zentao_popup.update_idletasks()
+        x = (self.create_zentao_popup.winfo_screenwidth() - self.CREATE_ZENTAO_POPUP_WIDTH) // 2
+        y = (self.create_zentao_popup.winfo_screenheight() - self.CREATE_ZENTAO_POPUP_HEIGHT) // 2
+        self.create_zentao_popup.geometry(f"+{x}+{y}")
+
+        # ========== 表单控件：从上到下依次布局  ==========
+        pad_y = 25
+        base_x = 40  # 全局左侧统一留白40px，永不贴左边缘
+        label_width = 80  # 左侧文字标签固定宽度
+        main_input_max_w = 600  #  核心：JiraID输入框/标题Label 最大宽度锁定600px
+        gap = 15  # 控件之间的间距，统一15px，视觉均匀
+
+        # 1. JiraID 行：标签 + 输入框  最大宽度600px + 右侧强制留白 + 永不贴边
+        tk.Label(self.create_zentao_popup, text="JiraID：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
+        jira_id_entry = tk.Entry(self.create_zentao_popup, width=int(main_input_max_w / 8), font=("微软雅黑", 10))
+        jira_id_entry.place(x=base_x + label_width + gap, y=pad_y, width=main_input_max_w)
+        self.create_form_widgets["jira_id_entry"] = jira_id_entry
+
+        # 2. 标题 行：标签 + 标题展示Label  最大宽度600px + 右侧强制留白 + 永不贴边 + 背景边框保留
+        pad_y += 60
+        tk.Label(self.create_zentao_popup, text="标题：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
+        title_label = tk.Label(self.create_zentao_popup, text="标题", bg="#F5F5F5", relief="solid", bd=1,
+                               anchor="w", padx=5, font=("微软雅黑", 10))
+        title_label.place(x=base_x + label_width + gap, y=pad_y, width=main_input_max_w)
+        self.create_form_widgets["title_label"] = title_label
+
+        # 3. 禅道模块 行：标签 + 下拉框 + zt_pid展示Label + zt_assignee展示Label  核心优化
+        #  下拉框宽度适配 + 模块ID/指派人整体左移 + 左右留白充足 + 绝不贴窗口右侧
+        pad_y += 60
+        tk.Label(self.create_zentao_popup, text="禅道模块：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
+        # 下拉框：宽度300px 适中，不拥挤不空旷，从配置读取模块列表
+        module_list = list(self.zentao_create_map.keys())
+        module_var = tk.StringVar(value="")
+        module_combobox = Combobox(self.create_zentao_popup, textvariable=module_var, values=module_list,
+                                   state="readonly", font=("微软雅黑", 10))
+        module_combobox.place(x=base_x + label_width + gap, y=pad_y, width=150)
+        self.create_form_widgets["module_combobox"] = module_combobox
+        self.create_form_widgets["module_var"] = module_var
+
+        # zt_pid 模块ID 展示区  左移+留白+固定宽度，不贴边
+        tk.Label(self.create_zentao_popup, text="模块ID：", anchor="w").place(x=base_x + label_width + gap + 165,
+                                                                             y=pad_y)
+        pid_label = tk.Label(self.create_zentao_popup, text="", bg="#F5F5F5", relief="solid", bd=1,
+                             width=10, anchor="w", padx=5, font=("微软雅黑", 10))
+        pid_label.place(x=base_x + label_width + gap + 220, y=pad_y)
+        self.create_form_widgets["pid_label"] = pid_label
+
+        # zt_assignee 指派人 展示区  左移+留白+固定宽度，右侧留足间距，彻底解决贴边问题
+        tk.Label(self.create_zentao_popup, text="指派人：", anchor="w").place(x=base_x + label_width + gap + 335,
+                                                                             y=pad_y)
+        assignee_label = tk.Label(self.create_zentao_popup, text="", bg="#F5F5F5", relief="solid", bd=1,
+                                  width=15, anchor="w", padx=5, font=("微软雅黑", 10))
+        assignee_label.place(x=base_x + label_width + gap + 390, y=pad_y)
+        self.create_form_widgets["assignee_label"] = assignee_label
+
+        # ========== 核心联动逻辑：选择下拉框后，自动回显zt_pid和zt_assignee ==========
+        def select_module_event(event):
+            select_module = module_var.get()
+            module_info = self.zentao_create_map.get(select_module, {})
+            pid_label.config(text=module_info.get("zt_pid", ""))
+            assignee_label.config(text=module_info.get("zt_assignee", ""))
+
+        module_combobox.bind("<<ComboboxSelected>>", select_module_event)
+
+        # 4. 按钮区：确认按钮 + 清空按钮  居中布局 + 上下留白充足 + 按钮间距均匀，美观
+        pad_y += 70
+        confirm_btn = tk.Button(self.create_zentao_popup, text="确认", width=10, height=1, bg="#4CAF50", fg="white",
+                                relief="flat", command=self.confirm_create_zentao_record)
+        confirm_btn.place(x=self.CREATE_ZENTAO_POPUP_WIDTH // 2 - 90, y=pad_y)
+
+        clear_btn = tk.Button(self.create_zentao_popup, text="清空", width=10, height=1, bg="#F44336", fg="white",
+                              relief="flat", command=self.clear_create_zentao_form)
+        clear_btn.place(x=self.CREATE_ZENTAO_POPUP_WIDTH // 2 + 10, y=pad_y)
+
+    def clear_create_zentao_form(self):
+        """清空禅道创建表单的所有数据，恢复初始状态"""
+        self.create_form_widgets.get("jira_id_entry").delete(0, tk.END)
+        self.create_form_widgets.get("title_label").config(text="标题")
+        self.create_form_widgets.get("module_var").set("")
+        self.create_form_widgets.get("pid_label").config(text="")
+        self.create_form_widgets.get("assignee_label").config(text="")
+
+    def get_table_all_data(self):
+        """获取表格内所有数据的完整列表（适配save_data_to_json的格式），复用现有row_history_map"""
+        table_all_data = []
+        table = self.tk_table_table_1
+        for row_id in table.get_children():
+            if row_id in self.row_history_map:
+                table_all_data.append(self.row_history_map[row_id])
+        return table_all_data
+
+    def confirm_create_zentao_record(self):
+        """确认添加禅道创建记录：校验表单 → 组装数据 → 添加到表格 → 保存到JSON → 提示结果"""
+        # 1. 表单取值
+        jira_id = self.create_form_widgets.get("jira_id_entry").get().strip()
+        select_module = self.create_form_widgets.get("module_var").get().strip()
+        # ========== 容错代码 ==========
+        if not self.zentao_create_map:
+            self.show_tooltip("未读取到禅道模块配置，请检查.config文件！")
+            return
+        module_info = self.zentao_create_map.get(select_module, {})
+        zt_pid = module_info.get("zt_pid", "")
+        zt_assignee = module_info.get("zt_assignee", "")
+
+        # 2. 必填项校验
+        if not jira_id:
+            self.show_tooltip("请输入JiraID！")
+            return
+        if not select_module:
+            self.show_tooltip("请选择禅道模块！")
+            return
+
+        # 3. 组装【符合TABLE_TYPE_CREATE_ZENTAO表格】的标准数据字典
+        new_record = {
+            "jira_key": jira_id,
+            "jira_summary": "标题",  # 暂时固定，后续替换为Jira查询结果
+            "zentao_module": select_module,
+            "zentao_module_id": zt_pid,
+            "zentao_assignee": zt_assignee,
+            "zentao_assignee_id": "",  # 预留字段，暂无值
+            "zentao_create_result": "待创建",  # 默认待创建状态
+            "zentao_create_comment": ""  # 默认空备注
+        }
+
+        # 4. 核心：添加数据到表格 + 刷新表格（关键：当前表格必须是创建禅道表格）
+        table = self.tk_table_table_1
+        row_id = table.insert('', tk.END, values=[
+            len(table.get_children()) + 1 if table.get_children() else 1,  # ID列：永远从1开始，完美规整
+            new_record["jira_summary"],
+            new_record["jira_key"],
+            new_record["zentao_module"],
+            new_record["zentao_assignee"],
+            new_record["zentao_create_result"],
+            new_record["zentao_create_comment"]
+        ])
+        self.row_history_map[row_id] = new_record  # 同步更新映射字典
+
+        # 5. 保存表格全量数据到JSON（与update task完全一致的逻辑）
+        table_all_data = self.get_table_all_data()
+        save_success, save_msg = common.save_data_to_json(table_all_data)
+        if save_success:
+            self.show_tooltip(f"添加成功！{save_msg}")
+        else:
+            self.show_tooltip(f"添加成功，保存失败：{save_msg}")
+
+        # 6. 清空表单，保持弹窗打开（方便继续添加）
+        self.clear_create_zentao_form()
+    # ========== 禅道创建-添加记录 核心方法结束 ==========
+
+
     # ========== 主线程调用UI方法的工具函数 ==========
     def run_in_main_thread(self, func, *args):
         self.after(0, lambda: func(*args))
@@ -538,8 +717,8 @@ class Win(WinGUI):
     def __event_bind(self):
         self.tk_button_button_search.bind('<Button-1>',self.ctl.search)
         self.tk_button_button_update.bind('<Button-1>',self.ctl.update)
-        # ========== 预留按钮事件绑定入口（后续在control.py实现逻辑即可） ==========
-        self.tk_button_add_record.bind('<Button-1>', self.ctl.add_zentao_record)
+        # ========== 添加记录按钮 点击添加记录 → 先切换表头 → 再打开弹窗 ==========
+        self.tk_button_add_record.bind('<Button-1>', lambda e: [self.reset_table_style(self.TABLE_TYPE_CREATE_ZENTAO), self.open_create_zentao_popup()])
         self.tk_button_submit_create.bind('<Button-1>', self.ctl.submit_zentao_create)
         pass
     def __style_config(self):
