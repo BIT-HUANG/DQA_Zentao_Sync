@@ -60,6 +60,12 @@ class WinGUI(Tk):
         self.tk_button_button_search = self.__tk_button_button_search(self)
         self.tk_button_button_update = self.__tk_button_button_update(self)
         self.tk_input_jql = self.__tk_input_jql(self)
+
+        # ========== 禅道创建区域 控件初始化 ==========
+        self.tk_label_zentao_create = self.__tk_label_zentao_create(self)
+        self.tk_button_add_record = self.__tk_button_add_record(self)
+        self.tk_button_submit_create = self.__tk_button_submit_create(self)
+
         # ========== 定义映射字典 绑定【表格行id: 原始完整行数据】 ==========
         self.row_history_map = {}
         # ========== 弹窗初始化 ==========
@@ -105,7 +111,7 @@ class WinGUI(Tk):
         screenheight = self.winfo_screenheight()
         geometry = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(geometry)
-        # ========== ✅ 核心修改1：开启窗口可拉伸+最大化 ==========
+        # ========== 开启窗口可拉伸+最大化 ==========
         self.resizable(width=True, height=True)
 
     def scrollbar_autohide(self,vbar, hbar, widget):
@@ -142,7 +148,7 @@ class WinGUI(Tk):
             self.h_scrollbar(hbar, widget, x, y, w, h, pw, ph)
         self.scrollbar_autohide(vbar, hbar, widget)
 
-    # ========== ✅ 核心新增：窗口大小变化事件，刷新表格尺寸 ==========
+    # ========== 窗口大小变化事件，刷新表格尺寸 ==========
     def on_window_resize(self, event):
         """窗口拉伸/最大化时，自动刷新表格和滚动条尺寸"""
         if event.widget == self:
@@ -162,6 +168,13 @@ class WinGUI(Tk):
             # 更新按钮位置
             self.tk_button_button_search.place(x=win_w - 200, y=20, width=80, height=30)
             self.tk_button_button_update.place(x=win_w - 110, y=20, width=80, height=30)
+            # ========== 禅道创建区域 跟随窗口拉伸自动适配位置 ==========
+            # 固定位置：窗口右下角、表格下方，间距统一20px，完美对齐
+            base_x = win_w - 300
+            base_y = win_h - 50
+            self.tk_label_zentao_create.place(x=base_x - 80, y=base_y, width=80, height=30)
+            self.tk_button_add_record.place(x=base_x, y=base_y, width=100, height=30)
+            self.tk_button_submit_create.place(x=base_x + 110, y=base_y, width=100, height=30)
 
     def __tk_label_label_1(self,parent):
         label = Label(parent,text="JQL： ",anchor="center", )
@@ -181,7 +194,6 @@ class WinGUI(Tk):
 
         # ========== 绑定表格单元格点击事件 ==========
         tk_table.bind('<ButtonRelease-1>', self.show_history_detail)
-        # ========== ✅ 修复核心：绑定3个鼠标事件，缺一不可 ==========
         tk_table.bind('<Motion>', self.on_table_motion)    # 鼠标在表格内移动 → 核心触发悬浮提示
         tk_table.bind('<Leave>', self.on_table_leave)     # 鼠标离开表格 → 隐藏提示
         return tk_table
@@ -200,6 +212,24 @@ class WinGUI(Tk):
         ipt = Entry(parent, )
         ipt.place(x=100, y=20, width=800, height=30)
         return ipt
+
+    # ========== 禅道创建 标题Label 定义 ==========
+    def __tk_label_zentao_create(self, parent):
+        label = Label(parent, text="禅道创建：", anchor="center")
+        label.place(x=1000, y=760, width=80, height=30)
+        return label
+
+    # ========== 添加记录 按钮 定义 ==========
+    def __tk_button_add_record(self, parent):
+        btn = Button(parent, text="添加记录", takefocus=False)
+        btn.place(x=1080, y=760, width=100, height=30)
+        return btn
+
+    # ========== 提交创建 按钮 定义 ==========
+    def __tk_button_submit_create(self, parent):
+        btn = Button(parent, text="提交记录", takefocus=False)
+        btn.place(x=1190, y=760, width=100, height=30)
+        return btn
 
     # ==========table control ==========
     def reset_table_style(self, table_type):
@@ -506,6 +536,9 @@ class Win(WinGUI):
     def __event_bind(self):
         self.tk_button_button_search.bind('<Button-1>',self.ctl.search)
         self.tk_button_button_update.bind('<Button-1>',self.ctl.update)
+        # ========== 预留按钮事件绑定入口（后续在control.py实现逻辑即可） ==========
+        self.tk_button_add_record.bind('<Button-1>', self.ctl.add_zentao_record)
+        self.tk_button_submit_create.bind('<Button-1>', self.ctl.submit_zentao_create)
         pass
     def __style_config(self):
         pass

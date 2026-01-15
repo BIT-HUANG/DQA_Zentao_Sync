@@ -31,6 +31,24 @@ class Controller:
         t = threading.Thread(target=self.__update_task, daemon=True)
         t.start()
 
+    # ========== 无参刷新表格公共方法 ==========
+    def refresh_table_data(self):
+        """无参刷新表格数据，复用原有查询逻辑，无点击事件，专门给update执行完后自动调用"""
+        t = threading.Thread(target=self.__search_task, daemon=True)
+        t.start()
+
+    # ========== 添加禅道记录 按钮事件方法 ==========
+    def add_zentao_record(self, evt):
+        print("添加禅道记录按钮事件处理:", evt)
+        t = threading.Thread(target=self.__add_zentao_record_task, daemon=True)
+        t.start()
+
+    # ========== 提交禅道创建 按钮事件方法 ==========
+    def submit_zentao_create(self, evt):
+        print("提交禅道创建按钮事件处理:", evt)
+        t = threading.Thread(target=self.__submit_zentao_create_task, daemon=True)
+        t.start()
+
     # ========== 同步Excel的子线程任务 ==========
     def __sync_excel_task(self):
         self.ui.run_in_main_thread(self.ui.show_tooltip, "正在同步Excel到禅道，请稍候...")
@@ -113,9 +131,55 @@ class Controller:
             short_tip = f"同步完成！总计：{len(table_all_data)}条 | 成功：{result['success']}条 | 跳过：{result['skip']}条 | 无需同步：{result['no_sync']}条 | 失败：{result['fail']}条"
             self.ui.run_in_main_thread(self.ui.show_tooltip, short_tip)
 
+            # ========== 同步成功后，自动刷新表格数据==========
+            print("🔄 同步成功，开始自动刷新表格数据...")
+            self.ui.run_in_main_thread(self.ui.show_tooltip, "🔄 同步成功，正在刷新最新数据，请稍候...", False)
+            sleep(0.5) # 短暂延时，让用户看到提示，体验更好
+            self.refresh_table_data() # 调用新增的无参刷新方法
+
         except Exception as e:
             error_msg = f"同步禅道历史到Jira失败：{str(e)}"
             print(error_msg)
             self.ui.run_in_main_thread(self.ui.load_error_table, error_msg)
+            self.ui.run_in_main_thread(self.ui.show_tooltip, error_msg)
+            return
+
+    # ========== 添加禅道记录 子线程任务 ==========
+    def __add_zentao_record_task(self):
+        # 1. 显示加载提示，和你的其他方法一致，禁用自动隐藏
+        self.ui.run_in_main_thread(self.ui.show_tooltip, "正在执行添加禅道记录操作，请稍候...", False)
+        try:
+            # ===================== 业务逻辑占位 - 替换区 =====================
+            print("添加记录按钮任务")
+            # 这里后续替换为真实的 service.py 业务调用：比如 services.add_zentao_record(xxx)
+            # =================================================================
+
+            # 执行成功后的UI提示
+            self.ui.run_in_main_thread(self.ui.show_tooltip, "✅ 禅道记录添加成功！")
+
+        except Exception as e:
+            # 统一异常捕获+UI错误提示，和你的其他方法完全一致
+            error_msg = f"❌ 禅道记录添加失败：{str(e)}"
+            print(error_msg)
+            self.ui.run_in_main_thread(self.ui.show_tooltip, error_msg)
+            return
+
+    # ========== 提交禅道创建 子线程任务 ==========
+    def __submit_zentao_create_task(self):
+        # 1. 显示加载提示，和你的其他方法一致，禁用自动隐藏
+        self.ui.run_in_main_thread(self.ui.show_tooltip, "正在批量提交禅道创建，请稍候...", False)
+        try:
+            # ===================== 业务逻辑占位 - 替换区 =====================
+            print("提交记录按钮任务")
+            # 这里后续替换为真实的 service.py 业务调用：比如 services.submit_zentao_create(xxx)
+            # =================================================================
+
+            # 执行成功后的UI提示
+            self.ui.run_in_main_thread(self.ui.show_tooltip, "✅ 禅道工单批量创建提交成功！")
+
+        except Exception as e:
+            # 统一异常捕获+UI错误提示，和你的其他方法完全一致
+            error_msg = f"❌ 禅道工单创建提交失败：{str(e)}"
+            print(error_msg)
             self.ui.run_in_main_thread(self.ui.show_tooltip, error_msg)
             return
