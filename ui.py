@@ -74,6 +74,7 @@ class WinGUI(Tk):
 
         # ========== 禅道创建区域 控件初始化 ==========
         self.tk_label_zentao_create = self.__tk_label_zentao_create(self)
+        self.tk_button_del_record = self.__tk_button_del_record(self)
         self.tk_button_add_record = self.__tk_button_add_record(self)
         self.tk_button_submit_create = self.__tk_button_submit_create(self)
 
@@ -183,9 +184,10 @@ class WinGUI(Tk):
             # 固定位置：窗口右下角、表格下方，间距统一20px，完美对齐
             base_x = win_w - 300
             base_y = win_h - 50
-            self.tk_label_zentao_create.place(x=base_x - 80, y=base_y, width=80, height=30)
-            self.tk_button_add_record.place(x=base_x, y=base_y, width=100, height=30)
-            self.tk_button_submit_create.place(x=base_x + 110, y=base_y, width=100, height=30)
+            self.tk_label_zentao_create.place(x=base_x - 190, y=base_y, width=80, height=30) # label
+            self.tk_button_del_record.place(x=base_x - 110, y=base_y, width=100, height=30)    # 删除按钮
+            self.tk_button_add_record.place(x=base_x, y=base_y, width=100, height=30)         # 添加按钮
+            self.tk_button_submit_create.place(x=base_x + 110, y=base_y, width=100, height=30)# 提交按钮
 
     def __tk_label_label_1(self,parent):
         label = Label(parent,text="JQL： ",anchor="center", )
@@ -236,10 +238,21 @@ class WinGUI(Tk):
         btn.place(x=1080, y=760, width=100, height=30)
         return btn
 
-    # ========== 提交创建 按钮 定义 ==========
+    # ========== 确认提交 按钮 定义 ==========
     def __tk_button_submit_create(self, parent):
         btn = Button(parent, text="确认提交", takefocus=False)
         btn.place(x=1190, y=760, width=100, height=30)
+        return btn
+
+    # ==========删除记录 按钮 定义 ==========
+    def __tk_button_del_record(self, parent):
+        # 核心：初始化ttk样式 + 配置【红底白字】样式，仅对当前按钮生效，不影响其他按钮
+        style = Style(parent)
+        style.configure('DelBtn.TButton', foreground='red')
+
+        # 创建按钮并应用样式，其他参数和你原有代码完全一致，位置不变
+        btn = Button(parent, text="删除记录", takefocus=False, style='DelBtn.TButton')
+        btn.place(x=1030, y=760, width=100, height=30)
         return btn
 
     # ==========table control ==========
@@ -253,6 +266,7 @@ class WinGUI(Tk):
 
         # 1. 清空表格所有数据行
         self.clear_table()
+        table.selection_remove(table.selection())  # 切换表格时取消选中行
         # 3. 重新配置新列+表头+宽度
         table["columns"] = list(columns_conf)
         table["show"] = "headings"
@@ -264,6 +278,8 @@ class WinGUI(Tk):
         """清空表格所有数据"""
         for item in self.tk_table_table_1.get_children():
             self.tk_table_table_1.delete(item)
+        # 清空时取消选中行
+        self.tk_table_table_1.selection_remove(self.tk_table_table_1.selection())
         # 清空映射字典，防止残留数据
         self.row_history_map.clear()
         # 清空表格时，隐藏标题悬浮提示
@@ -689,6 +705,42 @@ class WinGUI(Tk):
 
         # 6. 清空表单，保持弹窗打开（方便继续添加）
         self.clear_create_zentao_form()
+
+    # ========== 删除选中行核心方法 - 仅对 禅道创建表格 生效，不影响其他表格 ==========
+    def delete_selected_record(self):
+        table = self.tk_table_table_1
+        # 1. 核心校验：获取当前表格列，判断是否为【禅道创建专用表格】
+        current_cols = table["columns"]
+        is_zentao_create_table = "禅道模块" in current_cols and "禅道创建结果" in current_cols
+
+        if not is_zentao_create_table:
+            self.show_tooltip("⚠️ 仅禅道创建表格支持删除操作！")
+            return
+
+        # 2. 获取选中的行id
+        selected_items = table.selection()
+        if not selected_items:
+            self.show_tooltip("⚠️ 请选中需要删除的行！")
+            return
+
+        # 3. 循环删除选中行 + 同步删除映射字典数据（防止内存残留）
+        del_count = 0
+        for row_id in selected_items:
+            table.delete(row_id)
+            if row_id in self.row_history_map:
+                del self.row_history_map[row_id]
+                del_count += 1
+
+        # 4. 删除后自动保存最新数据到JSON，和添加逻辑一致
+        table_all_data = self.get_table_all_data()
+        save_success, save_msg = common.save_data_to_json(table_all_data)
+
+        # 5. 气泡提示删除结果
+        if save_success:
+            self.show_tooltip(f"✅ 成功删除 {del_count} 条记录，数据已保存")
+        else:
+            self.show_tooltip(f"✅ 成功删除 {del_count} 条记录，保存失败：{save_msg}")
+
     # ========== 禅道创建-添加记录 核心方法结束 ==========
 
 
@@ -720,6 +772,7 @@ class Win(WinGUI):
         # ========== 添加记录按钮 点击添加记录 → 先切换表头 → 再打开弹窗 ==========
         self.tk_button_add_record.bind('<Button-1>', lambda e: [self.reset_table_style(self.TABLE_TYPE_CREATE_ZENTAO), self.open_create_zentao_popup()])
         self.tk_button_submit_create.bind('<Button-1>', self.ctl.submit_zentao_create)
+        self.tk_button_del_record.bind('<Button-1>', lambda e: self.delete_selected_record())
         pass
     def __style_config(self):
         pass
