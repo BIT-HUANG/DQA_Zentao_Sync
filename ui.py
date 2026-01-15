@@ -771,7 +771,7 @@ class Win(WinGUI):
         self.tk_button_button_update.bind('<Button-1>',self.ctl.update)
         # ========== 添加记录按钮 点击添加记录 → 先切换表头 → 再打开弹窗 ==========
         self.tk_button_add_record.bind('<Button-1>', lambda e: [self.reset_table_style(self.TABLE_TYPE_CREATE_ZENTAO), self.open_create_zentao_popup()])
-        self.tk_button_submit_create.bind('<Button-1>', self.ctl.submit_zentao_create)
+        self.tk_button_submit_create.bind('<Button-1>', lambda e: self.ctl.sync_table_to_zentao())
         self.tk_button_del_record.bind('<Button-1>', lambda e: self.delete_selected_record())
         pass
     def __style_config(self):

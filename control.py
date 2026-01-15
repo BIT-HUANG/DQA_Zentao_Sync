@@ -21,6 +21,22 @@ class Controller:
         t = threading.Thread(target=self.__sync_excel_task, daemon=True)
         t.start()
 
+    # ========== 表格禅道创建提交（对外暴露的调度方法） ==========
+    def sync_table_to_zentao(self):
+        # 耗时操作，开子线程执行，守护线程，防止内存泄漏
+        t = threading.Thread(target=self.__sync_table_to_zentao_task, daemon=True)
+        t.start()
+
+    # ========== 线程安全更新表格单行数据（核心辅助方法） ==========
+    def __update_table_row(self, row_id, sync_flg, sync_result):
+        # 获取当前行原始数据
+        row_values = self.ui.tk_table_table_1.item(row_id)["values"]
+        # 替换【禅道创建结果】和【禅道创建备注】列的值
+        row_values[5] = sync_flg
+        row_values[6] = sync_result
+        # 更新表格展示，实时刷新
+        self.ui.tk_table_table_1.item(row_id, values=row_values)
+
     def search(self, evt):
         print("更新查询事件处理:", evt)
         t = threading.Thread(target=self.__search_task, daemon=True)
@@ -57,6 +73,70 @@ class Controller:
             self.ui.run_in_main_thread(self.ui.show_tooltip, "Excel同步完成！")
         except Exception as e:
             self.ui.run_in_main_thread(self.ui.show_tooltip, f"同步失败：{str(e)}")
+
+    # ========== 表格批量同步禅道到Jira的子线程任务 ==========
+    def __sync_table_to_zentao_task(self):
+        # 1. 先校验是否是禅道创建专属表格，不是则直接提示返回
+        current_cols = self.ui.tk_table_table_1["columns"]
+        if "禅道创建结果" not in current_cols or "禅道创建备注" not in current_cols:
+            self.ui.run_in_main_thread(self.ui.show_tooltip, "⚠️ 仅禅道创建表格支持提交同步！")
+            return
+
+        # 2. 获取表格所有行数据，过滤空行
+        table_rows = self.ui.tk_table_table_1.get_children()
+        if not table_rows:
+            self.ui.run_in_main_thread(self.ui.show_tooltip, "⚠️ 表格暂无数据，无需提交！")
+            return
+
+        # 3. 定义总数，用于进度计算
+        total_count = len(table_rows)
+        success_count = 0
+        fail_count = 0
+
+        try:
+            # ========== 循环遍历表格每一行，逐条同步 ==========
+            for index, row_id in enumerate(table_rows, start=1):
+                # 获取表格当前行的所有单元格值
+                row_values = self.ui.tk_table_table_1.item(row_id)["values"]
+                jira_id = row_values[2]  # 表格第3列：JiraID
+                zt_pid = str(row_values[3])  # 表格第4列：禅道模块ID
+                zt_assignee = str(row_values[4])  # 表格第5列：禅道指派人
+
+                # 跳过空JiraID的行
+                if not jira_id or jira_id.strip() == "":
+                    continue
+
+                # ✅ 实时更新进度提示 - 核心需求
+                progress_msg = f"正在同步 {index}/{total_count} 条，JiraID: {jira_id} 请稍候..."
+                self.ui.run_in_main_thread(self.ui.show_progress_tooltip, progress_msg)
+
+                # ✅ 核心调用：复用service层的sync_jira_to_zentao方法，无任何修改
+                sync_flg, sync_result = services.sync_jira_to_zentao(jira_id, zt_pid, zt_assignee)
+
+                # ✅ 实时回写表格数据 + 刷新展示（核心需求）
+                self.ui.run_in_main_thread(self.__update_table_row, row_id, sync_flg, sync_result)
+
+                # ✅ 更新内存中的row_history_map，保证数据一致性
+                if row_id in self.ui.row_history_map:
+                    self.ui.row_history_map[row_id]["zentao_create_result"] = sync_flg
+                    self.ui.row_history_map[row_id]["zentao_create_comment"] = sync_result
+
+                # 统计成功/失败数量
+                if sync_flg == "Success":
+                    success_count += 1
+                else:
+                    fail_count += 1
+
+            # ✅ 同步完成：保存JSON文件 + 显示最终结果提示
+            common.save_data_to_json(self.ui.row_history_map)
+            final_msg = f"✅ 同步完成！成功:{success_count}条，失败:{fail_count}条，数据已保存！"
+            self.ui.run_in_main_thread(self.ui.show_tooltip, final_msg)
+
+        except Exception as e:
+            # 异常兜底：提示错误 + 恢复普通tooltip
+            err_msg = f"❌ 同步失败：{str(e)}"
+            self.ui.run_in_main_thread(self.ui.show_tooltip, err_msg)
+
 
     # ========== 核心查询任务 ==========
     def __search_task(self):
