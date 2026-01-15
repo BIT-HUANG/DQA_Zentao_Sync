@@ -1,6 +1,6 @@
 from time import sleep
 
-from utils import services
+from utils import services, common
 import threading
 import json
 from urllib.request import HTTPError
@@ -84,11 +84,41 @@ class Controller:
 
     # ========== 核心更新任务 ==========
     def __update_task(self):
-        self.ui.run_in_main_thread(self.ui.show_tooltip, "正在进行双向同步，请稍候...")
+        self.ui.run_in_main_thread(self.ui.show_progress_tooltip, "正在读取表格数据并保存，请稍候...")
         try:
-            print("Test SYNC ....")
-            self.ui.after(2000, lambda:
-            self.ui.run_in_main_thread(self.ui.show_tooltip, "骗你的，这功能还没做！")
-                          )
+            # 1. 获取表格中所有的原始完整数据
+            table_all_data = list(self.ui.row_history_map.values())
+
+            # 2. 判断是否有数据
+            if not table_all_data:
+                tip_msg = "表格暂无数据，无需保存！"
+                self.ui.run_in_main_thread(self.ui.show_tooltip, tip_msg)
+                print(tip_msg)
+                return
+
+            # 3. 保存JSON文件
+            save_success, save_msg = common.save_data_to_json(table_all_data)
+            print(save_msg)
+            self.ui.run_in_main_thread(self.ui.show_tooltip, save_msg)
+
+            # 4. 更新comment
+            result = services.sync_zentao_history_to_jira(table_all_data, self.ui)
+            print(result)
+
+            # ========== ✅ 核心修改：精准的文案拼接，完全匹配你的期望 ==========
+            success_count = result.get("success", 0)
+            no_sync_count = result.get("no_sync", 0)
+            skip_count = result.get("skip", 0)
+            fail_count = result.get("fail", 0)
+            total_count = len(table_all_data)
+            # 最终文案：无禅道历史=跳过，无需同步=无需同步，真实失败=失败，和你要的一模一样
+            success_msg = f"同步完成！总计：{total_count}条 | 成功：{success_count}条 | 跳过：{skip_count}条 | 无需同步：{no_sync_count}条 | 失败：{fail_count}条"
+            print(success_msg)
+            self.ui.run_in_main_thread(self.ui.show_tooltip, success_msg)
+
         except Exception as e:
-            self.ui.run_in_main_thread(self.ui.show_tooltip, f"双向同步失败：{str(e)}")
+            error_msg = f"同步禅道历史到Jira失败：{str(e)}"
+            print(error_msg)
+            self.ui.run_in_main_thread(self.ui.load_error_table, error_msg)
+            self.ui.run_in_main_thread(self.ui.show_tooltip, error_msg)
+            return

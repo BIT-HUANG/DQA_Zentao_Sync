@@ -139,6 +139,8 @@ def get_bugs_with_ids(bug_id_list: list, progress_callback=None):
         if bug_id == "":
             bug_info_dict.update({
                 "zentao_id": "",
+                "zentao_prod_id":"",
+                "zentao_prod_name":"",
                 "zentao_status": "",
                 "zentao_resolution": "",
                 "zentao_assignee": "",
@@ -152,9 +154,11 @@ def get_bugs_with_ids(bug_id_list: list, progress_callback=None):
             bug_temp_dict = json.loads(bug_info['data'])
             bug_info_dict.update({
                 "zentao_id":bug_temp_dict['bug']['id'],
+                "zentao_prod_id": bug_temp_dict['productID'],
+                "zentao_prod_name": bug_temp_dict['productName'],
                 "zentao_status": bug_temp_dict['bug']['status'],
                 "zentao_resolution":bug_temp_dict['bug']['resolution'],
-                "zentao_assignee":bug_temp_dict['bug']['assignedTo'],
+                "zentao_assignee":bug_temp_dict['users'][bug_temp_dict['bug']['assignedTo']],
                 "zentao_history":bug_temp_dict['actions']
             })
             bug_info_list.append(bug_info_dict)

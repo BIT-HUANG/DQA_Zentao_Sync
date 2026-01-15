@@ -164,3 +164,23 @@ def transition_sony_jira_fields(key: str, new_status: str, fields: dict):
         LOGGER.info("Issue transited successfully!")
     except Exception as e:
         LOGGER.error("Exception: " + str(e))
+
+
+def add_jira_comment(key: str, comment_content: str):
+    LOGGER.debug(f"updating Sony jira {key} with data: {comment_content}")
+    add_comment = False
+    try:
+        jira_conn = JIRA(
+            server=HOST_SONY,
+            token_auth=mconfig.get_sony_jira_token(),
+        )
+        issue = jira_conn.issue(key)
+        comment = jira_conn.add_comment(issue, comment_content)
+        LOGGER.info(f"Comment added successfully to {key}, comment ID: {comment.id}")
+        add_comment = True
+        return add_comment
+
+    except Exception as e:
+        add_comment = False
+        LOGGER.error("Exception when add jira comment: " + str(e))
+        return add_comment

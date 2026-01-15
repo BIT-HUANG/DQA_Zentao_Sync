@@ -42,7 +42,7 @@ class WinGUI(Tk):
         "禅道状态": "zentao_status",
         "禅道对策": "zentao_resolution",
         "禅道最新历史(点击查看所有)": "zentao_history",
-        "Jira最新备注(点击查看所有)": "jira_latest_note",
+        "Jira最新备注(点击查看所有)": "jira_comments",
         "禅道模块": "zentao_module",
         "禅道模块ID": "zentao_module_id",
         "禅道指派人": "zentao_assignee",
@@ -216,7 +216,7 @@ class WinGUI(Tk):
                     show_values.append(common.show_latest_zentao_history(row.get("zentao_history", {})))
                 elif col_name == "Jira最新备注(点击查看所有)":
                     # Jira备注列：直接取值
-                    show_values.append(row.get("jira_latest_note", ""))
+                    show_values.append(row.get("jira_comments", ""))
                 else:
                     # 其他列：通过精准映射表取值，无则显示空字符串
                     key = self.COL_KEY_MAP.get(col_name, "")
@@ -226,7 +226,7 @@ class WinGUI(Tk):
             show_values += [""] * (len(current_cols) - len(show_values))
             # 插入行并获取当前行的唯一ID
             row_id = table.insert('', END, values=show_values)
-            # ========== ✅ 修复核心：所有行都存入完整的原始数据，不再做判断！ ==========
+            # ========== 修复核心：所有行都存入完整的原始数据，不再做判断！ ==========
             self.row_history_map[row_id] = row
 
     def load_table_data(self, data_list):
@@ -364,7 +364,7 @@ class WinGUI(Tk):
             self.title_tooltip.place_forget()
             return
 
-        # ========== ✅ 核心：和你弹窗【完全一致】的【相对坐标】计算逻辑，一字不改 ==========
+        # ==========  核心：和你弹窗【完全一致】的【相对坐标】计算逻辑，一字不改 ==========
         # 1. 获取标题单元格 【相对表格】的坐标 + 宽高 (你的弹窗源码，完全复用)
         x_cell = table.bbox(row_id, col_index)[0]  # 单元格左上角X（相对表格）
         y_cell = table.bbox(row_id, col_index)[1]  # 单元格左上角Y（相对表格）
@@ -374,7 +374,7 @@ class WinGUI(Tk):
         tip_x = x_cell
         tip_y = y_cell + cell_height + 3
 
-        # ========== ✅ 重中之重：place使用【相对位置】+ 绑定父容器table，这是弹窗位置正确的核心 ==========
+        # ==========  重中之重：place使用【相对位置】+ 绑定父容器table，这是弹窗位置正确的核心 ==========
         self.title_tooltip.config(text=full_title)
         self.title_tooltip.place(
             x=tip_x,  # X坐标：相对表格左上角的偏移量（不是屏幕）

@@ -13,7 +13,7 @@ import mzentao.net
 import mconfig
 from openpyxl import load_workbook
 from urllib.request import HTTPError
-
+from utils import common
 from libmirror.mstr import extract_pr_list
 
 
@@ -140,10 +140,11 @@ def get_jira_sync_list(jql_text):
                  'jira_summary': result['fields']['summary'],
                  'jira_status': result['fields']['status']['name'],
                  'jira_rank': result['fields']['customfield_31801']['value'],
+                 'jira_comments':result['fields']['comment']['comments'],
                  'zentao_id':  zentao_id
                  })
             jira_issue_list.append(issue_dict)
-        print(jira_issue_list)
+        # print(jira_issue_list)
 
     except HTTPError as e:
         #  捕获HTTP异常，直接返回异常对象e，e内包含完整的 e.code + e.reason
@@ -154,6 +155,7 @@ def get_jira_sync_list(jql_text):
 
         #  正常返回数据列表
     return jira_issue_list
+
 
 def get_jira_with_zentao(jira_issue_list, ui=None):
     if isinstance(jira_issue_list, HTTPError):
@@ -172,3 +174,87 @@ def get_jira_with_zentao(jira_issue_list, ui=None):
     )
     result_list = [{**d1, **d2} for d1, d2 in zip(jira_issue_list, zentao_result_list)]
     return result_list
+
+
+def sync_zentao_history_to_jira(full_jira_zentao_data_list, ui=None):
+    """
+    同步禅道历史到Jira评论【带实时进度条+精准统计修复】
+    精准区分：跳过/无需同步/成功/失败 | 失败仅指真实调用接口失败
+    :param full_jira_zentao_data_list: 完整的jira+zentao数据列表
+    :param ui: UI实例，用于进度条回调
+    :return: dict 精准统计结果 {success:成功数, no_sync:无需同步数, skip:跳过数, fail:失败数}
+    """
+    total_count = len(full_jira_zentao_data_list)
+    success_count = 0  # 至少1个ID新增成功
+    fail_count = 0  # 真实调用add_jira_comment失败/异常 才计数【你要的精准失败】
+    skip_count = 0  # 无禅道历史/无JiraKey 跳过
+    no_sync_count = 0  # 有禅道历史，所有ID都已存在，无需同步【新增维度】
+
+    # 遍历每一条数据，按索引计数，用于进度条
+    for curr_index, single_data in enumerate(full_jira_zentao_data_list, start=1):
+        # 进度条实时更新
+        if ui:
+            ui.run_in_main_thread(
+                ui.show_progress_tooltip,
+                f"正在同步禅道历史到Jira [{curr_index}/{total_count}]，处理中..."
+            )
+
+        # ========== 1. 跳过判定：无禅道历史 / 禅道历史为空 → 跳过 + 计数+1
+        zentao_history = single_data.get("zentao_history")
+        jira_key = single_data.get("jira_key", "").strip()
+        if not zentao_history or not jira_key:
+            skip_count += 1
+            print(f"ℹ️ [{curr_index}/{total_count}] {jira_key or '无JiraKey'} → 跳过，无禅道历史/无JiraKey")
+            continue
+
+        # ========== 2. 获取Jira评论池，拼接所有评论内容
+        jira_comments = single_data.get("jira_comments", [])
+        jira_comment_text_pool = ""
+        for comment in jira_comments:
+            jira_comment_text_pool += comment.get("body", "") + " "
+
+        # ========== 初始化当前条目的状态标记
+        curr_has_success = False  # 是否有ID新增成功
+        curr_has_fail = False  # 是否有ID新增失败【真实失败】
+        curr_all_exist = True  # 是否所有ID都已存在，默认True
+
+        # ========== 3. 遍历禅道历史ID，逐个校验+新增
+        for history_id, history_content in zentao_history.items():
+            if history_id not in jira_comment_text_pool:
+                curr_all_exist = False  # 有ID不存在 → 不是全量已存在
+                # 生成评论内容
+                comment_content = f"【禅道历史记录 ID:{history_id}】\n{common.transfer_single_zentao_history(history_content)}"
+                # 调用新增评论方法【耗时核心】
+                add_result = mjira.net_sony.add_jira_comment(jira_key, comment_content)
+
+                if add_result:
+                    # 新增成功
+                    jira_comment_text_pool += history_id + " "
+                    curr_has_success = True
+                    print(f"✅ [{curr_index}/{total_count}] {jira_key} → 禅道ID:{history_id} 新增评论成功")
+                else:
+                    # 【真正的失败】只有调用接口返回False，才算失败
+                    curr_has_fail = True
+                    print(f"❌ [{curr_index}/{total_count}] {jira_key} → 禅道ID:{history_id} 新增评论失败（接口调用失败）")
+            else:
+                # 历史ID已存在，打印日志（可选，不影响统计）
+                print(f"ℹ️ [{curr_index}/{total_count}] {jira_key} → 禅道ID:{history_id} 已存在，无需新增")
+
+        # ========== ✅ 核心精准统计逻辑【完美匹配你的期望】
+        if curr_has_success:
+            # 有至少1个ID新增成功 → 成功数+1
+            success_count += 1
+        elif curr_has_fail:
+            # 有至少1个ID真实调用失败 → 失败数+1
+            fail_count += 1
+        elif curr_all_exist:
+            # 所有ID都已存在，无需同步 → 无需同步数+1
+            no_sync_count += 1
+
+    # ========== 返回【精准的统计字典】，和你__update_task的提示文案对应
+    return {
+        "success": success_count,
+        "no_sync": no_sync_count,  # 新增：无需同步
+        "skip": skip_count,  # 跳过：无禅道历史
+        "fail": fail_count  # 失败：仅接口调用失败
+    }
