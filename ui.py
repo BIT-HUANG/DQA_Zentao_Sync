@@ -16,7 +16,7 @@ class WinGUI(Tk):
 
     # ======== 场景表格 枚举所有场景（规范，防止写错场景名） ========
     TABLE_TYPE_DEFAULT = "default"  # Jira+禅道完整数据
-    TABLE_TYPE_SYNC = "sync"  # Jira+禅道完整数据
+    TABLE_TYPE_CREATE_ZENTAO = "create_zentao"  # 禅道创建专用数据
     TABLE_TYPE_JIRA = "only_jira"  # 仅Jira数据
     TABLE_TYPE_ZENTAO = "only_zentao"  # 仅禅道数据
     TABLE_TYPE_ERROR = "error"  # 错误提示
@@ -26,12 +26,12 @@ class WinGUI(Tk):
     TABLE_COLUMNS_MAP = {
         TABLE_TYPE_DEFAULT: {"ID": 30, "标题": 300, "JiraID": 130, "Jira状态": 60, "禅道ID": 60, "禅道状态": 60,
                          "禅道对策": 60, "禅道最新历史(点击查看所有)": 450},
-        TABLE_TYPE_SYNC: {"ID": 30, "JiraID": 130, "禅道模块": 60, "禅道模块ID": 60, "禅道指派人": 60,
-                             "禅道指派人ID": 60, "同步结果":60, "同步结果备注": 450},
+        TABLE_TYPE_CREATE_ZENTAO: {"ID": 30, "标题": 300, "JiraID": 130, "禅道模块": 60, "禅道指派人": 60,
+                            "禅道创建结果":60, "禅道创建备注": 450},
         TABLE_TYPE_JIRA: {"ID": 30, "标题": 300, "JiraID": 130, "Jira状态": 60,"Jira最新备注(点击查看所有)":450},
         TABLE_TYPE_ZENTAO: {"ID": 30, "标题": 300, "禅道ID": 60, "禅道状态": 60, "禅道对策": 60, "禅道最新历史(点击查看所有)": 450},
         TABLE_TYPE_ERROR: {"查询结果提示": 1180},
-        TABLE_TYPE_EMPTY: {"查询结果提示": 1180}
+        TABLE_TYPE_EMPTY: {"查询结果提示": 1180},
     }
     # ======== 列名映射 ========
     COL_KEY_MAP = {
@@ -47,8 +47,8 @@ class WinGUI(Tk):
         "禅道模块ID": "zentao_module_id",
         "禅道指派人": "zentao_assignee",
         "禅道指派人ID": "zentao_assignee_id",
-        "同步结果": "sync_result",
-        "同步结果备注": "sync_note",
+        "禅道创建结果": "zentao_create_result",
+        "禅道创建备注": "zentao_create_comment",
         "查询结果提示": "tips"
     }
 
@@ -235,7 +235,7 @@ class WinGUI(Tk):
     def reset_table_style(self, table_type):
         """
         核心方法：根据表格类型重置表头+列结构，保留原有滚动条/事件绑定/布局
-        :param table_type: 表格类型，对应 TABLE_TYPE_DEFAULT/TABLE_TYPE_SYNC 等
+        :param table_type: 表格类型，对应 TABLE_TYPE_DEFAULT/TABLE_TYPE_CREATE_ZENTAO 等
         """
         table = self.tk_table_table_1
         columns_conf = self.TABLE_COLUMNS_MAP.get(table_type, self.TABLE_TYPE_DEFAULT)
@@ -299,9 +299,9 @@ class WinGUI(Tk):
         self.reset_table_style(self.TABLE_TYPE_DEFAULT)
         self.load_table_data(data_list)
 
-    def load_sync_table(self, data_list):
-        """加载同步结果表头 + 数据"""
-        self.reset_table_style(self.TABLE_TYPE_SYNC)
+    def load_zentao_create_table(self, data_list):
+        """加载禅道创建专用表头 + 数据"""
+        self.reset_table_style(self.TABLE_TYPE_CREATE_ZENTAO)
         self.load_table_data(data_list)
 
     def load_jira_table(self, data_list):
@@ -334,8 +334,9 @@ class WinGUI(Tk):
         self.tk_input_jql.delete(0, END)  # 删除从索引0到末尾的所有内容
 
     # ========== 点击单元格展示完整历史 ==========
+    # ========== 点击单元格展示完整历史 ✅精准修改：仅默认表格的历史列触发弹窗 ==========
     def show_history_detail(self, event):
-        """点击表格单元格，判断是【禅道最新历史】列则弹窗展示完整历史"""
+        """点击表格单元格，【仅默认表格】的【禅道最新历史】列则弹窗展示完整内容"""
         table = self.tk_table_table_1
         # 1. 获取点击的区域：只处理单元格点击
         region = table.identify('region', event.x, event.y)
@@ -345,48 +346,49 @@ class WinGUI(Tk):
 
         # 2. 获取点击的行、列信息
         row_id = table.identify_row(event.y)  # 点击的行ID
-        col_index = int(table.identify_column(event.x).replace('#','')) - 1  # 列索引 从0开始
+        col_index = int(table.identify_column(event.x).replace('#', '')) - 1  # 列索引 从0开始
 
-        # 3. 关键：只对【最后一列：禅道最新历史 (索引7)】生效
+        # 获取当前表格的配置key，判断是否为【默认完整表格】
+        current_table_cols = table["columns"]
+        # 只有默认表格的列头包含 "禅道最新历史(点击查看所有)"，才继续执行弹窗逻辑
+        is_default_table = "禅道最新历史(点击查看所有)" in current_table_cols
+        # 【核心】不是默认表格 → 直接退出，不弹窗
+        if not is_default_table:
+            self.hide_popup()
+            return
+
+        # 默认表格下，仅点击索引7的【禅道最新历史】列 才弹窗
         if col_index != 7 or row_id not in self.row_history_map:
             self.hide_popup()
             return
 
+        # 后续弹窗逻辑完全不变
         raw_history_dict = self.row_history_map[row_id].get("zentao_history", {})
         if not raw_history_dict:  # 匹配：空字典/None/空值，直接终止逻辑，不弹窗
             return
 
-        # 4. 获取原始历史字典 → 调用你的方法生成完整历史文本
         all_history_list = common.show_all_zentao_history(raw_history_dict)
-        # 拼接完整历史为换行文本，方便弹窗展示
         all_history_text = '\n\n'.join(all_history_list)
 
-        # 5. 创建/展示弹窗
-        self.hide_popup() # 先关闭旧弹窗
+        self.hide_popup()  # 先关闭旧弹窗
         self.popup_win = Toplevel(table)
         self.popup_win.title('禅道完整历史记录')
-        # 1. 获取点击单元格的 表格内坐标 + 单元格宽高
-        x_cell = table.bbox(row_id, col_index)[0]  # 单元格左上角x坐标（表格内）
-        y_cell = table.bbox(row_id, col_index)[1]  # 单元格左上角y坐标（表格内）
-        cell_height = table.bbox(row_id, col_index)[3]  # 单元格高度
+        x_cell = table.bbox(row_id, col_index)[0]
+        y_cell = table.bbox(row_id, col_index)[1]
+        cell_height = table.bbox(row_id, col_index)[3]
 
-        # 2. 转成屏幕绝对坐标（关键：表格控件的屏幕坐标 + 单元格坐标）
-        win_x = table.winfo_rootx() + x_cell  # 弹窗x轴：和单元格对齐
-        win_y = table.winfo_rooty() + y_cell + cell_height + 5  # 弹窗y轴：单元格正下方+5像素间距
-
-        # 3. 设置弹窗尺寸+固定坐标
+        win_x = table.winfo_rootx() + x_cell
+        win_y = table.winfo_rooty() + y_cell + cell_height + 5
         self.popup_win.geometry(f'500x300+{win_x}+{win_y}')
-        self.popup_win.attributes('-topmost', True) # 置顶
+        self.popup_win.attributes('-topmost', True)
 
-        # 弹窗内添加滚动文本框，适配超长历史
-        text_box = Text(self.popup_win, wrap=WORD, font=('宋体',10))
+        text_box = Text(self.popup_win, wrap=WORD, font=('宋体', 10))
         scroll = Scrollbar(self.popup_win, orient=VERTICAL, command=text_box.yview)
         text_box.configure(yscrollcommand=scroll.set)
 
         text_box.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
         scroll.pack(side=RIGHT, fill=Y)
 
-        # 填充完整历史数据，只读不可编辑
         text_box.insert(END, all_history_text)
         text_box.config(state=DISABLED)
 
