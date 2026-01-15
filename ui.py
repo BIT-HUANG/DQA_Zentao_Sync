@@ -93,6 +93,8 @@ class WinGUI(Tk):
             wraplength=600  # 标题超长时自动换行，最大宽度600像素
         )
         self.title_tooltip.place_forget()  # 初始隐藏
+        # ========== 绑定窗口大小变化事件 ==========
+        self.bind('<Configure>', self.on_window_resize)
 
     def __win(self):
         self.title("DQA 同步工具")
@@ -103,7 +105,8 @@ class WinGUI(Tk):
         screenheight = self.winfo_screenheight()
         geometry = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(geometry)
-        self.resizable(width=False, height=False)
+        # ========== ✅ 核心修改1：开启窗口可拉伸+最大化 ==========
+        self.resizable(width=True, height=True)
 
     def scrollbar_autohide(self,vbar, hbar, widget):
         """自动隐藏滚动条"""
@@ -138,10 +141,33 @@ class WinGUI(Tk):
             hbar = Scrollbar(master, orient="horizontal")
             self.h_scrollbar(hbar, widget, x, y, w, h, pw, ph)
         self.scrollbar_autohide(vbar, hbar, widget)
+
+    # ========== ✅ 核心新增：窗口大小变化事件，刷新表格尺寸 ==========
+    def on_window_resize(self, event):
+        """窗口拉伸/最大化时，自动刷新表格和滚动条尺寸"""
+        if event.widget == self:
+            win_w = self.winfo_width()
+            win_h = self.winfo_height()
+            # 表格尺寸：左右留20px边距，上下留75px头部+60px底部
+            table_w = win_w - 40
+            table_h = win_h - 135
+            if table_w < 800: table_w = 800
+            if table_h < 400: table_h = 400
+            # 更新表格尺寸
+            self.tk_table_table_1.place(x=20, y=75, width=table_w, height=table_h)
+            # 重新创建滚动条
+            self.create_bar(self, self.tk_table_table_1, True, True, 20,75,table_w,table_h,win_w,win_h)
+            # 更新输入框宽度
+            self.tk_input_jql.place(x=100, y=20, width=win_w - 340, height=30)
+            # 更新按钮位置
+            self.tk_button_button_search.place(x=win_w - 200, y=20, width=80, height=30)
+            self.tk_button_button_update.place(x=win_w - 110, y=20, width=80, height=30)
+
     def __tk_label_label_1(self,parent):
-        label = Label(parent,text="测试标签",anchor="center", )
-        label.place(x=32, y=21, width=50, height=30)
+        label = Label(parent,text="JQL： ",anchor="center", )
+        label.place(x=20, y=20, width=80, height=30)
         return label
+
     def __tk_table_table_1(self,parent):
         # 表头字段 表头宽度
         columns = {"ID":30,"标题":300,"JiraID":130,"Jira状态":60,"禅道ID":60,"禅道状态":60,"禅道对策":60,"禅道最新历史(点击查看所有)":450}
@@ -159,17 +185,20 @@ class WinGUI(Tk):
         tk_table.bind('<Motion>', self.on_table_motion)    # 鼠标在表格内移动 → 核心触发悬浮提示
         tk_table.bind('<Leave>', self.on_table_leave)     # 鼠标离开表格 → 隐藏提示
         return tk_table
+
     def __tk_button_button_search(self,parent):
-        btn = Button(parent, text="查询", takefocus=False,)
-        btn.place(x=111, y=20, width=50, height=30)
+        btn = Button(parent, text="列表查询", takefocus=False,)
+        btn.place(x=950, y=20, width=80, height=30)
         return btn
+
     def __tk_button_button_update(self,parent):
-        btn = Button(parent, text="更新", takefocus=False,)
-        btn.place(x=193, y=18, width=50, height=30)
+        btn = Button(parent, text="更新所有", takefocus=False,)
+        btn.place(x=1050, y=20, width=80, height=30)
         return btn
+
     def __tk_input_jql(self, parent):
         ipt = Entry(parent, )
-        ipt.place(x=342, y=20, width=850, height=30)
+        ipt.place(x=100, y=20, width=800, height=30)
         return ipt
 
     # ==========table control ==========
@@ -335,6 +364,43 @@ class WinGUI(Tk):
         """关闭弹窗"""
         if self.popup_win and self.popup_win.winfo_exists():
             self.popup_win.destroy()
+
+    #========== 历史同步结果弹窗显示 ==========
+    def show_popup(self, title: str, content: str):
+        """
+        新增专用弹窗：展示同步结果详细汇总信息 (独立弹窗，和单元格历史弹窗互不冲突)
+        :param title: 弹窗标题
+        :param content: 弹窗展示的详细内容文本
+        """
+        # 先关闭可能存在的旧弹窗（避免叠加）
+        self.hide_popup()
+        # 创建顶层弹窗窗口
+        self.popup_win = Toplevel(self)
+        self.popup_win.title(title)
+        self.popup_win.geometry("700x450")  # 固定宽高，适配同步结果明细
+        self.popup_win.resizable(width=True, height=True)  # 允许拉伸放大
+        self.popup_win.attributes('-topmost', True)  # 置顶显示，优先展示
+        # 窗口居中显示（核心优化，比跟随单元格更适合汇总弹窗）
+        self.popup_win.update_idletasks()
+        x = (self.popup_win.winfo_screenwidth() - self.popup_win.winfo_width()) // 2
+        y = (self.popup_win.winfo_screenheight() - self.popup_win.winfo_height()) // 2
+        self.popup_win.geometry(f"+{x}+{y}")
+
+        # 添加带滚动条的文本框，适配超长内容，防止内容溢出
+        text_box = Text(self.popup_win, wrap=tk.WORD, font=("微软雅黑", 10), bg="#F8F9FA")
+        scroll_y = Scrollbar(self.popup_win, orient=tk.VERTICAL, command=text_box.yview)
+        text_box.configure(yscrollcommand=scroll_y.set)
+
+        # 布局：文本框占满，滚动条在右侧
+        text_box.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=8, pady=8)
+        scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # 填充内容 + 设置只读不可编辑
+        text_box.insert(tk.END, content)
+        text_box.config(state=tk.DISABLED)
+
+        # 绑定关闭事件，清理弹窗对象
+        self.popup_win.protocol("WM_DELETE_WINDOW", self.hide_popup)
 
     # ========== 标题列悬浮提示 ==========
     def on_table_motion(self, event):

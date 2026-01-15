@@ -84,14 +84,14 @@ class Controller:
 
     # ========== 核心更新任务 ==========
     def __update_task(self):
-        self.ui.run_in_main_thread(self.ui.show_progress_tooltip, "正在读取表格数据并保存，请稍候...")
+        self.ui.run_in_main_thread(self.ui.show_progress_tooltip, "正在读取表格数据，请稍候...")
         try:
             # 1. 获取表格中所有的原始完整数据
             table_all_data = list(self.ui.row_history_map.values())
 
             # 2. 判断是否有数据
             if not table_all_data:
-                tip_msg = "表格暂无数据，无需保存！"
+                tip_msg = "表格暂无数据！"
                 self.ui.run_in_main_thread(self.ui.show_tooltip, tip_msg)
                 print(tip_msg)
                 return
@@ -101,20 +101,17 @@ class Controller:
             print(save_msg)
             self.ui.run_in_main_thread(self.ui.show_tooltip, save_msg)
 
-            # 4. 更新comment
-            result = services.sync_zentao_history_to_jira(table_all_data, self.ui)
-            print(result)
+            # 4. 更新comment - 接收返回的【统计结果】和【弹窗详情文案】
+            result, detail_popup_msg = services.sync_zentao_history_to_jira(table_all_data, self.ui)
+            print(result)  # 控制台打印统计字典
+            print(detail_popup_msg)  # 控制台打印完整详情
 
-            # ========== ✅ 核心修改：精准的文案拼接，完全匹配你的期望 ==========
-            success_count = result.get("success", 0)
-            no_sync_count = result.get("no_sync", 0)
-            skip_count = result.get("skip", 0)
-            fail_count = result.get("fail", 0)
-            total_count = len(table_all_data)
-            # 最终文案：无禅道历史=跳过，无需同步=无需同步，真实失败=失败，和你要的一模一样
-            success_msg = f"同步完成！总计：{total_count}条 | 成功：{success_count}条 | 跳过：{skip_count}条 | 无需同步：{no_sync_count}条 | 失败：{fail_count}条"
-            print(success_msg)
-            self.ui.run_in_main_thread(self.ui.show_tooltip, success_msg)
+            # ========== 核心新增：同步完成后，弹出【详细汇总弹窗】 ==========
+            self.ui.run_in_main_thread(self.ui.show_popup, "禅道历史同步完成", detail_popup_msg)
+
+            # 可选：底部简短提示（如果你的show_tooltip是气泡提示，弹窗是独立弹窗，可保留这行简短提示）
+            short_tip = f"同步完成！总计：{len(table_all_data)}条 | 成功：{result['success']}条 | 跳过：{result['skip']}条 | 无需同步：{result['no_sync']}条 | 失败：{result['fail']}条"
+            self.ui.run_in_main_thread(self.ui.show_tooltip, short_tip)
 
         except Exception as e:
             error_msg = f"同步禅道历史到Jira失败：{str(e)}"

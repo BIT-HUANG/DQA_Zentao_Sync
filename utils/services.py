@@ -178,17 +178,21 @@ def get_jira_with_zentao(jira_issue_list, ui=None):
 
 def sync_zentao_history_to_jira(full_jira_zentao_data_list, ui=None):
     """
-    同步禅道历史到Jira评论【带实时进度条+精准统计修复】
-    精准区分：跳过/无需同步/成功/失败 | 失败仅指真实调用接口失败
+    同步禅道历史到Jira评论【完整版：进度条+精准统计+同步完成明细收集】
+    同步完成后返回：统计结果 + 详细明细文案，用于弹窗展示精准状态
     :param full_jira_zentao_data_list: 完整的jira+zentao数据列表
     :param ui: UI实例，用于进度条回调
-    :return: dict 精准统计结果 {success:成功数, no_sync:无需同步数, skip:跳过数, fail:失败数}
+    :return: tuple (统计字典, 弹窗详情文案str)
     """
     total_count = len(full_jira_zentao_data_list)
-    success_count = 0  # 至少1个ID新增成功
-    fail_count = 0  # 真实调用add_jira_comment失败/异常 才计数【你要的精准失败】
-    skip_count = 0  # 无禅道历史/无JiraKey 跳过
-    no_sync_count = 0  # 有禅道历史，所有ID都已存在，无需同步【新增维度】
+    success_count = 0  # 至少1个ID新增成功的Jira数
+    fail_count = 0  # 真实调用接口失败的Jira数
+    skip_count = 0  # 无禅道历史/无JiraKey 跳过数
+    no_sync_count = 0  # 有禅道历史、无需同步的Jira数
+
+    # ========== 新增：核心收集变量 ==========
+    detail_msg_list = []  # 收集每条Jira的处理详情，用于弹窗展示
+    sync_id_count_dict = {}  # 记录每个Jira成功同步的历史ID数量 {JiraKey:同步条数}
 
     # 遍历每一条数据，按索引计数，用于进度条
     for curr_index, single_data in enumerate(full_jira_zentao_data_list, start=1):
@@ -199,62 +203,80 @@ def sync_zentao_history_to_jira(full_jira_zentao_data_list, ui=None):
                 f"正在同步禅道历史到Jira [{curr_index}/{total_count}]，处理中..."
             )
 
-        # ========== 1. 跳过判定：无禅道历史 / 禅道历史为空 → 跳过 + 计数+1
+        # 1. 基础数据获取
         zentao_history = single_data.get("zentao_history")
         jira_key = single_data.get("jira_key", "").strip()
+        curr_jira_detail = f"{jira_key}"  # 初始化当前Jira的详情文本
+        sync_id_count = 0  # 初始化当前Jira同步成功的ID数量
+
+        # ========== 状态1：跳过 → jira无对应禅道/无JiraKey ==========
         if not zentao_history or not jira_key:
             skip_count += 1
-            print(f"ℹ️ [{curr_index}/{total_count}] {jira_key or '无JiraKey'} → 跳过，无禅道历史/无JiraKey")
+            curr_jira_detail += " → 跳过（无对应禅道记录）"
+            detail_msg_list.append(curr_jira_detail)
+            print(f"ℹ️ [{curr_index}/{total_count}] {curr_jira_detail}")
             continue
 
-        # ========== 2. 获取Jira评论池，拼接所有评论内容
+        # 2. 获取Jira评论池，拼接所有评论内容
         jira_comments = single_data.get("jira_comments", [])
         jira_comment_text_pool = ""
         for comment in jira_comments:
             jira_comment_text_pool += comment.get("body", "") + " "
 
-        # ========== 初始化当前条目的状态标记
-        curr_has_success = False  # 是否有ID新增成功
-        curr_has_fail = False  # 是否有ID新增失败【真实失败】
-        curr_all_exist = True  # 是否所有ID都已存在，默认True
+        # 初始化状态标记
+        curr_has_success = False
+        curr_has_fail = False
+        curr_all_exist = True
 
-        # ========== 3. 遍历禅道历史ID，逐个校验+新增
+        # 3. 遍历禅道历史ID，逐个校验+新增
         for history_id, history_content in zentao_history.items():
             if history_id not in jira_comment_text_pool:
-                curr_all_exist = False  # 有ID不存在 → 不是全量已存在
-                # 生成评论内容
+                curr_all_exist = False
                 comment_content = f"【禅道历史记录 ID:{history_id}】\n{common.transfer_single_zentao_history(history_content)}"
-                # 调用新增评论方法【耗时核心】
+                # 调用评论方法
                 add_result = mjira.net_sony.add_jira_comment(jira_key, comment_content)
 
                 if add_result:
-                    # 新增成功
                     jira_comment_text_pool += history_id + " "
                     curr_has_success = True
+                    sync_id_count += 1  # 计数+1：同步成功的ID数量
                     print(f"✅ [{curr_index}/{total_count}] {jira_key} → 禅道ID:{history_id} 新增评论成功")
                 else:
-                    # 【真正的失败】只有调用接口返回False，才算失败
                     curr_has_fail = True
                     print(f"❌ [{curr_index}/{total_count}] {jira_key} → 禅道ID:{history_id} 新增评论失败（接口调用失败）")
             else:
-                # 历史ID已存在，打印日志（可选，不影响统计）
                 print(f"ℹ️ [{curr_index}/{total_count}] {jira_key} → 禅道ID:{history_id} 已存在，无需新增")
 
-        # ========== ✅ 核心精准统计逻辑【完美匹配你的期望】
+        # ========== 按规则拼接当前Jira的最终状态文案 ==========
         if curr_has_success:
-            # 有至少1个ID新增成功 → 成功数+1
             success_count += 1
+            sync_id_count_dict[jira_key] = sync_id_count
+            curr_jira_detail += f" → 同步了 {sync_id_count} 条"
         elif curr_has_fail:
-            # 有至少1个ID真实调用失败 → 失败数+1
             fail_count += 1
+            curr_jira_detail += " → 同步失败（接口调用异常）"
         elif curr_all_exist:
-            # 所有ID都已存在，无需同步 → 无需同步数+1
             no_sync_count += 1
+            curr_jira_detail += " → 无需同步（已是最新）"
 
-    # ========== 返回【精准的统计字典】，和你__update_task的提示文案对应
-    return {
+        # 把当前Jira的详情加入列表，用于弹窗
+        detail_msg_list.append(curr_jira_detail)
+
+    # 组装统计结果
+    stat_result = {
         "success": success_count,
-        "no_sync": no_sync_count,  # 新增：无需同步
-        "skip": skip_count,  # 跳过：无禅道历史
-        "fail": fail_count  # 失败：仅接口调用失败
+        "no_sync": no_sync_count,
+        "skip": skip_count,
+        "fail": fail_count
     }
+
+    # ========== 组装弹窗的【详细明细文案】- 分行格式化，美观整洁 ==========
+    detail_total_msg = "禅道历史同步Jira完成，详情如下：\n"
+    detail_total_msg += "——————————————————\n"
+    for msg in detail_msg_list:
+        detail_total_msg += f"{msg}\n"
+    detail_total_msg += "——————————————————\n"
+    detail_total_msg += f"总计：{total_count}条 | 成功同步：{success_count}条 | 跳过：{skip_count}条 | 无需同步：{no_sync_count}条 | 失败：{fail_count}条"
+
+    # 返回：统计字典 + 弹窗详情文案
+    return stat_result, detail_total_msg
