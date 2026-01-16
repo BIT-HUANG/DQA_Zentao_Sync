@@ -591,6 +591,9 @@ class WinGUI(Tk):
         jira_no_entry = tk.Entry(self.create_zentao_popup, font=("微软雅黑", 10))
         jira_no_entry.place(x=base_x + label_width + gap + 240, y=pad_y, width=100)
         self.create_form_widgets["jira_no_entry"] = jira_no_entry
+        # ======== 绑定按键事件，仅允许输入纯数字，屏蔽所有非数字按键 ========
+        jira_no_entry.bind("<KeyPress>", self.__only_allow_digit_input)
+        self.create_form_widgets["jira_no_entry"] = jira_no_entry
 
         # 2. 标题 行：标签 + 标题展示Label  最大宽度600px + 右侧强制留白 + 永不贴边 + 背景边框保留
         pad_y += 60
@@ -657,6 +660,25 @@ class WinGUI(Tk):
         self.create_form_widgets.get("module_var").set("")
         self.create_form_widgets.get("pid_label").config(text="")
         self.create_form_widgets.get("assignee_label").config(text="")
+
+    def __only_allow_digit_input(self, event):
+        """
+        核心校验方法：仅允许输入纯数字，屏蔽所有非数字按键
+        放行：0-9数字键、小键盘0-9、退格键(BackSpace)、删除键(Delete)、左/右方向键
+        拦截：字母、中文、空格、回车、Shift、Ctrl、Alt、Tab、标点符号等所有其他按键
+        """
+        # 可放行的按键列表（数字相关+编辑相关，保证正常输入和删除）
+        allowed_keys = [
+            # 主键盘数字键
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            # 小键盘数字键
+            'KP_0', 'KP_1', 'KP_2', 'KP_3', 'KP_4', 'KP_5', 'KP_6', 'KP_7', 'KP_8', 'KP_9',
+            # 编辑按键：退格、删除、左右方向键（必备，保证输入体验）
+            'BackSpace', 'Delete', 'Left', 'Right'
+        ]
+        # 判断按键是否在放行列表中，不在则直接拦截
+        if event.keysym not in allowed_keys:
+            return "break"  # 返回break：tkinter底层阻断该按键的输入行为
 
     def get_table_all_data(self):
         """获取表格内所有数据的完整列表（适配save_data_to_json的格式），复用现有row_history_map"""
