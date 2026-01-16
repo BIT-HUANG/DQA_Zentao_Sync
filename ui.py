@@ -596,15 +596,7 @@ class WinGUI(Tk):
         self.create_form_widgets["jira_no_entry"] = jira_no_entry
 
         # 2. 标题 行：标签 + 标题展示Label  最大宽度600px + 右侧强制留白 + 永不贴边 + 背景边框保留
-        pad_y += 60
-        tk.Label(self.create_zentao_popup, text="标题：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
-        title_label = tk.Label(self.create_zentao_popup, text="标题", bg="#F5F5F5", relief="solid", bd=1,
-                               anchor="w", padx=5, font=("微软雅黑", 10))
-        title_label.place(x=base_x + label_width + gap, y=pad_y, width=main_input_max_w)
-        self.create_form_widgets["title_label"] = title_label
-
-        # 3. 禅道模块 行：标签 + 下拉框 + zt_pid展示Label + zt_assignee展示Label  核心优化
-        #  下拉框宽度适配 + 模块ID/指派人整体左移 + 左右留白充足 + 绝不贴窗口右侧
+        # 2. 禅道模块 行：标签 + 下拉框 + zt_pid展示Label + zt_assignee展示Label  上移为第二行
         pad_y += 60
         tk.Label(self.create_zentao_popup, text="禅道模块：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
         # 下拉框：宽度300px 适中，不拥挤不空旷，从配置读取模块列表
@@ -641,6 +633,13 @@ class WinGUI(Tk):
 
         module_combobox.bind("<<ComboboxSelected>>", select_module_event)
 
+        # 3. 标题 行：标签 + 标题展示Label  下移为第三行
+        pad_y += 60
+        tk.Label(self.create_zentao_popup, text="标题：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
+        title_label = tk.Label(self.create_zentao_popup, text="标题", bg="#F5F5F5", relief="solid", bd=1,
+                               anchor="w", padx=5, font=("微软雅黑", 10))
+        title_label.place(x=base_x + label_width + gap, y=pad_y, width=main_input_max_w)
+        self.create_form_widgets["title_label"] = title_label
         # 4. 按钮区：确认按钮 + 清空按钮  居中布局 + 上下留白充足 + 按钮间距均匀，美观
         pad_y += 70
         confirm_btn = tk.Button(self.create_zentao_popup, text="确认", width=10, height=1, bg="#4CAF50", fg="white",
