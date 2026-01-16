@@ -63,6 +63,8 @@ class WinGUI(Tk):
 
         # ========== 禅道创建相关变量 ==========
         self.zentao_create_map = mconfig.get_create_zentao_map()  # 读取.config的禅道模块映射
+        self.jira_project_name_map = mconfig.get_jira_project_name_list()  # 读取Jira项目名称映射
+        self.jira_project_name_list = list(self.jira_project_name_map.values())  # 下拉框只展示value值列表
         self.create_zentao_popup = None  # 禅道创建表单弹窗对象
         self.create_form_widgets = {}  # 存储表单内所有控件，方便清空/取值
 
@@ -570,11 +572,25 @@ class WinGUI(Tk):
         main_input_max_w = 600  #  核心：JiraID输入框/标题Label 最大宽度锁定600px
         gap = 15  # 控件之间的间距，统一15px，视觉均匀
 
-        # 1. JiraID 行：标签 + 输入框  最大宽度600px + 右侧强制留白 + 永不贴边
-        tk.Label(self.create_zentao_popup, text="JiraID：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
-        jira_id_entry = tk.Entry(self.create_zentao_popup, width=int(main_input_max_w / 8), font=("微软雅黑", 10))
-        jira_id_entry.place(x=base_x + label_width + gap, y=pad_y, width=main_input_max_w)
-        self.create_form_widgets["jira_id_entry"] = jira_id_entry
+        # ========== 替换原有单个JiraID输入框 → 拆分为【项目名称下拉框 + 编号输入框】 ==========
+        # 1.1. Jira项目名称 行：标签 + 下拉框 (只展示value值：CNUXBTRACK/CNUXDQID)
+        tk.Label(self.create_zentao_popup, text="Jira项目：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
+        # 项目下拉框：只读模式，取值为配置中的项目简称列表，样式和原有下拉框一致
+        project_var = tk.StringVar(value="")
+        project_combobox = Combobox(self.create_zentao_popup, textvariable=project_var,
+                                    values=self.jira_project_name_list,
+                                    state="readonly", font=("微软雅黑", 10))
+        project_combobox.place(x=base_x + label_width + gap, y=pad_y, width=180)
+        if self.jira_project_name_list:
+            project_var.set(self.jira_project_name_list[0])
+        self.create_form_widgets["project_combobox"] = project_combobox
+        self.create_form_widgets["project_var"] = project_var
+
+        # 1.2. Jira编号 行：标签 + 纯数字输入框，紧跟项目下拉框，布局对齐，间距统一
+        tk.Label(self.create_zentao_popup, text="编号：", anchor="w").place(x=base_x + label_width + gap + 195, y=pad_y)
+        jira_no_entry = tk.Entry(self.create_zentao_popup, font=("微软雅黑", 10))
+        jira_no_entry.place(x=base_x + label_width + gap + 240, y=pad_y, width=100)
+        self.create_form_widgets["jira_no_entry"] = jira_no_entry
 
         # 2. 标题 行：标签 + 标题展示Label  最大宽度600px + 右侧强制留白 + 永不贴边 + 背景边框保留
         pad_y += 60
@@ -634,7 +650,9 @@ class WinGUI(Tk):
 
     def clear_create_zentao_form(self):
         """清空禅道创建表单的所有数据，恢复初始状态"""
-        self.create_form_widgets.get("jira_id_entry").delete(0, tk.END)
+        if self.jira_project_name_list:
+            self.create_form_widgets.get("project_var").set(self.jira_project_name_list[0])
+        self.create_form_widgets.get("jira_no_entry").delete(0, tk.END)
         self.create_form_widgets.get("title_label").config(text="标题")
         self.create_form_widgets.get("module_var").set("")
         self.create_form_widgets.get("pid_label").config(text="")
@@ -651,9 +669,11 @@ class WinGUI(Tk):
 
     def confirm_create_zentao_record(self):
         """确认添加禅道创建记录：校验表单 → 组装数据 → 添加到表格 → 保存到JSON → 提示结果"""
-        # 1. 表单取值
-        jira_id = self.create_form_widgets.get("jira_id_entry").get().strip()
+        # 1. 表单取值 - 改为【项目下拉值 + 编号值】
+        select_project = self.create_form_widgets.get("project_var").get().strip()  # 选中的项目简称
+        jira_no = self.create_form_widgets.get("jira_no_entry").get().strip()  # 输入的纯数字编号
         select_module = self.create_form_widgets.get("module_var").get().strip()
+
         # ========== 容错代码 ==========
         if not self.zentao_create_map:
             self.show_tooltip("未读取到禅道模块配置，请检查.config文件！")
@@ -662,18 +682,27 @@ class WinGUI(Tk):
         zt_pid = module_info.get("zt_pid", "")
         zt_assignee = module_info.get("zt_assignee", "")
 
-        # 2. 必填项校验
-        if not jira_id:
-            self.show_tooltip("请输入JiraID！")
+        # 2. 新增校验逻辑（项目必选+编号必选+编号纯数字）+ 原有模块必选校验
+        if not select_project:
+            self.show_tooltip("请选择Jira项目名称！")
+            return
+        if not jira_no:
+            self.show_tooltip("请输入Jira编号！")
+            return
+        if not jira_no.isdigit():
+            self.show_tooltip("Jira编号仅支持输入纯数字！")
             return
         if not select_module:
             self.show_tooltip("请选择禅道模块！")
             return
 
-        # 3. 组装【符合TABLE_TYPE_CREATE_ZENTAO表格】的标准数据字典
+        # 3. 核心：自动拼接完整JiraID 【项目名称-编号】 例：CNUXBTRACK + 1 → CNUXBTRACK-1
+        jira_id = f"{select_project}-{jira_no}"
+
+        # 4. 组装【符合TABLE_TYPE_CREATE_ZENTAO表格】的标准数据字典 - 无任何改动
         new_record = {
             "jira_key": jira_id,
-            "jira_summary": "标题",  # 暂时固定，后续替换为Jira查询结果
+            "jira_summary": "标题",  # 暂时固定，后续可扩展自动查询Jira标题
             "zentao_module": select_module,
             "zentao_module_id": zt_pid,
             "zentao_assignee": zt_assignee,
@@ -682,7 +711,7 @@ class WinGUI(Tk):
             "zentao_create_comment": ""  # 默认空备注
         }
 
-        # 4. 核心：添加数据到表格 + 刷新表格（关键：当前表格必须是创建禅道表格）
+        # 5. 核心：添加数据到表格 + 刷新表格（关键：当前表格必须是创建禅道表格）- 无任何改动
         table = self.tk_table_table_1
         row_id = table.insert('', tk.END, values=[
             len(table.get_children()) + 1 if table.get_children() else 1,  # ID列：永远从1开始，完美规整
@@ -696,7 +725,7 @@ class WinGUI(Tk):
         ])
         self.row_history_map[row_id] = new_record  # 同步更新映射字典
 
-        # 5. 保存表格全量数据到JSON（与update task完全一致的逻辑）
+        # 6. 保存表格全量数据到JSON（与update task完全一致的逻辑）- 无任何改动
         table_all_data = self.get_table_all_data()
         save_success, save_msg = common.save_data_to_json(table_all_data)
         if save_success:
@@ -704,8 +733,9 @@ class WinGUI(Tk):
         else:
             self.show_tooltip(f"添加成功，保存失败：{save_msg}")
 
-        # 6. 清空表单，保持弹窗打开（方便继续添加）
+        # 7. 清空表单，保持弹窗打开（方便继续添加）- 无任何改动
         self.clear_create_zentao_form()
+
 
     # ========== 删除选中行核心方法 - 仅对 禅道创建表格 生效，不影响其他表格 ==========
     def delete_selected_record(self):

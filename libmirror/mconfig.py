@@ -375,3 +375,16 @@ def get_create_zentao_map() -> dict:
             __CONFIG_VALUE_CREATE_ZENTAO_MAP = {}
         __CONFIG_VALUE_CREATE_ZENTAO_MAP = __CONFIG_JSON[__CONFIG_KEY_CREATE_ZENTAO_MAP]
     return __CONFIG_VALUE_CREATE_ZENTAO_MAP
+
+# ========== 读取.config中的Jira项目名称映射 jira_project_name_list ==========
+__CONFIG_KEY_JIRA_PROJECT_NAME_LIST = "jira_project_name_list"
+__CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = None
+
+def get_jira_project_name_list() -> dict:
+    global __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST
+    if __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST is None:
+        if __CONFIG_KEY_JIRA_PROJECT_NAME_LIST not in __CONFIG_JSON:
+            LOGGER.error(f'请补充配置"{__CONFIG_KEY_JIRA_PROJECT_NAME_LIST}"到.config\n')
+            __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = {}
+        __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = __CONFIG_JSON[__CONFIG_KEY_JIRA_PROJECT_NAME_LIST]
+    return __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST
