@@ -106,17 +106,17 @@ class Controller:
                 if not jira_id or jira_id.strip() == "":
                     continue
 
-                # ✅ 实时更新进度提示 - 核心需求
+                # 实时更新进度提示 - 核心需求
                 progress_msg = f"正在同步 {index}/{total_count} 条，JiraID: {jira_id} 请稍候..."
                 self.ui.run_in_main_thread(self.ui.show_progress_tooltip, progress_msg)
 
-                # ✅ 核心调用：复用service层的sync_jira_to_zentao方法，无任何修改
+                # 核心调用：复用service层的sync_jira_to_zentao方法，无任何修改
                 sync_flg, sync_result = services.sync_jira_to_zentao(jira_id, zt_pid, zt_assignee)
 
-                # ✅ 实时回写表格数据 + 刷新展示（核心需求）
+                # 实时回写表格数据 + 刷新展示（核心需求）
                 self.ui.run_in_main_thread(self.__update_table_row, row_id, sync_flg, sync_result)
 
-                # ✅ 更新内存中的row_history_map，保证数据一致性
+                # 更新内存中的row_history_map，保证数据一致性
                 if row_id in self.ui.row_history_map:
                     self.ui.row_history_map[row_id]["zentao_create_result"] = sync_flg
                     self.ui.row_history_map[row_id]["zentao_create_comment"] = sync_result
@@ -136,7 +136,6 @@ class Controller:
             # 异常兜底：提示错误 + 恢复普通tooltip
             err_msg = f"❌ 同步失败：{str(e)}"
             self.ui.run_in_main_thread(self.ui.show_tooltip, err_msg)
-
 
     # ========== 核心查询任务 ==========
     def __search_task(self):

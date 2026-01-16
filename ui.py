@@ -148,10 +148,12 @@ class WinGUI(Tk):
         widget.configure(yscrollcommand=vbar.set)
         vbar.config(command=widget.yview)
         vbar.place(relx=(w + x) / pw, rely=y / ph, relheight=h / ph, anchor='ne')
+
     def h_scrollbar(self,hbar, widget, x, y, w, h, pw, ph):
         widget.configure(xscrollcommand=hbar.set)
         hbar.config(command=widget.xview)
         hbar.place(relx=x / pw, rely=(y + h) / ph, relwidth=w / pw, anchor='sw')
+
     def create_bar(self,master, widget,is_vbar,is_hbar, x, y, w, h, pw, ph):
         vbar, hbar = None, None
         if is_vbar:
@@ -541,7 +543,7 @@ class WinGUI(Tk):
         self.tooltip_label.place_forget()
         self.tooltip_label.place(relx=0.5, rely=1.0, y=-20, anchor="s")
 
-    # ========== 新增：禅道创建-添加记录 核心方法开始 ==========
+    # ========== 禅道创建-添加记录 核心方法开始 ==========
     def open_create_zentao_popup(self):
         """打开【添加创建禅道-添加记录】表单弹窗 800*320 可拉伸 + 完美排版不贴边"""
         # ========== 兜底切换表头，双重保障 ==========
@@ -757,7 +759,6 @@ class WinGUI(Tk):
         # 7. 清空表单，保持弹窗打开（方便继续添加）- 无任何改动
         self.clear_create_zentao_form()
 
-
     # ========== 删除选中行核心方法 - 仅对 禅道创建表格 生效，不影响其他表格 ==========
     def delete_selected_record(self):
         table = self.tk_table_table_1
@@ -792,14 +793,12 @@ class WinGUI(Tk):
             self.show_tooltip(f"✅ 成功删除 {del_count} 条记录，数据已保存")
         else:
             self.show_tooltip(f"✅ 成功删除 {del_count} 条记录，保存失败：{save_msg}")
-
     # ========== 禅道创建-添加记录 核心方法结束 ==========
 
 
     # ========== 主线程调用UI方法的工具函数 ==========
     def run_in_main_thread(self, func, *args):
         self.after(0, lambda: func(*args))
-
 
 
 class Win(WinGUI):
@@ -810,14 +809,17 @@ class Win(WinGUI):
         self.__style_config()
         self.config(menu=self.create_menu())
         self.ctl.init(self)
+
     def create_menu(self):
         menu = Menu(self,tearoff=False)
         menu.add_cascade(label="原始功能",menu=self.menu_sub_test_1(menu))
         return menu
+
     def menu_sub_test_1(self,parent):
         menu = Menu(parent,tearoff=False)
         menu.add_command(label="从Excel创建禅道",command=self.ctl.sync_zentao_from_excel)
         return menu
+
     def __event_bind(self):
         self.tk_button_button_search.bind('<Button-1>',self.ctl.search)
         self.tk_button_button_update.bind('<Button-1>',self.ctl.update)
@@ -826,5 +828,6 @@ class Win(WinGUI):
         self.tk_button_submit_create.bind('<Button-1>', lambda e: self.ctl.sync_table_to_zentao())
         self.tk_button_del_record.bind('<Button-1>', lambda e: self.delete_selected_record())
         pass
+
     def __style_config(self):
         pass
