@@ -128,7 +128,7 @@ class Controller:
                     fail_count += 1
 
             # ✅ 同步完成：保存JSON文件 + 显示最终结果提示
-            common.save_data_to_json(self.ui.row_history_map)
+            common.save_data_to_json(self.ui.row_history_map,file_name="table_create_zentao_data.json")
             final_msg = f"✅ 同步完成！成功:{success_count}条，失败:{fail_count}条，数据已保存！"
             self.ui.run_in_main_thread(self.ui.show_tooltip, final_msg)
 
@@ -195,7 +195,7 @@ class Controller:
                 return
 
             # 3. 保存JSON文件
-            save_success, save_msg = common.save_data_to_json(table_all_data)
+            save_success, save_msg = common.save_data_to_json(table_all_data,file_name="table_default_data.json")
             print(save_msg)
             self.ui.run_in_main_thread(self.ui.show_tooltip, save_msg)
 
