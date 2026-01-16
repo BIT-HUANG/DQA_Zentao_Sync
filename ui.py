@@ -26,8 +26,8 @@ class WinGUI(Tk):
     TABLE_COLUMNS_MAP = {
         TABLE_TYPE_DEFAULT: {"ID": 30, "标题": 300, "JiraID": 130, "Jira状态": 60, "禅道ID": 60, "禅道状态": 60,
                          "禅道对策": 60, "禅道最新历史(点击查看所有)": 450},
-        TABLE_TYPE_CREATE_ZENTAO: {"ID": 30, "标题": 300, "JiraID": 130, "禅道模块": 130, "禅道指派人": 130,
-                            "禅道创建结果":130, "禅道创建备注": 450},
+        TABLE_TYPE_CREATE_ZENTAO: {"ID": 30, "标题": 300, "JiraID": 130, "禅道模块": 130, "禅道模块ID": 130,"禅道指派人": 130,
+                            "禅道创建结果":130, "禅道创建备注": 250},
         TABLE_TYPE_JIRA: {"ID": 30, "标题": 300, "JiraID": 130, "Jira状态": 60,"Jira最新备注(点击查看所有)":450},
         TABLE_TYPE_ZENTAO: {"ID": 30, "标题": 300, "禅道ID": 60, "禅道状态": 60, "禅道对策": 60, "禅道最新历史(点击查看所有)": 450},
         TABLE_TYPE_ERROR: {"查询结果提示": 1180},
@@ -689,6 +689,7 @@ class WinGUI(Tk):
             new_record["jira_summary"],
             new_record["jira_key"],
             new_record["zentao_module"],
+            new_record["zentao_module_id"],
             new_record["zentao_assignee"],
             new_record["zentao_create_result"],
             new_record["zentao_create_comment"]

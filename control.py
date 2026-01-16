@@ -32,8 +32,8 @@ class Controller:
         # 获取当前行原始数据
         row_values = self.ui.tk_table_table_1.item(row_id)["values"]
         # 替换【禅道创建结果】和【禅道创建备注】列的值
-        row_values[5] = sync_flg
-        row_values[6] = sync_result
+        row_values[6] = sync_flg
+        row_values[7] = sync_result
         # 更新表格展示，实时刷新
         self.ui.tk_table_table_1.item(row_id, values=row_values)
 
@@ -99,8 +99,8 @@ class Controller:
                 # 获取表格当前行的所有单元格值
                 row_values = self.ui.tk_table_table_1.item(row_id)["values"]
                 jira_id = row_values[2]  # 表格第3列：JiraID
-                zt_pid = str(row_values[3])  # 表格第4列：禅道模块ID
-                zt_assignee = str(row_values[4])  # 表格第5列：禅道指派人
+                zt_pid = str(row_values[4])  # 表格第4列：禅道模块ID
+                zt_assignee = str(row_values[5])  # 表格第5列：禅道指派人
 
                 # 跳过空JiraID的行
                 if not jira_id or jira_id.strip() == "":
