@@ -135,12 +135,24 @@ def get_jira_sync_list(jql_text):
             if external_issue_link
             else ""
         )
+            jira_resolved_version = result['fields']['customfield_10819'] if result['fields']['customfield_10819'] is not None else ""
+            jira_released_package_version = result['fields']['customfield_29900'] if result['fields']['customfield_29900'] is not None else ""
+            jira_resolution = result['fields']['resolution']['description'] if result['fields']['resolution'] is not None else ""
             issue_dict.update(
                 {'jira_key': result['key'],
                  'jira_summary': result['fields']['summary'],
                  'jira_status': result['fields']['status']['name'],
                  'jira_rank': result['fields']['customfield_31801']['value'],
+                 'jira_components':result['fields']['components'], #列表需要数据处理
+                 'jira_detected_sw_project':result['fields']['customfield_38300'],#列表需要数据处理
+                 'jira_fix_version':result['fields']['fixVersions'],#列表需要数据处理
+                 'jira_resolution':jira_resolution,# 需要判空
                  'jira_comments':result['fields']['comment']['comments'],
+                 'jira_issue_links':result['fields']['issuelinks'],#列表需要数据处理
+                 'jira_assignee':result['fields']['assignee']['displayName'],
+                 'jira_released_package_version': jira_released_package_version,# 需要判空
+                 'jira_defect_info': result['fields']['customfield_10708'],
+                 'jira_resolved_version':jira_resolved_version,# 需要判空
                  'zentao_id':  zentao_id
                  })
             jira_issue_list.append(issue_dict)

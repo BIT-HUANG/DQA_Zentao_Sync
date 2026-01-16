@@ -158,7 +158,7 @@ def get_bugs_with_ids(bug_id_list: list, progress_callback=None):
                 "zentao_prod_name": bug_temp_dict['productName'],
                 "zentao_status": bug_temp_dict['bug']['status'],
                 "zentao_resolution":bug_temp_dict['bug']['resolution'],
-                "zentao_assignee":bug_temp_dict['users'][bug_temp_dict['bug']['assignedTo']],
+                "zentao_assignee":[bug_temp_dict['bug']['assignedTo']],
                 "zentao_history":bug_temp_dict['actions']
             })
             bug_info_list.append(bug_info_dict)
