@@ -747,12 +747,17 @@ class WinGUI(Tk):
                     show_content = f"❌ 未查询到Jira信息：{jira_key}，该JiraID不存在或无权限访问！"
                 # 场景3：查询成功，返回有效数据列表（只有1条）
                 elif isinstance(query_result, list) and len(query_result) >= 1:
-                    jira_dict = query_result[0]
-                    # 拼接所有字段：key = value 格式，按字典顺序展示，原样展示不处理嵌套/列表
-                    for field_key, field_value in jira_dict.items():
-                        show_content += f"{field_key}：{field_value}\n\n"
-                    # 补全结尾提示
-                    show_content += "✅ 查询成功：以上为该Jira的完整信息（字段未做格式化，后续可优化）"
+                    # ✅ 原始未处理数据（入参）：query_result[0] 是完整的原始dict
+                    raw_jira_data = query_result[0]
+                    # ✅ 调用你新增的工具方法：入参=原始数据，返回=处理后的精简dict
+
+                    brief_jira_dict = common.get_jira_brief_result(raw_jira_data)
+
+                    # ✅ 拼接处理后的精简数据，展示到UI → 替换原来的原始数据拼接逻辑
+                    for brief_key, brief_value in brief_jira_dict.items():
+                        show_content += f"{brief_key}：{brief_value}\n\n"
+                    # 补全成功提示
+                    show_content += "✅ 查询成功：已展示Jira精简核心信息（数据已格式化处理）"
                 # 场景4：其他未知异常
                 else:
                     show_content = f"❌ 查询异常：无法解析{jira_key}的返回结果，请检查JiraID是否正确！"

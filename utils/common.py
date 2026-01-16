@@ -49,3 +49,27 @@ def save_data_to_json(data_list, file_name="table_data_temp.json"):
     except Exception as e:
         # 失败返回异常信息
         return False, f"保存JSON文件失败：{str(e)}"
+
+
+def get_jira_brief_result(raw_data):
+    print(raw_data)
+    brief_result = {}
+
+    sw_project_list = [item.get("value", "") for item in raw_data.get("jira_detected_sw_project", []) if
+                       item.get("value")]
+    jira_detected_sw_project_str = ",".join(sw_project_list) if sw_project_list else "无"
+
+    fix_version_list = [item.get("name", "") for item in raw_data.get("jira_fix_version", []) if item.get("name")]
+    jira_fix_version_str = ",".join(fix_version_list) if fix_version_list else "无"
+
+    brief_result['Summary'] = raw_data.get('jira_summary','无')
+    brief_result['Status'] = raw_data.get('jira_status', '无')
+    brief_result['Defect Rank'] = raw_data.get('jira_rank', '无')
+    brief_result['Detected SW Project'] = jira_detected_sw_project_str #列表处理
+    brief_result['Assignee'] = raw_data.get('jira_assignee', '无')
+    brief_result['Resolution'] = raw_data.get('jira_resolution', '无')
+    brief_result['Fix Version'] = jira_fix_version_str #列表处理
+    brief_result['Release Version'] = raw_data.get('jira_released_package_version', '无')
+    brief_result['Resolved Version'] = raw_data.get('jira_resolved_version', '无')
+    brief_result['Defect Info'] = raw_data.get('jira_defect_info', '无')
+    return brief_result
