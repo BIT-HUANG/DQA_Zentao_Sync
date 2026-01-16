@@ -776,7 +776,6 @@ class WinGUI(Tk):
         jira_info_text.insert(tk.END, content)  # 插入新内容
         jira_info_text.config(state=tk.DISABLED)  # 恢复只读，禁止手动编辑
 
-
     def get_table_all_data(self):
         """获取表格内所有数据的完整列表（适配save_data_to_json的格式），复用现有row_history_map"""
         table_all_data = []
