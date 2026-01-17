@@ -169,11 +169,17 @@ class Controller:
             self.ui.run_in_main_thread(self.ui.load_default_table, data_list)
             self.ui.run_in_main_thread(self.ui.show_tooltip, "查询完成！")
 
+
         except Exception as e:
-            # 错误提示 → 主线程执行，
-            err_dict = json.loads(e.read().decode(ENCODE))
-            errorMessages = err_dict.get("errorMessages", [])[0] if err_dict.get("errorMessages") else ""
-            error_msg = f"查询失败：{errorMessages}"
+            try:
+                # 加一行判断：如果有read方法再执行，彻底避免AttributeError
+                resp_str = e.read().decode(ENCODE) if hasattr(e, 'read') else ""
+                err_dict = json.loads(resp_str)
+                errorMessages = err_dict.get("errorMessages", [])[0] if err_dict.get("errorMessages") else ""
+                error_msg = f"查询失败：{errorMessages}"
+            except:
+                error_msg = f"查询失败：{str(e)}"
+            # 原有逻辑不变
             print(error_msg)
             self.ui.run_in_main_thread(self.ui.load_error_table, error_msg)
             self.ui.run_in_main_thread(self.ui.show_tooltip, error_msg)

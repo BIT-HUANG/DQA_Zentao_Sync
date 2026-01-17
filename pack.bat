@@ -11,6 +11,11 @@ echo Packaging %PROGRAM_NAME%.exe...
 cd "%ENTRY_DIR%"
 echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
+:: ========== 添加Flask相关的全部隐式依赖（核心必须加） ==========
+--hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 ^
+:: ========== 把新增的portal.py打包到根目录 ==========
+--add-data "portal.py;." ^
+:: ========== 原有libmirror相关的add-data配置（ ==========
 --add-data "libmirror/mstr.py;." ^
 --add-data "libmirror/mconfig.py;." ^
 --add-data "libmirror/mio.py;." ^
@@ -28,7 +33,6 @@ if %errorlevel% neq 0 (
     pause
     exit /b 1
 )
-
 
 echo Operation Completed
 pause

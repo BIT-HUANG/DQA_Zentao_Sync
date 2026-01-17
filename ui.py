@@ -717,10 +717,10 @@ class WinGUI(Tk):
 
         # 2. 前置校验：项目未选/编号为空，直接重置为默认提示，不查询+清空缓存
         if not select_project or not jira_no:
-            self.cached_jira_query_result = None  # ✅ 清空缓存
+            self.cached_jira_query_result = None  #  清空缓存
             jira_info_text.config(state=tk.NORMAL)
             jira_info_text.delete(1.0, tk.END)
-            jira_info_text.insert(tk.END, "✅ 请输入Jira编号后自动查询信息")
+            jira_info_text.insert(tk.END, " 请输入Jira编号后自动查询信息")
             jira_info_text.config(state=tk.DISABLED)
             return
 
@@ -734,7 +734,7 @@ class WinGUI(Tk):
                 # 调用services的查询方法 → 仅执行这一次请求
                 query_result = services.get_jira_sync_list(jql_text)
 
-                # ========== ✅ 核心新增：把查询结果存入全局缓存，后续所有逻辑复用这个结果 ==========
+                # ==========  核心新增：把查询结果存入全局缓存，后续所有逻辑复用这个结果 ==========
                 self.cached_jira_query_result = query_result
 
                 # ========== 分场景解析返回结果 ==========
@@ -747,13 +747,13 @@ class WinGUI(Tk):
                     show_content = f"❌ 未查询到Jira信息：{jira_key}，该JiraID不存在或无权限访问！"
                 # 场景3：查询成功，返回有效数据列表（只有1条）
                 elif isinstance(query_result, list) and len(query_result) >= 1:
-                    # ✅ 原始未处理数据（入参）：query_result[0] 是完整的原始dict
+                    #  原始未处理数据（入参）：query_result[0] 是完整的原始dict
                     raw_jira_data = query_result[0]
-                    # ✅ 调用你新增的工具方法：入参=原始数据，返回=处理后的精简dict
+                    #  调用你新增的工具方法：入参=原始数据，返回=处理后的精简dict
 
                     brief_jira_dict = common.get_jira_brief_result(raw_jira_data)
 
-                    # ✅ 拼接处理后的精简数据，展示到UI → 替换原来的原始数据拼接逻辑
+                    #  拼接处理后的精简数据，展示到UI → 替换原来的原始数据拼接逻辑
                     for brief_key, brief_value in brief_jira_dict.items():
                         show_content += f"{brief_key}：{brief_value}\n\n"
                     # 补全成功提示
@@ -766,7 +766,7 @@ class WinGUI(Tk):
                 self.run_in_main_thread(self.__show_jira_info_to_text, show_content)
 
             except Exception as e:
-                self.cached_jira_query_result = None  # ✅ 异常时清空缓存
+                self.cached_jira_query_result = None  #  异常时清空缓存
                 self.run_in_main_thread(self.__show_jira_info_to_text, f"❌ 查询出错：{str(e)}")
 
         # 启动查询线程

@@ -7,10 +7,15 @@ set ENTRY_DIR=%~dp0
 echo %ENTRY_DIR%
 
 :: Start packaging the program
-echo Packaging %PROGRAM_NAME%.exe...
+echo Packaging %PROGRAM_NAME%.exe (no console mode)...
 cd "%ENTRY_DIR%"
 echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm --noconsole ^
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
+:: ======== Flask相关隐式依赖 ========
+--hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 --hidden-import=markupsafe ^
+:: ======== 根目录的portal.py ========
+--add-data "portal.py;." ^
+:: ======== 原有libmirror所有配置  ========
 --add-data "libmirror/mstr.py;." ^
 --add-data "libmirror/mconfig.py;." ^
 --add-data "libmirror/mio.py;." ^
@@ -28,7 +33,6 @@ if %errorlevel% neq 0 (
     pause
     exit /b 1
 )
-
 
 echo Operation Completed
 pause
