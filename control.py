@@ -1,6 +1,6 @@
 from time import sleep
-
 from utils import services, common
+from service_manager import start_services, stop_services, get_service_status
 import threading
 import json
 from urllib.request import HTTPError
@@ -15,6 +15,91 @@ class Controller:
 
     def init(self, ui):
         self.ui = ui
+        self.update_service_status()
+
+    # 新增：开启同步服务
+    def start_sync_service(self):
+        """开启同步服务（增加状态校验）"""
+
+        def task():
+            try:
+                # 新增：先查询服务状态
+                status = get_service_status()
+                if status["ngrok"] or status["flask"]:
+                    msg = "⚠️ 服务已在运行中（ngrok：{} | Flask：{}）".format(
+                        "运行中" if status["ngrok"] else "未运行",
+                        "运行中" if status["flask"] else "未运行"
+                    )
+                    self.ui.run_in_main_thread(self.ui.show_tooltip, msg)
+                    return
+
+                # 原有启动逻辑
+                msg = start_services()
+                self.ui.run_in_main_thread(self.ui.show_tooltip, msg)
+            except Exception as e:
+                err_msg = f"❌ 启动服务失败：{str(e)}"
+                self.ui.run_in_main_thread(self.ui.show_tooltip, err_msg)
+
+        t = threading.Thread(target=task, daemon=True)
+        t.start()
+
+    # 新增：关闭同步服务
+    def stop_sync_service(self):
+        """关闭同步服务（增加容错）"""
+
+        # 异步执行，避免阻塞UI
+        def task():
+            try:
+                # 先查询状态，避免重复停止
+                status = get_service_status()
+                if not status["ngrok"] and not status["flask"]:
+                    self.ui.run_in_main_thread(self.ui.show_tooltip, "⚠️ 服务未运行，无需停止")
+                    return
+
+                # 调用停止方法
+                msg = stop_services()
+                # 强制刷新状态提示
+                self.ui.run_in_main_thread(
+                    lambda: self.ui.service_status_label.config(
+                        text="服务状态：ngrok(未运行) | Flask(未运行)"
+                    )
+                )
+                self.ui.run_in_main_thread(self.ui.show_tooltip, msg)
+            except Exception as e:
+                # 即使底层报错，也提示用户「服务已停止」（实际状态已标记为停止）
+                err_msg = f"⚠️ 服务停止完成（部分清理操作告警）：{str(e)}"
+                print(err_msg)
+                self.ui.run_in_main_thread(self.ui.show_tooltip, "✅ 所有服务已停止")
+                # 强制刷新状态为未运行
+                self.ui.run_in_main_thread(
+                    lambda: self.ui.service_status_label.config(
+                        text="服务状态：ngrok(未运行) | Flask(未运行)"
+                    )
+                )
+
+        t = threading.Thread(target=task, daemon=True)
+        t.start()
+
+    #中新增定时更新状态的方法
+    def update_service_status(self):
+        """定时更新UI上的服务状态"""
+
+        def task():
+            while True:
+                status = get_service_status()
+                status_text = f"服务状态：ngrok({self._get_status_text(status['ngrok'])}) | Flask({self._get_status_text(status['flask'])})"
+                if status["ngrok_url"]:
+                    status_text += f" | 公网地址：{status['ngrok_url']}"  # 截断过长地址
+                self.ui.run_in_main_thread(
+                    lambda: self.ui.service_status_label.config(text=status_text)
+                )
+                sleep(2)  # 每2秒更新一次
+
+        t = threading.Thread(target=task, daemon=True)
+        t.start()
+
+    def _get_status_text(self, is_running):
+        return "运行中" if is_running else "未运行"
 
     def sync_zentao_from_excel(self):
         # 顺带修复：这个方法也有耗时操作，也加线程+主线程转发UI

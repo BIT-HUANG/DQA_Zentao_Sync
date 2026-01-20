@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, Response  # 新增导入Response
+from flask import Flask, request, Response
 import sys
 import os
-import json  # 新增导入json模块
+import json
+from utils import services
 
 # 适配打包后的运行环境 & 普通python运行环境
 if getattr(sys, "frozen", False):
@@ -35,12 +36,13 @@ def dqa_get_zentao_webhook():
         print(receive_data)
         print("=" * 80)
 
-        # ========== 核心修改：替换jsonify，返回【原生中文】的JSON响应，关闭Unicode转义 ==========
+        return_result = services.sync_zentao_action_to_jira_comment_realtime_webhook(receive_data)
+
         res_data = {
             "code": 200,
             "status": "success",
-            "msg": "禅道WebHook数据接收成功",
-            "data": "111"
+            "msg": "索尼Jira已登记处理",
+            "data": return_result
         }
         # 关键配置：ensure_ascii=False → 强制不转义中文，indent=None → 紧凑格式返回
         json_str = json.dumps(res_data, ensure_ascii=False, indent=None)
@@ -60,7 +62,23 @@ def dqa_get_zentao_webhook():
         return Response(json_str, content_type='application/json; charset=utf-8'), 500
 
 
+@app.route('/hello_world', methods=['GET', 'POST'])
+def hello_world():
+    # 直接返回文本内容 hello world!
+    return "hello world!"
+
+
 def start_flask_server(host="0.0.0.0", port=5000, debug=False):
+    # 补充：增加端口占用检测（可选，提升健壮性）
+    import socket
+    def is_port_in_use(port):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            return s.connect_ex(('localhost', port)) == 0
+
+    if is_port_in_use(port):
+        print(f"❌ 端口{port}已被占用，Flask启动失败")
+        return
+
     app.run(host=host, port=port, debug=debug, use_reloader=False)
 
 

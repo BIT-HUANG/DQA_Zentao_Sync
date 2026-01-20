@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 
 
 from mjira.const import FIELD_CSC, FIELD_SONY
@@ -27,7 +28,6 @@ def download_jira_attachments(jira_info, jira_id):
         )
         assets_path_list.append(assets_folder + attachment_info["filename"])
     return assets_path_list
-
 
 def sync_jira_to_zentao(jira_id, zt_pid,zt_assignee):
     try:
@@ -83,7 +83,6 @@ def sync_jira_to_zentao(jira_id, zt_pid,zt_assignee):
         print(e)
         return sync_fail, str(e)
 
-
 def sync_excel():
     file_path = mconfig.get_issue_list_file_path()
 
@@ -112,7 +111,6 @@ def sync_excel():
 
     # 保存（保留原始公式）
     wb.save(file_path)
-
 
 def get_jira_sync_list(jql_text):
     jira_issue_list = []
@@ -168,7 +166,6 @@ def get_jira_sync_list(jql_text):
         #  正常返回数据列表
     return jira_issue_list
 
-
 def get_jira_with_zentao(jira_issue_list, ui=None):
     if isinstance(jira_issue_list, HTTPError):
         raise jira_issue_list
@@ -186,7 +183,6 @@ def get_jira_with_zentao(jira_issue_list, ui=None):
     )
     result_list = [{**d1, **d2} for d1, d2 in zip(jira_issue_list, zentao_result_list)]
     return result_list
-
 
 def sync_zentao_history_to_jira(full_jira_zentao_data_list, ui=None):
     """
@@ -292,3 +288,69 @@ def sync_zentao_history_to_jira(full_jira_zentao_data_list, ui=None):
 
     # 返回：统计字典 + 弹窗详情文案
     return stat_result, detail_total_msg
+
+def add_jira_comment_with_key(jira_key, comment_content):
+    event_time = comment_content.get('date', '无时间信息')  # 时间
+    event_text = comment_content.get('text', '无事件信息')  # text原始内容
+    event_note = comment_content.get('comment', '无备注信息')  # 备注
+
+    # ========== 新增核心：将 [文本](链接) 转为 JIRA Wiki超链接 [文本|链接] ==========
+    import re
+    # 正则匹配原始超链接格式 [xxx](xxx)
+    link_pattern = re.compile(r'\[(.*?)\]\((.*?)\)')
+    # 替换所有匹配到的超链接（兼容多个超链接的情况）
+    event_text = link_pattern.sub(r'[\1|\2]', event_text)
+
+    # 2. 组合成JIRA友好的格式化文本，分行展示+超链接原生支持
+    format_comment = f"""外部禅道更新历史：
+    时间：{event_time}
+    事件：{event_text}
+    备注：{event_note}"""
+
+    add_result = mjira.net_sony.add_jira_comment(jira_key, format_comment) #True False
+    return add_result
+
+def get_jira_keys_with_external_issue_id(external_issue_id):
+    jql = f'"External issue ID" ~ "dangbei {external_issue_id}"'
+    try:
+        search_result = mjira.net_sony.search_sony_jira_in_params(jql, mconfig.get_issue_field(), -1)
+        #  核心判断：如果返回的是HTTPError异常对象 → 主动抛出，向上传递
+        if isinstance(search_result, HTTPError):
+            raise search_result
+        #  只有返回正常数据，才执行取值和循环逻辑
+        jql_result_list = search_result["issues"]
+        jira_key_list = []
+        for result in jql_result_list:
+            jira_key_list.append(result['key'])
+    except HTTPError as e:
+        #  捕获HTTP异常，直接返回异常对象e，e内包含完整的 e.code + e.reason
+        return e
+    except Exception as e:
+        #  兜底捕获所有其他异常，返回空列表，防止程序卡死
+        return []
+    print(jira_key_list)
+    return jira_key_list
+
+def sync_zentao_action_to_jira_comment_realtime_webhook(receive_data):
+    try:
+        zentao_id = receive_data.get("objectID", "")
+        jira_key_list = get_jira_keys_with_external_issue_id(zentao_id)
+        if isinstance(jira_key_list, HTTPError):
+            raise jira_key_list
+        add_result_list = []
+        for jira_key in jira_key_list:
+            if jira_key == "":
+                continue
+            else:
+                add_result = add_jira_comment_with_key(jira_key, receive_data)  # true/false
+                if add_result:
+                    add_result_list.append(f"索尼Jira:{jira_key}评论添加成功")
+                else:
+                    add_result_list.append(f"索尼Jira:{jira_key}评论添加失败")
+    except HTTPError as e:
+        #  捕获HTTP异常，直接返回异常对象e，e内包含完整的 e.code + e.reason
+        return e
+    except Exception as e:
+        #  兜底捕获所有其他异常，返回空列表，防止程序卡死
+        return e
+    return add_result_list

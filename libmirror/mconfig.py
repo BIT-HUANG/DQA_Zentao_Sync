@@ -388,3 +388,16 @@ def get_jira_project_name_list() -> dict:
             __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = {}
         __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = __CONFIG_JSON[__CONFIG_KEY_JIRA_PROJECT_NAME_LIST]
     return __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST
+
+
+# ========== 读取.config中的ngrok auth token ==========
+__CONFIG_KEY_NGROK_AUTH_TKOEN = "ngrok_auth_token"
+__CONFIG_VALUE_NGROK_AUTH_TKOEN = None
+
+def get_ngrok_auth_token() -> str:
+    global __CONFIG_VALUE_NGROK_AUTH_TKOEN
+    if __CONFIG_VALUE_NGROK_AUTH_TKOEN is None:
+        if __CONFIG_KEY_NGROK_AUTH_TKOEN not in __CONFIG_JSON:
+            LOGGER.error(f'请补充配置"{__CONFIG_KEY_NGROK_AUTH_TKOEN}"到.config\n')
+        __CONFIG_VALUE_NGROK_AUTH_TKOEN = __CONFIG_JSON[__CONFIG_KEY_NGROK_AUTH_TKOEN]
+    return __CONFIG_VALUE_NGROK_AUTH_TKOEN

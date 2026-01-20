@@ -14,6 +14,8 @@ from utils import common
 from utils import services
 from urllib.error import HTTPError
 
+from service_manager import get_service_status
+
 class WinGUI(Tk):
 
     # ======== 场景表格 枚举所有场景（规范，防止写错场景名） ========
@@ -63,6 +65,18 @@ class WinGUI(Tk):
         super().__init__()
         self.__win()
 
+        # 服务状态标签
+        self.service_status_label = tk.Label(
+            self,
+            text="服务状态：未运行",
+            bg="#F0F0F0",
+            fg="#333333",
+            padx=10,
+            pady=5,
+            justify="left",
+            font=("微软雅黑", 9)
+        )
+        self.service_status_label.place(x=0, y=750, width=800, height=25)
         # ========== 禅道创建相关变量 ==========
         self.zentao_create_map = mconfig.get_create_zentao_map()  # 读取.config的禅道模块映射
         self.jira_project_name_map = mconfig.get_jira_project_name_list()  # 读取Jira项目名称映射
@@ -196,6 +210,9 @@ class WinGUI(Tk):
             self.tk_button_del_record.place(x=base_x - 110, y=base_y, width=100, height=30)    # 删除按钮
             self.tk_button_add_record.place(x=base_x, y=base_y, width=100, height=30)         # 添加按钮
             self.tk_button_submit_create.place(x=base_x + 110, y=base_y, width=100, height=30)# 提交按钮
+            # ========== 服务站是区域 跟随窗口拉伸自动适配位置 ==========
+            # 固定位置：窗口左下角、表格下方，间距统一20px，完美对齐
+            self.service_status_label.place(x=0, y=base_y, width=800, height=25)
 
     def __tk_label_label_1(self,parent):
         label = Label(parent,text="JQL： ",anchor="center", )
@@ -910,8 +927,9 @@ class WinGUI(Tk):
 
 
     # ========== 主线程调用UI方法的工具函数 ==========
-    def run_in_main_thread(self, func, *args):
-        self.after(0, lambda: func(*args))
+    def run_in_main_thread(self, func, *args, **kwargs):
+        """优化版：支持位置参数 + 关键字参数"""
+        self.after(0, lambda: func(*args, **kwargs))
 
 
 class Win(WinGUI):
@@ -926,11 +944,34 @@ class Win(WinGUI):
     def create_menu(self):
         menu = Menu(self,tearoff=False)
         menu.add_cascade(label="原始功能",menu=self.menu_sub_test_1(menu))
+        menu.add_cascade(label="服务功能", menu=self.menu_sub_service(menu))
         return menu
 
     def menu_sub_test_1(self,parent):
         menu = Menu(parent,tearoff=False)
         menu.add_command(label="从Excel创建禅道",command=self.ctl.sync_zentao_from_excel)
+        return menu
+
+    def menu_sub_service(self, parent):
+        menu = Menu(parent, tearoff=False)
+
+        # 动态设置菜单状态
+        def update_menu_state():
+            status = get_service_status()
+            if status["ngrok"] or status["flask"]:
+                menu.entryconfig("开启同步服务", state="disabled")
+                menu.entryconfig("关闭同步服务", state="normal")
+            else:
+                menu.entryconfig("开启同步服务", state="normal")
+                menu.entryconfig("关闭同步服务", state="disabled")
+            # 每1秒更新一次菜单状态
+            self.after(1000, update_menu_state)
+
+        menu.add_command(label="开启同步服务", command=self.ctl.start_sync_service)
+        menu.add_command(label="关闭同步服务", command=self.ctl.stop_sync_service)
+
+        # 启动菜单状态更新
+        update_menu_state()
         return menu
 
     def __event_bind(self):
