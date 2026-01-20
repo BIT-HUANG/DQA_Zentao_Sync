@@ -10,12 +10,20 @@ echo %ENTRY_DIR%
 echo Packaging %PROGRAM_NAME%.exe...
 cd "%ENTRY_DIR%"
 echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
+:: ========== 原有基础依赖 ==========
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
-:: ========== 添加Flask相关的全部隐式依赖（核心必须加） ==========
+:: ========== Flask相关依赖（补充完整） ==========
 --hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 ^
-:: ========== 把新增的portal.py打包到根目录 ==========
+--hidden-import=werkzeug.serving --hidden-import=werkzeug._internal --hidden-import=click ^
+:: ========== ngrok相关依赖（核心新增） ==========
+--hidden-import=ngrok --hidden-import=ngrok._ffi --hidden-import=ngrok._impl --hidden-import=ngrok.api ^
+--hidden-import=asyncio --hidden-import=threading --hidden-import=ctypes ^
+:: ========== 状态管理相关依赖（新增） ==========
+--hidden-import=psutil  :: 可选：如果用了psutil强制终止ngrok进程则添加 ^
+:: ========== 添加所有新增文件到打包目录（核心） ==========
 --add-data "portal.py;." ^
-:: ========== 原有libmirror相关的add-data配置（ ==========
+--add-data "service_manager.py;." ^  :: 新增服务管理模块 ^
+:: ========== 原有libmirror相关的add-data配置 ==========
 --add-data "libmirror/mstr.py;." ^
 --add-data "libmirror/mconfig.py;." ^
 --add-data "libmirror/mio.py;." ^

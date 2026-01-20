@@ -117,7 +117,7 @@ def download_sony_attachment(url: str,file_name: str,file_folder: str,):
         LOGGER.error(f"Unexpected error downloading image: {e}")
 
 
-# -------------------------- Jira ----------------------------
+# -------------------------- Update ----------------------------
 
 def update_sony_jira(key: str, data_issue: dict):
     """Update an existing Sony Jira issue.
