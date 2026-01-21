@@ -15,6 +15,7 @@ from utils import services
 from urllib.error import HTTPError
 
 from service_manager import get_service_status
+from system_setting_ui import SystemSettingUI
 
 class WinGUI(Tk):
 
@@ -76,6 +77,7 @@ class WinGUI(Tk):
             justify="left",
             font=("微软雅黑", 9)
         )
+        self.system_ui = SystemSettingUI(self)
         self.service_status_label.place(x=0, y=750, width=800, height=25)
         # ========== 禅道创建相关变量 ==========
         self.zentao_create_map = mconfig.get_create_zentao_map()  # 读取.config的禅道模块映射
@@ -940,11 +942,13 @@ class Win(WinGUI):
         self.__style_config()
         self.config(menu=self.create_menu())
         self.ctl.init(self)
+        self.controller = controller
 
     def create_menu(self):
         menu = Menu(self,tearoff=False)
         menu.add_cascade(label="原始功能",menu=self.menu_sub_test_1(menu))
         menu.add_cascade(label="服务功能", menu=self.menu_sub_service(menu))
+        menu.add_cascade(label="系统", menu=self.menu_sub_system(menu))
         return menu
 
     def menu_sub_test_1(self,parent):
@@ -972,6 +976,13 @@ class Win(WinGUI):
 
         # 启动菜单状态更新
         update_menu_state()
+        return menu
+
+    def menu_sub_system(self, parent):
+        menu = Menu(parent, tearoff=False)
+        menu.add_command(label="设置", command=self.ctl.open_setting_dialog)
+        menu.add_command(label="帮助", command=self.ctl.open_help_dialog)
+        menu.add_command(label="关于", command=self.ctl.open_about_dialog)
         return menu
 
     def __event_bind(self):

@@ -4,6 +4,10 @@ from service_manager import start_services, stop_services, get_service_status
 import threading
 import json
 from urllib.request import HTTPError
+import tkinter.messagebox as messagebox
+from system_setting_ui import SystemSettingUI
+import sys
+import os
 
 ENCODE = "UTF-8"
 
@@ -12,10 +16,17 @@ class Controller:
 
     def __init__(self):
         pass
+        # ========== 初始化系统设置UI相关 ==========
+        self.system_ui = None  # 系统设置UI实例
+        self.config_path = ""  # 配置文件路径
 
     def init(self, ui):
         self.ui = ui
         self.update_service_status()
+        # ========== 新增：初始化系统设置UI + 配置文件路径 ==========
+        self.system_ui = SystemSettingUI(self.ui)
+        self.system_ui.set_save_callback(self.save_config)  # 绑定保存回调
+        self.config_path = self.get_config_path()  # 初始化配置文件路径
 
     # 新增：开启同步服务
     def start_sync_service(self):
@@ -353,3 +364,95 @@ class Controller:
             print(error_msg)
             self.ui.run_in_main_thread(self.ui.show_tooltip, error_msg)
             return
+
+
+    # ========== 获取.config文件路径（适配打包后） ==========
+    def get_config_path(self):
+        """获取.config文件路径（适配打包后exe同级目录）"""
+        if hasattr(sys, '_MEIPASS'):
+            # 打包后路径（exe同级目录）
+            base_path = os.path.dirname(sys.executable)
+        else:
+            # 开发环境路径（项目根目录）
+            base_path = os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(base_path, ".config")
+
+    # ========== 读取.config配置文件 ==========
+    def load_config(self):
+        """读取.config文件，返回配置字典（含异常处理）"""
+        try:
+            if not os.path.exists(self.config_path):
+                self.ui.run_in_main_thread(
+                    messagebox.showerror, "配置错误", f"配置文件不存在：{self.config_path}"
+                )
+                return {}
+
+            with open(self.config_path, 'r', encoding='utf-8') as f:
+                config_data = json.load(f)
+            return config_data
+        except json.JSONDecodeError:
+            self.ui.run_in_main_thread(
+                messagebox.showerror, "配置错误", f".config文件格式非法，请检查JSON格式"
+            )
+            return {}
+        except Exception as e:
+            self.ui.run_in_main_thread(
+                messagebox.showerror, "配置错误", f"读取配置失败：{str(e)}"
+            )
+            return {}
+
+    # ========== 新增：保存配置到.config文件 ==========
+    def save_config(self, new_config):
+        """保存修改后的配置到.config文件（含格式校验+异常处理）"""
+        try:
+            # 先校验JSON格式合法性
+            json.dumps(new_config)
+
+            # 写入文件
+            with open(self.config_path, 'w', encoding='utf-8') as f:
+                json.dump(new_config, f, ensure_ascii=False, indent=2)
+
+            self.ui.run_in_main_thread(
+                messagebox.showinfo, "保存成功", "配置已成功保存！"
+            )
+        except json.JSONDecodeError:
+            self.ui.run_in_main_thread(
+                messagebox.showerror, "保存失败", "配置格式非法，无法保存！"
+            )
+        except PermissionError:
+            self.ui.run_in_main_thread(
+                messagebox.showerror, "保存失败", "没有写入权限，请以管理员身份运行！"
+            )
+        except Exception as e:
+            self.ui.run_in_main_thread(
+                messagebox.showerror, "保存失败", f"保存配置出错：{str(e)}"
+            )
+
+    # ========== 新增：打开设置弹窗 ==========
+    def open_setting_dialog(self):
+        """打开系统设置弹窗（绑定UI菜单点击事件）"""
+        config_data = self.load_config()
+        if config_data:
+            self.ui.run_in_main_thread(
+                self.system_ui.create_setting_dialog, config_data
+            )
+
+    # ========== 新增：打开关于弹窗 ==========
+    def open_about_dialog(self):
+        """打开关于弹窗（绑定UI菜单点击事件）"""
+        self.ui.run_in_main_thread(
+            self.system_ui.create_about_dialog
+        )
+
+    def open_about_dialog(self):
+        """打开关于弹窗（绑定UI菜单点击事件）"""
+        self.ui.run_in_main_thread(
+            self.system_ui.create_about_dialog
+        )
+
+    # ========== 新增：打开帮助弹窗 ==========
+    def open_help_dialog(self):
+        """打开帮助弹窗（绑定UI菜单点击事件）"""
+        self.ui.run_in_main_thread(
+            self.system_ui.create_help_dialog
+        )

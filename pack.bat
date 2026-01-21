@@ -18,6 +18,7 @@ echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
 --hidden-import=psutil ^
 --add-data "portal.py;." ^
 --add-data "service_manager.py;." ^
+--add-data "system_setting_ui.py;." ^
 --add-data "libmirror/mstr.py;." ^
 --add-data "libmirror/mconfig.py;." ^
 --add-data "libmirror/mio.py;." ^
@@ -29,6 +30,7 @@ echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
 --add-data "libmirror/mjira/http.py;mjira" ^
 --add-data "libmirror/mjira/net_sony.py;mjira" ^
 --add-data "libmirror/mzentao/*.py;mzentao" ^
+--add-data "README.md;." ^
 %PROGRAM_NAME%.py
 if %errorlevel% neq 0 (
     echo Packaging failed, please check pyinstaller configuration!
