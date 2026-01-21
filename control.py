@@ -434,7 +434,7 @@ class Controller:
         config_data = self.load_config()
         if config_data:
             self.ui.run_in_main_thread(
-                self.system_ui.create_setting_dialog, config_data
+                self.system_ui.create_setting_dialog
             )
 
     # ========== 新增：打开关于弹窗 ==========
