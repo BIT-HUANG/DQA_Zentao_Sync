@@ -3,19 +3,21 @@ setlocal
 
 :: Define source directory and target directory
 set PROGRAM_NAME=DQA_SYNC
-set ENTRY_DIR=%~dp0
+set OUTPUT_EXE_NAME=DQA_SYNC_NO_CONSOLE
+set ENTRY_DIR=%~dp0..\
 echo %ENTRY_DIR%
 
 :: Start packaging the program
 echo Packaging %PROGRAM_NAME%.exe (no console mode)...
 cd "%ENTRY_DIR%"
 echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm --noconsole ^
+--name %OUTPUT_EXE_NAME% ^
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
 --hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 ^
 --hidden-import=werkzeug.serving --hidden-import=werkzeug._internal --hidden-import=click ^
 --hidden-import=ngrok --hidden-import=ngrok._ffi --hidden-import=ngrok._impl --hidden-import=ngrok.api ^
 --hidden-import=asyncio --hidden-import=threading --hidden-import=ctypes ^
---hidden-import=psutil  :: 可选：如果用了psutil强制终止ngrok进程则添加 ^
+--hidden-import=psutil ^
 --add-data "portal.py;." ^
 --add-data "service_manager.py;." ^
 --add-data "system_setting_ui.py;." ^

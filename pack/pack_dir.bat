@@ -3,13 +3,15 @@ setlocal
 
 :: Define source directory and target directory
 set PROGRAM_NAME=DQA_SYNC
-set ENTRY_DIR=%~dp0
+set OUTPUT_EXE_NAME=DQA_SYNC_CONSOLE
+set ENTRY_DIR=%~dp0..\
 echo %ENTRY_DIR%
 
 :: Start packaging the program
 echo Packaging %PROGRAM_NAME%.exe...
 cd "%ENTRY_DIR%"
-echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
+echo y | pyinstaller --onedir --noupx --clean --log-level INFO --noconfirm ^
+--name %OUTPUT_EXE_NAME% ^
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
 --hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 ^
 --hidden-import=werkzeug.serving --hidden-import=werkzeug._internal --hidden-import=click ^
