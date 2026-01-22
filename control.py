@@ -430,9 +430,13 @@ class Controller:
 
     # ========== 新增：打开设置弹窗 ==========
     def open_setting_dialog(self):
-        """打开系统设置弹窗（绑定UI菜单点击事件）"""
+        """打开系统设置弹窗（绑定UI菜单点击事件）- 新增传递主实例引用"""
         config_data = self.load_config()
         if config_data:
+            # 关键修改：在创建设置弹窗前，给system_ui绑定主实例引用
+            # 方式1：绑定Control层实例（推荐，通过Control层调用主窗口方法）
+            self.system_ui.control = self  # 把Control实例传给SysTemSettingUI
+            # 原有打开弹窗的逻辑
             self.ui.run_in_main_thread(
                 self.system_ui.create_setting_dialog
             )

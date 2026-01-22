@@ -8,6 +8,7 @@ import random
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import *
+import logging
 
 import mconfig
 from utils import common
@@ -79,10 +80,16 @@ class WinGUI(Tk):
         )
         self.system_ui = SystemSettingUI(self)
         self.service_status_label.place(x=0, y=750, width=800, height=25)
-        # ========== 禅道创建相关变量 ==========
-        self.zentao_create_map = mconfig.get_create_zentao_map()  # 读取.config的禅道模块映射
+        # ========== 禅道创建相关变量（核心改造：适配List[Dict]格式） ==========
+        self.zentao_create_list = mconfig.get_create_zentao_map()  # 新格式：List[Dict]
+        # 兼容原有逻辑的映射变量（避免大面积修改）
+        self.zentao_create_map = self._convert_zentao_list_to_map()  # 转回双层Dict
+
         self.jira_project_name_map = mconfig.get_jira_project_name_list()  # 读取Jira项目名称映射
-        self.jira_project_name_list = list(self.jira_project_name_map.values())  # 下拉框只展示value值列表
+        self.jira_project_name_list = []
+        for item in self.jira_project_name_map:
+            if isinstance(item, dict) and len(item) == 1:
+                self.jira_project_name_list.append(list(item.values())[0])
         self.create_zentao_popup = None  # 禅道创建表单弹窗对象
         self.create_form_widgets = {}  # 存储表单内所有控件，方便清空/取值
         self.jira_query_timer = None  # Jira查询防抖定时器，解决频繁查询问题
@@ -135,6 +142,18 @@ class WinGUI(Tk):
         self.title_tooltip.place_forget()  # 初始隐藏
         # ========== 绑定窗口大小变化事件 ==========
         self.bind('<Configure>', self.on_window_resize)
+
+    def _convert_zentao_list_to_map(self):
+        """将新格式List[Dict]转回原有双层Dict格式，兼容旧逻辑"""
+        zentao_map = {}
+        for item in self.zentao_create_list:
+            pname = item.get("zt_pname")
+            if pname:
+                zentao_map[pname] = {
+                    "zt_pid": item.get("zt_pid"),
+                    "zt_assignee": item.get("zt_assignee")
+                }
+        return zentao_map
 
     def __win(self):
         self.title("DQA 同步工具")
@@ -627,7 +646,8 @@ class WinGUI(Tk):
         # ===================== 2. 第二行：禅道模块 + 模块ID + 指派人 =====================
         pad_y += 60
         tk.Label(self.create_zentao_popup, text="禅道模块：", anchor="w", width=label_width).place(x=base_x, y=pad_y)
-        module_list = list(self.zentao_create_map.keys())
+        # 核心改造：从List[Dict]提取zt_pname作为下拉框选项
+        module_list = [item.get("zt_pname", "") for item in self.zentao_create_list if item.get("zt_pname")]
         module_var = tk.StringVar(value="")
         module_combobox = tk.ttk.Combobox(self.create_zentao_popup, textvariable=module_var, values=module_list,
                                           state="readonly", font=("微软雅黑", 10))
@@ -649,10 +669,18 @@ class WinGUI(Tk):
         assignee_label.place(x=515, y=pad_y)
         self.create_form_widgets["assignee_label"] = assignee_label
 
-        # 禅道模块选中联动事件
+        # 禅道模块选中联动事件（核心改造：适配List[Dict]）
         def select_module_event(event):
             select_module = module_var.get()
-            module_info = self.zentao_create_map.get(select_module, {})
+            # 遍历List[Dict]匹配zt_pname
+            module_info = {}
+            for item in self.zentao_create_list:
+                if item.get("zt_pname") == select_module:
+                    module_info = {
+                        "zt_pid": item.get("zt_pid", ""),
+                        "zt_assignee": item.get("zt_assignee", "")
+                    }
+                    break
             pid_label.config(text=module_info.get("zt_pid", ""))
             assignee_label.config(text=module_info.get("zt_assignee", ""))
 
@@ -817,10 +845,20 @@ class WinGUI(Tk):
         select_module = self.create_form_widgets.get("module_var").get().strip()
 
         # ========== 原有基础校验，不变 ==========
-        if not self.zentao_create_map:
+        if not self.zentao_create_list:
             self.show_tooltip("未读取到禅道模块配置，请检查.config文件！")
             return
-        module_info = self.zentao_create_map.get(select_module, {})
+
+        # 核心改造：从List[Dict]获取模块信息
+        module_info = {}
+        for item in self.zentao_create_list:
+            if item.get("zt_pname") == select_module:
+                module_info = {
+                    "zt_pid": item.get("zt_pid", ""),
+                    "zt_assignee": item.get("zt_assignee", "")
+                }
+                break
+
         zt_pid = module_info.get("zt_pid", "")
         zt_assignee = module_info.get("zt_assignee", "")
 
@@ -996,3 +1034,69 @@ class Win(WinGUI):
 
     def __style_config(self):
         pass
+
+    def reload_all_config(self):
+        """全局配置重载"""
+        try:
+            # 读取全量配置
+            self.all_config = mconfig.load_all_config()
+
+            # 更新所有配置变量（一一对应你的.config字段）
+            self.ngrok_auth_token = self.all_config.get("ngrok_auth_token", "")
+            self.sony_jira_token = self.all_config.get("sony_jira_token", "")
+            self.zt_url = self.all_config.get("zt_url", "")
+            self.zt_http_basic = self.all_config.get("zt_http_basic", "")
+            self.zt_username = self.all_config.get("zt_username", "")
+            self.zt_password = self.all_config.get("zt_password", "")
+            self.db_manager = self.all_config.get("db_manager", "")
+            self.host_zt = self.all_config.get("host_zt", "")
+            self.issue_field = self.all_config.get("issue_field", [])
+            self.issue_list_jql = self.all_config.get("issue_list_jql", "")
+            self.issue_list_jql_test = self.all_config.get("issue_list_jql_test", "")
+            self.issue_list_file_path = self.all_config.get("issue_list_file_path", "")
+            self.trans_artifacts = self.all_config.get("trans_artifacts", False)
+            self.trans_descriptions = self.all_config.get("trans_descriptions", False)
+            self.host_sony = self.all_config.get("host_sony", "")
+
+            # 核心禅道/Jira配置
+            self.zentao_create_list = self.all_config.get("create_zentao_map", [])
+            self.zentao_create_map = self._convert_zentao_list_to_map()
+            self.jira_project_name_list = []
+            for item in self.all_config.get("jira_project_name_list", []):
+                if isinstance(item, dict) and len(item) == 1:
+                    # 提取字典的value（如CNUXBTRACK）作为下拉选项
+                    self.jira_project_name_list.append(list(item.values())[0])
+
+            # 刷新UI
+            self.refresh_all_ui_components()
+            self.show_tooltip("✅ 所有配置已实时刷新生效！", auto_hide=True)
+
+        except Exception as e:
+            logging.error(f"重载配置失败：{str(e)}")
+            self.show_tooltip(f"❌ 配置刷新失败：{str(e)}", auto_hide=True)
+
+    def refresh_all_ui_components(self):
+        """
+        刷新所有依赖配置的UI组件（统一维护，新增组件只需在这里加）
+        """
+        # 1. 刷新禅道创建弹窗的模块下拉框（如果弹窗已打开）
+        if self.create_zentao_popup and self.create_zentao_popup.winfo_exists():
+            self.refresh_zentao_module_combobox()
+
+        # 2. 刷新Jira项目下拉框（如果存在）
+        if self.create_zentao_popup and self.create_zentao_popup.winfo_exists():
+            project_combobox = self.create_form_widgets.get("project_combobox")
+            if project_combobox and project_combobox.winfo_exists():
+                project_combobox["values"] = self.jira_project_name_list
+                # 保留当前选中值（如果仍在选项列表中）
+                current_val = self.create_form_widgets.get("project_var").get()
+                if current_val and current_val not in self.jira_project_name_list and self.jira_project_name_list:
+                    self.create_form_widgets.get("project_var").set(self.jira_project_name_list[0])
+
+        # 3. 刷新其他配置相关的UI组件（根据你的实际界面补充）
+        # 示例：刷新禅道URL显示框
+        if hasattr(self, "zentao_url_label"):
+            self.zentao_url_label.config(text=self.zentao_url)
+
+        # 4. 刷新表格/列表等依赖配置的组件
+        self.reset_table_style(self.TABLE_TYPE_CREATE_ZENTAO)

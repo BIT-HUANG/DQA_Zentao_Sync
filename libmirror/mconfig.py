@@ -1,15 +1,87 @@
 __API_VERSION = 1
 
 from mlogger import LOGGER
+import json
 import os
+import logging
 from mio import get_json_from_file
 
 
 print("1. 运行工作目录(CWD):", os.getcwd())  # 相对路径的基准
 print("2. 代码文件所在目录:", os.path.dirname(os.path.abspath(__file__)))  # 代码文件位置
 print("3. .config实际解析路径:", os.path.abspath(".config"))  # 相对路径最终指向的位置
+CONFIG_FILE_PATH = os.path.abspath(".config")
+
+DEFAULT_CONFIG = {
+    # 基础字符串配置
+    "ngrok_auth_token": "",
+    "sony_jira_token": "",
+    "zt_url": "",
+    "zt_http_basic": "",
+    "zt_username": "",
+    "zt_password": "",
+    "db_manager": "",
+    "host_zt": "",
+    "issue_list_jql": "",
+    "issue_list_jql_test": "",
+    "issue_list_file_path": "",
+    "host_sony": "",
+
+    # 布尔类型配置
+    "trans_artifacts": False,
+    "trans_descriptions": False,
+
+    # 列表类型配置
+    "issue_field": [],
+
+    # 复杂列表字典类型（核心配置）
+    "create_zentao_map": [],
+    "jira_project_name_list": []
+}
 
 
+def load_all_config():
+    """
+    通用方法：读取配置文件中的所有配置（一次性加载全部）
+    返回：完整的配置字典（缺失字段会用默认值填充）
+    """
+    try:
+        if not os.path.exists(CONFIG_FILE_PATH):
+            logging.warning(f"配置文件不存在，使用默认配置：{CONFIG_FILE_PATH}")
+            return DEFAULT_CONFIG.copy()
+
+        # 每次读取都重新打开文件，确保获取最新内容
+        with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as f:
+            user_config = json.load(f)
+
+        # 合并用户配置和默认配置（确保缺失字段有默认值）
+        full_config = DEFAULT_CONFIG.copy()
+        full_config.update(user_config)
+        return full_config
+
+    except Exception as e:
+        logging.error(f"读取配置文件失败：{str(e)}")
+        return DEFAULT_CONFIG.copy()
+
+
+# 保留原有单个配置读取方法（兼容旧代码）
+def get_create_zentao_map():
+    """读取禅道模块配置（兼容旧逻辑）"""
+    all_config = load_all_config()
+    return all_config.get("create_zentao_map", [])
+
+
+def get_jira_project_list():
+    """读取Jira项目配置（兼容旧逻辑）"""
+    all_config = load_all_config()
+    return all_config.get("jira_project_list", [])
+
+
+# 新增：获取任意配置项的通用方法
+def get_config_item(key, default=None):
+    """获取单个配置项（通用）"""
+    all_config = load_all_config()
+    return all_config.get(key, default)
 
 
 try:
@@ -367,27 +439,90 @@ def get_issue_field() -> list:
 __CONFIG_KEY_CREATE_ZENTAO_MAP = "create_zentao_map"
 __CONFIG_VALUE_CREATE_ZENTAO_MAP = None
 
-def get_create_zentao_map() -> dict:
+def get_create_zentao_map() -> list:
+    """读取禅道创建模块映射（新格式：List[Dict]）"""
     global __CONFIG_VALUE_CREATE_ZENTAO_MAP
     if __CONFIG_VALUE_CREATE_ZENTAO_MAP is None:
         if __CONFIG_KEY_CREATE_ZENTAO_MAP not in __CONFIG_JSON:
             LOGGER.error(f'请补充配置"{__CONFIG_KEY_CREATE_ZENTAO_MAP}"到.config\n')
-            __CONFIG_VALUE_CREATE_ZENTAO_MAP = {}
-        __CONFIG_VALUE_CREATE_ZENTAO_MAP = __CONFIG_JSON[__CONFIG_KEY_CREATE_ZENTAO_MAP]
+            __CONFIG_VALUE_CREATE_ZENTAO_MAP = []  # 改为空列表（原是空dict）
+        else:
+            # 读取新格式：List[Dict]
+            __CONFIG_VALUE_CREATE_ZENTAO_MAP = __CONFIG_JSON[__CONFIG_KEY_CREATE_ZENTAO_MAP]
+            # 兼容校验：确保格式正确
+            if not isinstance(__CONFIG_VALUE_CREATE_ZENTAO_MAP, list):
+                LOGGER.error(f'配置"{__CONFIG_KEY_CREATE_ZENTAO_MAP}"格式错误，应为List[Dict]，已重置为空列表')
+                __CONFIG_VALUE_CREATE_ZENTAO_MAP = []
+            else:
+                # 过滤有效项（必须包含zt_pname/zt_pid/zt_assignee）
+                valid_items = []
+                for item in __CONFIG_VALUE_CREATE_ZENTAO_MAP:
+                    if isinstance(item, dict) and all(k in item for k in ["zt_pname", "zt_pid", "zt_assignee"]):
+                        valid_items.append(item)
+                    else:
+                        LOGGER.warning(f'过滤无效配置项：{item}（需包含zt_pname/zt_pid/zt_assignee字段）')
+                __CONFIG_VALUE_CREATE_ZENTAO_MAP = valid_items
     return __CONFIG_VALUE_CREATE_ZENTAO_MAP
+
+# ========== 新增：兼容原有Dict格式的辅助方法（防止其他代码依赖） ==========
+def get_create_zentao_map_dict() -> dict:
+    """兼容原有逻辑：将List[Dict]转回双层Dict格式"""
+    zentao_list = get_create_zentao_map()
+    zentao_map = {}
+    for item in zentao_list:
+        pname = item.get("zt_pname")
+        if pname:
+            zentao_map[pname] = {
+                "zt_pid": item.get("zt_pid"),
+                "zt_assignee": item.get("zt_assignee")
+            }
+    return zentao_map
+
+# ========== 新增：获取项目名称列表（适配UI下拉框） ==========
+def get_zentao_project_names() -> list:
+    """提取所有zt_pname值，用于UI下拉框"""
+    zentao_list = get_create_zentao_map()
+    return [item.get("zt_pname") for item in zentao_list if item.get("zt_pname")]
 
 # ========== 读取.config中的Jira项目名称映射 jira_project_name_list ==========
 __CONFIG_KEY_JIRA_PROJECT_NAME_LIST = "jira_project_name_list"
 __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = None
 
-def get_jira_project_name_list() -> dict:
+def get_jira_project_name_list() -> list:
+    """读取Jira项目名称映射（新格式：List[Dict]）"""
     global __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST
     if __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST is None:
         if __CONFIG_KEY_JIRA_PROJECT_NAME_LIST not in __CONFIG_JSON:
             LOGGER.error(f'请补充配置"{__CONFIG_KEY_JIRA_PROJECT_NAME_LIST}"到.config\n')
-            __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = {}
-        __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = __CONFIG_JSON[__CONFIG_KEY_JIRA_PROJECT_NAME_LIST]
+            __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = []  # 改为空列表（原是空dict）
+        else:
+            # 读取新格式：List[Dict]
+            __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = __CONFIG_JSON[__CONFIG_KEY_JIRA_PROJECT_NAME_LIST]
+            # 兼容校验：确保格式正确（防止配置写错）
+            if not isinstance(__CONFIG_VALUE_JIRA_PROJECT_NAME_LIST, list):
+                LOGGER.error(f'配置"{__CONFIG_KEY_JIRA_PROJECT_NAME_LIST}"格式错误，应为List[Dict]，已重置为空列表')
+                __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = []
+            else:
+                # 过滤无效元素（只保留 Dict 类型）
+                valid_items = []
+                for item in __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST:
+                    if isinstance(item, dict) and len(item) == 1:  # 确保是单键值对Dict
+                        valid_items.append(item)
+                    else:
+                        LOGGER.warning(f'过滤无效配置项：{item}（需为单键值对Dict）')
+                __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST = valid_items
     return __CONFIG_VALUE_JIRA_PROJECT_NAME_LIST
+
+def get_jira_project_name_values() -> list:
+    """从List[Dict]中提取所有value值（兼容原有ui.py的使用方式）"""
+    project_list = get_jira_project_name_list()
+    value_list = []
+    for item in project_list:
+        # 取Dict中唯一的value值
+        for v in item.values():
+            value_list.append(v)
+            break  # 确保只取第一个value（单键值对）
+    return value_list
 
 
 # ========== 读取.config中的ngrok auth token ==========

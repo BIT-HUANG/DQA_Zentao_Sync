@@ -114,6 +114,15 @@ class ConfigManager:
             print(f"保存配置失败：{str(e)}")
             raise  # 抛出异常，让上层感知保存失败
 
+    def save_config(self):
+        """公开的保存配置方法（兼容外部调用）"""
+        try:
+            self._save_config(self.config)
+            return True
+        except Exception as e:
+            print(f"保存配置失败：{str(e)}")
+            return False
+
     def get(self, key, default=None):
         """读取配置：支持嵌套 key 如 "a.b.c"，返回原生类型"""
         keys = key.split(".")
