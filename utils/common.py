@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 
 # ========== table data transfer ==========
@@ -77,13 +78,20 @@ class ConfigManager:
     """配置文件管理器：全程 JSON 原生读写，保持 list/dict 等类型不变（对齐项目根目录路径）"""
 
     def __init__(self, config_file_name=".config"):
-        # ========== 核心修改：复用项目根目录路径逻辑 ==========
-        # 1. 获取utils目录（当前文件所在目录）
-        utils_dir = os.path.dirname(os.path.abspath(__file__))
-        # 2. 向上回退一级 → 项目根目录（和table_data_temp.json同目录）
-        root_dir = os.path.dirname(utils_dir)
-        # 3. 拼接配置文件的绝对路径
+        # ========== 适配打包/非打包环境的路径逻辑 ==========
+        if getattr(sys, 'frozen', False):
+            # 打包成EXE后的环境：EXE所在目录为根目录
+            root_dir = os.path.dirname(sys.executable)
+        else:
+            # Debug环境：源码目录逻辑
+            utils_dir = os.path.dirname(os.path.abspath(__file__))
+            root_dir = os.path.dirname(utils_dir)
+
+        # 拼接配置文件路径（EXE同目录下的.config）
         self.config_path = os.path.join(root_dir, config_file_name)
+
+        # 确保目录存在（打包后可能缺少目录）
+        os.makedirs(root_dir, exist_ok=True)
 
         # 加载配置
         self.config = self._load_config()
