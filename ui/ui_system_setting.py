@@ -706,7 +706,6 @@ class SystemSettingUI:
         self.about_dialog.transient(self.parent)
         self.about_dialog.grab_set()
 
-        # ========== 新增：弹窗居中（相对于主窗口） ==========
         self.about_dialog.update_idletasks()  # 先更新弹窗尺寸
         # 主窗口位置和尺寸
         parent_x = self.parent.winfo_x()
@@ -732,10 +731,59 @@ class SystemSettingUI:
 
         # 开发信息
         ttk.Label(content_frame, text="开发人员：BD4SLW", font=("微软雅黑", 10)).pack(pady=2)
-        ttk.Label(content_frame, text="联系方式：EL PSY KONGROO", font=("微软雅黑", 10)).pack(pady=2)
+        contact_label = ttk.Label(content_frame, text="联系方式：EL PSY KONGROO", font=("微软雅黑", 10))
+        contact_label.pack(pady=2)
+        # 绑定双击事件（<Double-1> 表示鼠标左键双击）
+        contact_label.bind("<Double-1>", self.on_double_click_contact)
 
         # 确定按钮
         ttk.Button(content_frame, text="确定", command=self.on_close_about).pack(padx=5)
+
+    def on_double_click_contact(self, event):
+        """双击联系方式标签的处理函数（终极修复版）"""
+        try:
+            # 直接通过 parent（主UI Win实例）调用 show_game_menu_item 方法
+            # 这是最直接、最可靠的方式，绕开control层的引用问题
+            self.parent.show_game_menu_item()
+
+            # 交互反馈：文字变蓝
+            event.widget.config(foreground="blue")
+            tk.messagebox.showinfo("提示", "隐藏彩蛋已激活！")
+        except AttributeError as e:
+            # 兜底：如果parent也没有该方法，手动创建菜单选项
+            self.create_game_menu_item_manually()
+            event.widget.config(foreground="blue")
+            tk.messagebox.showinfo("提示", "隐藏彩蛋已激活（兜底模式）！")
+        except Exception as e:
+            print(f"激活菜单失败：{e}")
+            tk.messagebox.showwarning("提示", f"彩蛋激活失败：{str(e)}")
+
+    def create_game_menu_item_manually(self):
+        """兜底方案：直接找到系统菜单并添加选项"""
+        # 获取主窗口的菜单
+        main_menu = self.parent.nametowidget(self.parent.cget("menu"))
+        # 遍历菜单找到“其他”子菜单（system_menu）
+        for i in range(main_menu.index("end") + 1):
+            try:
+                menu_item = main_menu.entrycget(i, "label")
+                # 假设你的“其他”菜单标签是“其他”，请根据实际情况修改
+                if menu_item == "其他":
+                    sub_menu = main_menu.nametowidget(main_menu.entrycget(i, "menu"))
+                    # 检查是否已添加“其他”选项
+                    has_game_item = False
+                    for j in range(sub_menu.index("end") + 1):
+                        if sub_menu.entrycget(j, "label") == "其他":
+                            has_game_item = True
+                            break
+                    if not has_game_item:
+                        # 手动添加“其他”选项
+                        sub_menu.add_command(
+                            label="其他",
+                            command=self.parent.ctl.open_game_select_dialog
+                        )
+                    break
+            except:
+                continue
 
     def on_cancel_setting(self):
         """取消设置（关闭弹窗，不保存）"""

@@ -980,6 +980,9 @@ class Win(WinGUI):
         self.config(menu=self.create_menu())
         self.ctl.init(self)
         self.controller = controller
+        self.main_menu = None
+        self.system_menu = None
+        self.game_menu_item = None
 
     def create_menu(self):
         menu = Menu(self,tearoff=False)
@@ -1020,7 +1023,56 @@ class Win(WinGUI):
         menu.add_command(label="设置", command=self.ctl.open_setting_dialog)
         menu.add_command(label="帮助", command=self.ctl.open_help_dialog)
         menu.add_command(label="关于", command=self.ctl.open_about_dialog)
+        # menu.add_command(label="其他", command=self.ctl.open_game_select_dialog)
+        # 保存menu引用，方便后续添加选项
+        self.system_menu = menu
+        # 默认不添加“其他”选项
+        self.game_menu_item = None
         return menu
+
+    def show_game_menu_item(self):
+        """显示系统子菜单中的“其他”选项（核心修复）"""
+        # 1. 校验子菜单引用是否有效
+        if not self.system_menu:
+            # 兜底：重新获取系统子菜单（防止引用丢失）
+            self._reload_system_menu()
+
+        # 2. 仅在未添加时添加，避免重复
+        if self.system_menu and self.game_menu_item is None:
+            # 添加“其他”选项到系统子菜单
+            self.game_menu_item = self.system_menu.add_command(
+                label="==隐藏==",
+                command=self.ctl.open_game_select_dialog
+            )
+            # 强制刷新UI，解决tkinter菜单不即时显示的问题
+            self.update_idletasks()
+            self.main_menu.update()  # 刷新顶级菜单
+            print("✅ “隐藏”选项已成功添加到【系统】子菜单")
+        elif self.game_menu_item is not None:
+            print("ℹ️ “隐藏”选项已存在，无需重复添加")
+        else:
+            print("❌ 系统子菜单引用失效，无法添加选项")
+
+    def _reload_system_menu(self):
+        """兜底：重新获取系统子菜单引用（防止初始化时引用丢失）"""
+        if not self.main_menu:
+            self.main_menu = self.nametowidget(self.cget("menu"))
+
+        # 遍历顶级菜单，找到“系统”菜单并获取其子菜单
+        for idx in range(self.main_menu.index("end") + 1):
+            try:
+                # 获取顶级菜单项的标签
+                item_label = self.main_menu.entrycget(idx, "label")
+                if item_label == "系统":
+                    # 获取“系统”顶级菜单对应的子菜单
+                    self.system_menu = self.main_menu.nametowidget(
+                        self.main_menu.entrycget(idx, "menu")
+                    )
+                    print(f"✅ 重新获取系统子菜单成功：{self.system_menu}")
+                    break
+            except Exception as e:
+                print(f"⚠️ 遍历菜单时出错：{e}")
+                continue
 
     def __event_bind(self):
         self.tk_button_button_search.bind('<Button-1>',self.ctl.search)

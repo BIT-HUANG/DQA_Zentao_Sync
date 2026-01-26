@@ -6,6 +6,7 @@ import json
 from urllib.request import HTTPError
 import tkinter.messagebox as messagebox
 from ui.ui_system_setting import SystemSettingUI
+from ui.ui_game import GameUI
 import sys
 import os
 
@@ -19,14 +20,15 @@ class Controller:
         # ========== 初始化系统设置UI相关 ==========
         self.system_ui = None  # 系统设置UI实例
         self.config_path = ""  # 配置文件路径
+        self.game_ui = None  # 游戏UI实例
 
     def init(self, ui):
         self.ui = ui
         self.update_service_status()
-        # ========== 新增：初始化系统设置UI + 配置文件路径 ==========
         self.system_ui = SystemSettingUI(self.ui)
         self.system_ui.set_save_callback(self.save_config)  # 绑定保存回调
         self.config_path = self.get_config_path()  # 初始化配置文件路径
+        self.game_ui = GameUI(self.ui)
 
     # 新增：开启同步服务
     def start_sync_service(self):
@@ -460,3 +462,13 @@ class Controller:
         self.ui.run_in_main_thread(
             self.system_ui.create_help_dialog
         )
+
+    def open_game_select_dialog(self):
+        """打开关于弹窗（绑定UI菜单点击事件）"""
+        self.ui.run_in_main_thread(
+            self.game_ui.create_game_select_dialog
+        )
+
+    def show_game_menu_item(self):
+        """调用UI层显示游戏菜单选项"""
+        self.ui.run_in_main_thread(self.ui.show_game_menu_item)
