@@ -1,4 +1,13 @@
 # DQA 同步工具 - 使用帮助
+
+
+## 0. 首次使用
+- 首次使用时，在系统设置中添加自己的Jira令牌，禅道用户名与密码，以及禅道默认指派人。
+- Jira令牌：sony_jira_token
+- 禅道用户名：zt_username
+- 禅道密码：zt_password
+- 禅道默认指派人： db_manager
+
 ## 1. 功能说明
 - 原始功能：从Excel创建禅道工单
 - 服务功能：开启/关闭同步服务（ngrok+Flask）

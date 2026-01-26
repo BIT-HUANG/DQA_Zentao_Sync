@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, Response
+from flask import Flask, request, Response,jsonify
 import sys
 import os
 import json
@@ -64,8 +64,21 @@ def dqa_get_zentao_webhook():
 
 @app.route('/hello_world', methods=['GET', 'POST'])
 def hello_world():
-    # 直接返回文本内容 hello world!
-    return "hello world!"
+    # GET请求：保留原有测试逻辑
+    if request.method == 'GET':
+        res_data = {
+            "code": 200,
+            "status": "success",
+            "msg": "Server Received Data.",
+            "data": "Hello World!"
+        }
+        return jsonify(res_data)
+
+    # POST请求：适配Teams创建校验的核心逻辑
+    elif request.method == 'POST':
+        # 第一步：Teams创建阶段仅返回极简响应，确保校验通过
+        # 这是Teams能识别的唯一格式（仅text字段）
+        return jsonify({"text": "OK"}), 200
 
 
 def start_flask_server(host="0.0.0.0", port=5000, debug=False):
