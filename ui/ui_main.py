@@ -983,6 +983,7 @@ class Win(WinGUI):
         self.main_menu = None
         self.system_menu = None
         self.game_menu_item = None
+        self.game_menu_activated = False
 
     def create_menu(self):
         menu = Menu(self,tearoff=False)
@@ -1031,27 +1032,48 @@ class Win(WinGUI):
         return menu
 
     def show_game_menu_item(self):
-        """显示系统子菜单中的“其他”选项（核心修复）"""
-        # 1. 校验子菜单引用是否有效
+        """显示系统子菜单中的“其他”选项（防重复版）"""
+        # 第一层防护：状态标记检查（最核心）
+        if self.game_menu_activated:
+            print("ℹ️ 彩蛋菜单已激活，无需重复添加")
+            return
+
+        # 第二层防护：子菜单引用检查
         if not self.system_menu:
-            # 兜底：重新获取系统子菜单（防止引用丢失）
             self._reload_system_menu()
 
-        # 2. 仅在未添加时添加，避免重复
-        if self.system_menu and self.game_menu_item is None:
-            # 添加“其他”选项到系统子菜单
-            self.game_menu_item = self.system_menu.add_command(
-                label="彩蛋",
-                command=self.ctl.open_game_select_dialog
-            )
-            # 强制刷新UI，解决tkinter菜单不即时显示的问题
-            self.update_idletasks()
-            self.main_menu.update()  # 刷新顶级菜单
-            print("✅ “隐藏”选项已成功添加到【系统】子菜单")
-        elif self.game_menu_item is not None:
-            print("ℹ️ “隐藏”选项已存在，无需重复添加")
+        # 第三层防护：菜单项引用检查 + 遍历检查
+        if self.system_menu:
+            # 先遍历子菜单，检查是否已有“彩蛋”选项
+            has_other = False
+            try:
+                last_idx = self.system_menu.index("end")
+                if last_idx is not None:
+                    for idx in range(last_idx + 1):
+                        label = self.system_menu.entrycget(idx, "label")
+                        if label == "彩蛋":
+                            has_other = True
+                            self.game_menu_activated = True  # 更新状态标记
+                            break
+            except:
+                pass
+
+            # 仅当没有“彩蛋”选项时才添加
+            if not has_other:
+                self.game_menu_item = self.system_menu.add_command(
+                    label="彩蛋",
+                    command=self.ctl.open_game_select_dialog
+                )
+                # 强制刷新
+                self.update_idletasks()
+                self.main_menu.update()
+                # 更新状态标记（关键：标记为已激活）
+                self.game_menu_activated = True
+                print("✅ 彩蛋菜单首次激活，添加成功")
+            else:
+                print("ℹ️ 子菜单中已有“彩蛋”选项，无需重复添加")
         else:
-            print("❌ 系统子菜单引用失效，无法添加选项")
+            print("❌ 系统子菜单获取失败，无法添加")
 
     def _reload_system_menu(self):
         """兜底：重新获取系统子菜单引用（防止初始化时引用丢失）"""

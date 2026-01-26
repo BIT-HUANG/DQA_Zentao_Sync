@@ -18,6 +18,7 @@ class SystemSettingUI:
         self.original_config = {}  # 存储原始配置（用于重置）
         self.setting_dialog = None  # 设置弹窗
         self.about_dialog = None  # 关于弹窗
+        self.contact_double_clicked = False
         self.help_dialog = None  # 帮助弹窗
 
         # 存储输入控件引用（区分不同类型：单行/多行/分组）
@@ -740,23 +741,24 @@ class SystemSettingUI:
         ttk.Button(content_frame, text="确定", command=self.on_close_about).pack(padx=5)
 
     def on_double_click_contact(self, event):
-        """双击联系方式标签的处理函数（终极修复版）"""
+        """双击事件处理（防重复版）"""
+        # 第一层防护：本地标记检查
+        if self.contact_double_clicked:
+            tk.messagebox.showinfo("提示", "ℹ️ 隐藏菜单已激活，无需重复操作")
+            return
+
         try:
-            # 直接通过 parent（主UI Win实例）调用 show_game_menu_item 方法
-            # 这是最直接、最可靠的方式，绕开control层的引用问题
             self.parent.show_game_menu_item()
 
-            # 交互反馈：文字变蓝
+            # 标记为已双击，防止重复触发
+            self.contact_double_clicked = True
             event.widget.config(foreground="blue")
-            tk.messagebox.showinfo("提示", "隐藏彩蛋已激活！")
-        except AttributeError as e:
-            # 兜底：如果parent也没有该方法，手动创建菜单选项
-            self.create_game_menu_item_manually()
-            event.widget.config(foreground="blue")
-            tk.messagebox.showinfo("提示", "隐藏彩蛋已激活（兜底模式）！")
+            tk.messagebox.showinfo("提示", "✅ 隐藏菜单已激活！\n请打开【系统】菜单查看")
+
         except Exception as e:
-            print(f"激活菜单失败：{e}")
-            tk.messagebox.showwarning("提示", f"彩蛋激活失败：{str(e)}")
+            error_msg = f"激活失败：{str(e)}"
+            print(error_msg)
+            tk.messagebox.showwarning("提示", error_msg)
 
     def create_game_menu_item_manually(self):
         """兜底方案：直接找到系统菜单并添加选项"""
