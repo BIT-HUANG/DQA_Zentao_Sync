@@ -666,7 +666,7 @@ class SystemSettingUI:
             if hasattr(sys, '_MEIPASS'):
                 readme_path = os.path.join(os.path.dirname(sys.executable), "README.md")
             else:
-                readme_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "README.md")
+                readme_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../README.md")
 
             with open(readme_path, 'r', encoding='utf-8') as f:
                 readme_content = f.read()

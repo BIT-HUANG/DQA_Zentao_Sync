@@ -1,0 +1,2552 @@
+[
+  {
+    "jira_key": "CNUXBTRACK-1",
+    "jira_summary": "Pseudo Bug11",
+    "jira_status": "Assigned",
+    "jira_rank": "C",
+    "jira_components": [
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/component/73518",
+        "id": "73518",
+        "name": "CUX",
+        "description": "Shanghai local bug tracking for ChinaUX"
+      }
+    ],
+    "jira_detected_sw_project": [
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/customFieldOption/153110",
+        "value": "Sakura-N",
+        "id": "153110",
+        "disabled": false
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/customFieldOption/153118",
+        "value": "Uroboros-P",
+        "id": "153118",
+        "disabled": false
+      }
+    ],
+    "jira_fix_version": [
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/version/76100",
+        "id": "76100",
+        "description": "Valhalla的不限制解决时间的bug",
+        "name": "Valhalla Temporary",
+        "archived": false,
+        "released": false
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/version/76214",
+        "id": "76214",
+        "description": "Uroboros的不限制解决时间的bug",
+        "name": "Uroboros Temporary",
+        "archived": false,
+        "released": false
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/version/77304",
+        "id": "77304",
+        "description": "QualityMonitoring",
+        "name": "QualityMonitoring",
+        "archived": false,
+        "released": false
+      }
+    ],
+    "jira_resolution": "",
+    "jira_comments": [
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/5946651",
+        "id": "5946651",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=5106002624",
+          "name": "5106002624",
+          "key": "JIRAUSER241663",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "lai zewen ( Zewen.Lai )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "Remove ChinaUX",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=5106002624",
+          "name": "5106002624",
+          "key": "JIRAUSER241663",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "lai zewen ( Zewen.Lai )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2023-08-07T15:09:48.159+0900",
+        "updated": "2023-08-07T15:09:48.159+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/5956728",
+        "id": "5956728",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "body": "sss",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "created": "2023-08-10T17:21:53.159+0900",
+        "updated": "2023-08-10T17:21:53.159+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/5973355",
+        "id": "5973355",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "body": "internal comment",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "created": "2023-08-23T00:24:35.998+0900",
+        "updated": "2023-08-23T00:24:35.998+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/6048973",
+        "id": "6048973",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "body": "test comment",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "created": "2023-10-04T00:40:04.234+0900",
+        "updated": "2023-10-04T00:40:04.234+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/6060480",
+        "id": "6060480",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=5106002624",
+          "name": "5106002624",
+          "key": "JIRAUSER241663",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "lai zewen ( Zewen.Lai )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "影响统计bug，移除ChinaUX的component",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=5106002624",
+          "name": "5106002624",
+          "key": "JIRAUSER241663",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "lai zewen ( Zewen.Lai )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2023-10-11T13:58:35.247+0900",
+        "updated": "2023-10-11T13:58:35.247+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/6529041",
+        "id": "6529041",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "body": "duplicate with CNUXBTRACK-2",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0050",
+          "name": "51060Q0050",
+          "key": "JIRAUSER244986",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Xu Zhaoyang ( SSVE )",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "created": "2024-09-04T10:43:13.532+0900",
+        "updated": "2024-09-04T10:43:13.532+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/6807488",
+        "id": "6807488",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0086",
+          "name": "51060Q0086",
+          "key": "JIRAUSER304733",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Yang Yang ( Yang )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "test",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0086",
+          "name": "51060Q0086",
+          "key": "JIRAUSER304733",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Yang Yang ( Yang )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2025-06-09T16:37:26.802+0900",
+        "updated": "2025-06-09T16:37:26.802+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7030670",
+        "id": "7030670",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "未找到历史记录",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-08T15:01:10.378+0900",
+        "updated": "2026-01-08T15:01:10.378+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7030675",
+        "id": "7030675",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "未找到历史记录",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-08T15:03:10.904+0900",
+        "updated": "2026-01-08T15:03:10.904+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7030734",
+        "id": "7030734",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "https://otypm.dangbei.net/index.php?m=bug&f=view&bugID=3853",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-08T15:41:38.712+0900",
+        "updated": "2026-01-08T15:41:38.712+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7031508",
+        "id": "7031508",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "未找到历史记录",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-09T10:12:48.234+0900",
+        "updated": "2026-01-09T10:12:48.234+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7031584",
+        "id": "7031584",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "禅道历史记录：\n2026-01-08 13:13:12, 由张寒松创建。\n\n2026-01-08 13:58:56, 由张寒松编辑。\n修改了指派给，旧值为 \"张寒松\"，新值为 \"\"。\n修改了重现步骤，区别为：001-[步骤]001+[步骤]002-[初始情况]002+[初始情况]003-[操作/状态]003+[操作/状态]004-[结果]004+[结果]005-[期望]005+[期望]006-006+007-[环境]007+[环境]008-[Environmental Condition]008+[Environmental Condition]009-[Connected Equipment]009+[Connected Equipment]010-[Signal Condition]PKG: v0288_0010 [备注]010+[Signal Condition]011+PKG: v0288_0010012+[备注]001-<p><b>[步骤]</b>001+<p><b>[步骤]</b> </p>002-</p><p> [初始情况]002+<p>[初始情况]</p>003-</p><p> [操作/状态]003+<p>[操作/状态]</p>004-</p><p></p><p><b>[结果]</b>004+<p><b>[结果]</b> </p>005-</p><p> </p><p><b>[期望]</b>005+<p><b>[期望]</b> </p>006-</p><p>006+<p><br /></p>007-</p><p> </p><p><b>[环境]</b>007+<p><b>[环境]</b> </p>008-</p><p> [Environmental Condition]008+<p>[Environmental Condition]</p>009-</p><p> [Connected Equipment]009+<p>[Connected Equipment]</p>010-</p><p> [Signal Condition]</p><p>PKG: v0288_0010 </p><p><b>[备注]</b></p><p></p>010+<p>[Signal Condition]</p>011+<p>PKG: v0288_0010</p>012+<p><b>[备注]</b></p>12345\n2026-01-08 21:20:04, 由张寒松添加备注。\n备注1\n2026-01-08 21:20:15, 由张寒松添加备注。\n备注2\n2026-01-08 21:20:22, 由张寒松添加备注。\n备注3",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-09T11:19:39.395+0900",
+        "updated": "2026-01-09T11:19:39.395+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7031669",
+        "id": "7031669",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "禅道Bug # 操作记录:\nzhanghansong 在 2026-01-08 13:13:12 opened 了 bug\nzhanghansong 在 2026-01-08 13:58:56 edited 了 bug，并且添加了备注: 12345\nzhanghansong 在 2026-01-08 21:20:04 commented 了 bug，并且添加了备注: 备注1\nzhanghansong 在 2026-01-08 21:20:15 commented 了 bug，并且添加了备注: 备注2\nzhanghansong 在 2026-01-08 21:20:22 commented 了 bug，并且添加了备注: 备注3",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0067",
+          "name": "51060Q0067",
+          "key": "JIRAUSER284314",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Zhang Hansong ( Hansong )",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-09T12:04:38.282+0900",
+        "updated": "2026-01-09T12:04:38.282+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7036881",
+        "id": "7036881",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:32501】\n32501: 2026-01-08 13:13:12, zhanghansong opened, Comment: ",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T09:49:47.451+0900",
+        "updated": "2026-01-16T09:49:47.451+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7036883",
+        "id": "7036883",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:32538】\n32538: 2026-01-08 13:58:56, zhanghansong edited, Comment: 12345",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T09:49:48.511+0900",
+        "updated": "2026-01-16T09:49:48.511+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7036885",
+        "id": "7036885",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:32705】\n32705: 2026-01-08 21:20:04, zhanghansong commented, Comment: 备注1",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T09:49:49.414+0900",
+        "updated": "2026-01-16T09:49:49.414+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7036887",
+        "id": "7036887",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:32706】\n32706: 2026-01-08 21:20:15, zhanghansong commented, Comment: 备注2",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T09:49:50.340+0900",
+        "updated": "2026-01-16T09:49:50.340+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7036889",
+        "id": "7036889",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:32707】\n32707: 2026-01-08 21:20:22, zhanghansong commented, Comment: 备注3",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T09:49:51.178+0900",
+        "updated": "2026-01-16T09:49:51.178+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7036891",
+        "id": "7036891",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:32923】\n32923: 2026-01-09 15:38:56, zhanghansong edited, Comment: ",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T09:49:52.039+0900",
+        "updated": "2026-01-16T09:49:52.039+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7037271",
+        "id": "7037271",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "【禅道历史记录 ID:33755】\n33755: 2026-01-16 09:53:30, huanghongxiang opened, Comment: ",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-16T14:12:53.221+0900",
+        "updated": "2026-01-16T14:12:53.221+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7037928",
+        "id": "7037928",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3853', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-18 01:21:34', 'comment': '', 'text': '黄泓翔解决了Bug [#3853::[Test API] 8](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3853)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-18T02:21:35.912+0900",
+        "updated": "2026-01-18T02:21:35.912+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7037930",
+        "id": "7037930",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3922', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-18 01:23:51', 'comment': 'test 1 for dqa', 'text': '黄泓翔激活了Bug [#3922::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3922)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-18T02:23:52.816+0900",
+        "updated": "2026-01-18T02:23:52.816+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7037932",
+        "id": "7037932",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3922', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-18 01:24:56', 'comment': '测试已解决该问题', 'text': '黄泓翔解决了Bug [#3922::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3922)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-18T02:24:57.650+0900",
+        "updated": "2026-01-18T02:24:57.650+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7037934",
+        "id": "7037934",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3853', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-18 01:27:07', 'comment': '激活该问题重新修复', 'text': '黄泓翔激活了Bug [#3853::[Test API] 8](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3853)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-18T02:27:08.685+0900",
+        "updated": "2026-01-18T02:27:08.685+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7037936",
+        "id": "7037936",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3853', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-18 01:27:48', 'comment': '问题已修复，移交测试。', 'text': '黄泓翔解决了Bug [#3853::[Test API] 8](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3853)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-18T02:27:50.020+0900",
+        "updated": "2026-01-18T02:27:50.020+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038301",
+        "id": "7038301",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3922', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-19 11:14:36', 'comment': '重新修改测试1', 'text': '黄泓翔激活了Bug [#3922::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3922)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T12:14:37.721+0900",
+        "updated": "2026-01-19T12:14:37.721+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038322",
+        "id": "7038322",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3922', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-19 11:35:44', 'comment': '已修复，推送钉钉企微', 'text': '黄泓翔解决了Bug [#3922::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3922)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T12:35:46.121+0900",
+        "updated": "2026-01-19T12:35:46.121+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038432",
+        "id": "7038432",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3930', 'product': ',39,', 'project': '0', 'action': 'opened', 'actor': 'wangyixia', 'date': '2026-01-19 13:07:17', 'comment': '', 'text': '王益霞创建Bug [#3930::[Amaebi1.1][统合OTA_HomeUI]自定义普通角色退出账号后，本机家庭角色同步了自定义普通角色的组件模式](https://otypm.dangbei.net/index.php?m=bug&f=view&t=json&id=3930)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T14:07:20.344+0900",
+        "updated": "2026-01-19T14:07:20.344+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038439",
+        "id": "7038439",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3931', 'product': ',39,', 'project': '0', 'action': 'opened', 'actor': 'wangyixia', 'date': '2026-01-19 13:07:58', 'comment': '', 'text': '王益霞创建Bug [#3931::[Amaebi1.1][统合OTA_HomeUI]合规2.5的桌面(1.7.3.4)与合规2.0的桌面(1.6.5.5)自定义普通角色变更组件模式后不同步](https://otypm.dangbei.net/index.php?m=bug&f=view&t=json&id=3931)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T14:08:00.333+0900",
+        "updated": "2026-01-19T14:08:00.333+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038446",
+        "id": "7038446",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3932', 'product': ',39,', 'project': '0', 'action': 'opened', 'actor': 'wangyixia', 'date': '2026-01-19 13:09:08', 'comment': '', 'text': '王益霞创建Bug [#3932::[Amaebi1.1][统合OTA_HomeUI]电视端拔电重启后，WiFi显示已连接的状态，时间显示错误，等待大概10秒钟自动恢复](https://otypm.dangbei.net/index.php?m=bug&f=view&t=json&id=3932)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T14:09:10.226+0900",
+        "updated": "2026-01-19T14:09:10.226+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038488",
+        "id": "7038488",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-19 13:28:59', 'comment': '', 'text': '黄泓翔激活了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T14:29:01.773+0900",
+        "updated": "2026-01-19T14:29:01.773+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038507",
+        "id": "7038507",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-19 13:40:48', 'comment': '测试结果通过', 'text': '黄泓翔解决了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T14:40:49.998+0900",
+        "updated": "2026-01-19T14:40:49.998+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038523",
+        "id": "7038523",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3932', 'product': ',39,', 'project': '0', 'action': 'resolved', 'actor': 'liuxiaohu', 'date': '2026-01-19 13:48:29', 'comment': \"01-08 16:01:55.207&nbsp; root&nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;0 I kernel&nbsp; : [&nbsp; &nbsp;40.116168][&nbsp; &nbsp; C3] [wlan][4863]asicConnac2xRxProcessRxvforMSP:(RX WARN) prRetSwRfb-&gt;ucStaRecIdx(254) &gt;= CFG_STA_REC_NUM(27)<br />01-08 16:01:55.238&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;40.146602]audit: audit_lost=839 audit_rate_limit=5 audit_backlog_limit=64<br />01-08 16:01:55.238&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;40.146622]audit: rate limit exceeded<br />01-08 16:01:55.344&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;40.252622]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000001<br />01-08 16:01:55.364&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;40.272465]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000000<br />01-08 16:01:55.684&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;40.592302]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000001<br />01-08 16:01:55.837&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;40.745658]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000000<br />01-08 16:01:55.945&nbsp; wifi&nbsp; 1227&nbsp; 1227 I kernel&nbsp; : [&nbsp; &nbsp;40.854154][wlan][1227]mtk_cfg_get_txpower:(REQ WARN) STA doesn't support this function<br />01-08 16:01:55.964&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;40.872627]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000001<br />01-08 16:01:55.984&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;40.892273]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000000<br />01-08 16:01:56.124&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;41.032698]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000001<br />01-08 16:01:56.144&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;41.052507]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000000<br />01-08 16:01:56.258&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;41.166361]audit: audit_lost=901 audit_rate_limit=5 audit_backlog_limit=64<br />01-08 16:01:56.258&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;41.166384]audit: rate limit exceeded<br />01-08 16:01:56.284&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;41.192382]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000001<br />01-08 16:01:56.343&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;41.252263]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000000<br />01-08 16:01:56.624&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;41.532761]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000001<br />01-08 16:01:56.725&nbsp; 1002&nbsp; 1744&nbsp; 1744 D kernel&nbsp; : [&nbsp; &nbsp;41.633723]sony_bt_remote_event hid=0x000c0045, type=0x01, code=0x006a, value=0x00000000<br />01-08 16:01:57.273&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;42.181689]audit: audit_lost=965 audit_rate_limit=5 audit_backlog_limit=64<br />01-08 16:01:57.273&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;42.181711]audit: rate limit exceeded<br />01-08 16:01:57.369&nbsp; 1000&nbsp; &nbsp;968&nbsp; &nbsp;968 I kernel&nbsp; : [&nbsp; &nbsp;42.278119]hang_detect HANG_KICK ( 300)<br />01-08 16:01:57.369&nbsp; 1000&nbsp; &nbsp;968&nbsp; &nbsp;968 I kernel&nbsp; : [&nbsp; &nbsp;42.278139][Hang_Detect] hang_detect enabled 10<br />01-08 16:01:58.286&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;43.194620]audit: audit_lost=1025 audit_rate_limit=5 audit_backlog_limit=64<br />01-08 16:01:58.286&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;43.194643]audit: rate limit exceeded<br />01-08 16:01:58.954&nbsp; wifi&nbsp; 1227&nbsp; 1227 I kernel&nbsp; : [&nbsp; &nbsp;43.862445][wlan][1227]mtk_cfg_get_txpower:(REQ WARN) STA doesn't support this function<br />01-19 10:26:52.328&nbsp; root&nbsp; &nbsp; 21&nbsp; &nbsp; 21 I kernel&nbsp; : [&nbsp; &nbsp;43.920013]mt5896-rtc 1c020600.rtc: rtc alarm irq enable=0x0<br />01-19 10:26:52.609&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;44.201003]audit: audit_lost=1091 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:52.609&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;44.201026]audit: rate limit exceeded<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;105&nbsp; &nbsp;105 I kernel&nbsp; : [&nbsp; &nbsp;44.408431][wdk-c] cpu=2 o_k=2 lbit=0x4 cbit=0xf,b,3,1,406269917,f,0,0,0,0,[44408425584,11000000] 30<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;104&nbsp; &nbsp;104 I kernel&nbsp; : [&nbsp; &nbsp;44.408434][wdk-c] cpu=1 o_k=1 lbit=0x6 cbit=0xf,9,3,1,406269917,f,0,0,0,0,[44408431334,10999984] 30<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;104&nbsp; &nbsp;104 I kernel&nbsp; : [&nbsp; &nbsp;44.408439]wdt_dump_cntcv CPU:1 CNTCV_CTL:0 CNTCV_TVAL:3837cf39 CNTVCT:27c1739c SYST_CNTCR:0 SYST_DISTL:0 SYST_CNTCV:0<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;106&nbsp; &nbsp;106 I kernel&nbsp; : [&nbsp; &nbsp;44.408446][wdk-c] cpu=3 o_k=3 lbit=0xe cbit=0xf,1,3,1,406269917,f,0,0,0,0,[44408443084,10999973] 30<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;106&nbsp; &nbsp;106 I kernel&nbsp; : [&nbsp; &nbsp;44.408449]wdt_dump_cntcv CPU:3 CNTCV_CTL:0 CNTCV_TVAL:1d1490e3 CNTVCT:27c173f7 SYST_CNTCR:0 SYST_DISTL:0 SYST_CNTCV:0<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;105&nbsp; &nbsp;105 I kernel&nbsp; : [&nbsp; &nbsp;44.408461]wdt_dump_cntcv CPU:2 CNTCV_CTL:0 CNTCV_TVAL:3bf3e889 CNTVCT:27c17397 SYST_CNTCR:0 SYST_DISTL:0 SYST_CNTCV:0<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;102&nbsp; &nbsp;102 I kernel&nbsp; : [&nbsp; &nbsp;44.408586][thread:102] 2026-01-19 02:26:52.815017 UTC;android time 2026-01-19 02:26:52.815017<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;102&nbsp; &nbsp;102 I kernel&nbsp; : [&nbsp; &nbsp;44.408738][wdk-k] cpu=0 o_k=0 lbit=0xf cbit=0xf,0,3,1,406269917,f,0,0,0,0,[44408581668,10999834] 30<br />01-19 10:26:52.816&nbsp; root&nbsp; &nbsp;102&nbsp; &nbsp;102 I kernel&nbsp; : [&nbsp; &nbsp;44.408743]wdt_dump_cntcv CPU:0 CNTCV_CTL:0 CNTCV_TVAL:14933dab CNTVCT:27c173ab SYST_CNTCR:0 SYST_DISTL:0 SYST_CNTCV:0<br />01-19 10:26:53.613&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;45.205255]audit: audit_lost=1153 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:53.613&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;45.205278]audit: rate limit exceeded<br />01-19 10:26:54.625&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;46.217351]audit: audit_lost=1213 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:54.625&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;46.217373]audit: rate limit exceeded<br />01-19 10:26:55.278&nbsp; wifi&nbsp; 1227&nbsp; 1227 I kernel&nbsp; : [&nbsp; &nbsp;46.869878][wlan][1227]mtk_cfg_get_txpower:(REQ WARN) STA doesn't support this function<br />01-19 10:26:55.632&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;47.224607]audit: audit_lost=1273 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:55.632&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;47.224628]audit: rate limit exceeded<br />01-19 10:26:56.508&nbsp; root&nbsp; 5695&nbsp; 5695 W kernel&nbsp; : [&nbsp; &nbsp;48.100358]aee_dumpstate (5695): /proc/5695/oom_adj is deprecated, please use /proc/5695/oom_score_adj instead.<br />01-19 10:26:56.643&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;48.235767]audit: audit_lost=1337 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:56.643&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;48.235789]audit: rate limit exceeded<br />01-19 10:26:57.647&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;49.239214]audit: audit_lost=1399 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:57.647&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;49.239235]audit: rate limit exceeded<br />01-19 10:26:58.286&nbsp; wifi&nbsp; 1227&nbsp; 1227 I kernel&nbsp; : [&nbsp; &nbsp;49.877878][wlan][1227]mtk_cfg_get_txpower:(REQ WARN) STA doesn't support this function<br />01-19 10:26:58.656&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;50.247922]audit: audit_lost=1463 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:58.656&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;50.247944]audit: rate limit exceeded<br />01-19 10:26:58.801&nbsp; root&nbsp; &nbsp; 28&nbsp; &nbsp; 28 I kernel&nbsp; : [&nbsp; &nbsp;50.392917]binder: undelivered TRANSACTION_COMPLETE<br />01-19 10:26:58.801&nbsp; root&nbsp; &nbsp; 28&nbsp; &nbsp; 28 I kernel&nbsp; : [&nbsp; &nbsp;50.392945]binder: undelivered transaction 104711, process died.<br />01-19 10:26:59.329&nbsp; logd&nbsp; &nbsp;248&nbsp; &nbsp;248 W kernel&nbsp; : [&nbsp; &nbsp;50.921765]logd: Skipping entries from slow reader, pid 5781, fd 15, from LogBuffer::Prune()<br />01-19 10:26:59.489&nbsp; logd&nbsp; &nbsp;247&nbsp; &nbsp;247 I kernel&nbsp; : [&nbsp; &nbsp;51.081236]logd: logdr: UID=0 GID=0 PID=5835 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns<br />01-19 10:26:59.659&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;51.251077]audit: audit_lost=1528 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:26:59.659&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;51.251099]audit: rate limit exceeded<br />01-19 10:26:59.926&nbsp; logd&nbsp; &nbsp;248&nbsp; &nbsp;248 W kernel&nbsp; : [&nbsp; &nbsp;51.518511]logd: Skipping entries from slow reader, pid 5835, fd 17, from LogBuffer::Prune()<br />01-19 10:26:59.926&nbsp; logd&nbsp; &nbsp;248&nbsp; &nbsp;248 W kernel&nbsp; : [&nbsp; &nbsp;51.518553]logd: Skipping entries from slow reader, pid 5781, fd 15, from LogBuffer::Prune()<br />01-19 10:27:00.665&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;52.257147]audit: audit_lost=1587 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:27:00.665&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;52.257168]audit: rate limit exceeded<br />01-19 10:27:01.300&nbsp; wifi&nbsp; 1227&nbsp; 1227 I kernel&nbsp; : [&nbsp; &nbsp;52.892295][wlan][1227]mtk_cfg_get_txpower:(REQ WARN) STA doesn't support this function<br />01-19 10:27:01.674&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;53.266800]audit: audit_lost=1645 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:27:01.675&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;53.266821]audit: rate limit exceeded<br />01-19 10:27:02.678&nbsp; 1041&nbsp; 3674&nbsp; 3674 W kernel&nbsp; : [&nbsp; &nbsp;54.270112]audit: audit_lost=1702 audit_rate_limit=5 audit_backlog_limit=64<br />01-19 10:27:02.678&nbsp; 1041&nbsp; 3674&nbsp; 3674 E kernel&nbsp; : [&nbsp; &nbsp;54.270133]audit: rate limit exceeded<br />01-19 10:27:02.927&nbsp; 1000&nbsp; &nbsp;642&nbsp; &nbsp;642 E kernel&nbsp; : [&nbsp; &nbsp;54.518920]mt5896-gmac 1c700000.gmac: mtk_dtv_gmac_ioctl: mdns offload is unsupported<br />01-19 10:27:02.927&nbsp; 1000&nbsp; &nbsp;642&nbsp; &nbsp;642 I kernel&nbsp; : [&nbsp; &nbsp;54.519154][wlan][642]priv_support_mdns_offload:(REQ ERR<br /><br />获取的是本机时间，日志中也是先打印的16:01 然后10:27,需要系统排查\", 'text': '刘晓虎解决了Bug [#3932::[Amaebi1.1][统合OTA_HomeUI]电视端拔电重启后，WiFi显示已连接的状态，时间显示错误，等待大概10秒钟自动恢复](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3932)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T14:48:31.340+0900",
+        "updated": "2026-01-19T14:48:31.340+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038624",
+        "id": "7038624",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3931', 'product': ',39,', 'project': '0', 'action': 'resolved', 'actor': 'congqi', 'date': '2026-01-19 14:35:31', 'comment': '新旧版本桌面的账号登录不一样，一个mysony登录一个newtv登录，所以账号信息组件使用的不是同一个，所以不能同步<img src=\"{5369.png}\" alt=\"\" />', 'text': '丛琦解决了Bug [#3931::[Amaebi1.1][统合OTA_HomeUI]合规2.5的桌面(1.7.3.4)与合规2.0的桌面(1.6.5.5)自定义普通角色变更组件模式后不同步](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3931)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T15:35:34.146+0900",
+        "updated": "2026-01-19T15:35:34.146+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038640",
+        "id": "7038640",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-19 14:46:21', 'comment': '', 'text': '黄泓翔激活了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T15:46:23.978+0900",
+        "updated": "2026-01-19T15:46:23.978+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038652",
+        "id": "7038652",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-19 14:49:25', 'comment': '', 'text': '黄泓翔解决了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T15:49:30.287+0900",
+        "updated": "2026-01-19T15:49:30.287+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038740",
+        "id": "7038740",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3875', 'product': ',48,', 'project': '0', 'action': 'resolved', 'actor': 'chenpeijie', 'date': '2026-01-19 15:50:53', 'comment': '<p><span style=\"color:#000000;\">通过控制频率提示点击太频繁 规避</span></p>\\n<p><span style=\"color:#000000;\"><br /></span></p>\\n<p><span style=\"color:#000000;\"><span style=\"color:#171A1D;font-family:Helvetica, Tahoma, Arial;\">2026年1月19日发送的新包，麻烦验证</span><br /></span></p>', 'text': '陈培杰解决了Bug [#3875::[当贝商店2.0.7]应用批量卸载时连续点击ok键后卸载功能失效](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3875)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T16:50:58.511+0900",
+        "updated": "2026-01-19T16:50:58.511+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038798",
+        "id": "7038798",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3940', 'product': ',60,', 'project': '0', 'action': 'opened', 'actor': 'wanghongxia', 'date': '2026-01-19 16:15:58', 'comment': '', 'text': '王红霞创建Bug [#3940::[当贝投屏]]爱奇艺后台剔除进行普通投屏时按音量+键电视音量默认是35，音量-键默认是25（未根据TV当前音量/-）](https://otypm.dangbei.net/index.php?m=bug&f=view&t=json&id=3940)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T17:16:04.343+0900",
+        "updated": "2026-01-19T17:16:04.343+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038804",
+        "id": "7038804",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3901', 'product': ',60,', 'project': '0', 'action': 'resolved', 'actor': 'duanyuxiang', 'date': '2026-01-19 16:18:42', 'comment': '1.19解决，请使用1.19以后的包测试。', 'text': '段郁祥解决了Bug [#3901:: [当贝投屏][手机畅联ios/Android]多次进行NFC魔法同屏后，手机端页面放大](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3901)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T17:18:47.516+0900",
+        "updated": "2026-01-19T17:18:47.516+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038821",
+        "id": "7038821",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-19 16:24:34', 'comment': 'add power automate', 'text': '黄泓翔激活了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T17:24:40.869+0900",
+        "updated": "2026-01-19T17:24:40.869+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038856",
+        "id": "7038856",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'resolved', 'actor': 'huanghongxiang', 'date': '2026-01-19 16:43:00', 'comment': '', 'text': '黄泓翔解决了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T17:43:06.362+0900",
+        "updated": "2026-01-19T17:43:06.362+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038862",
+        "id": "7038862",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3922', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-19 16:46:53', 'comment': '', 'text': '黄泓翔激活了Bug [#3922::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3922)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T17:47:00.844+0900",
+        "updated": "2026-01-19T17:47:00.844+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7038886",
+        "id": "7038886",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "{'objectType': 'bug', 'objectID': '3923', 'product': ',44,', 'project': '0', 'action': 'activated', 'actor': 'huanghongxiang', 'date': '2026-01-19 16:56:59', 'comment': '', 'text': '黄泓翔激活了Bug [#3923::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3923)'}",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-19T17:57:40.674+0900",
+        "updated": "2026-01-19T17:57:40.674+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039652",
+        "id": "7039652",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "时间：2026-01-20 13:02:43\n    事件：黄泓翔激活了Bug [#3924::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924)\n    备注：重新激活同来同步索尼jira",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T14:02:49.516+0900",
+        "updated": "2026-01-20T14:02:49.516+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039653",
+        "id": "7039653",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "时间：2026-01-20 13:02:43\n    事件：黄泓翔激活了Bug [#3924::Pseudo Bug11](https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924)\n    备注：重新激活同来同步索尼jira",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T14:02:52.826+0900",
+        "updated": "2026-01-20T14:02:52.826+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039708",
+        "id": "7039708",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "时间：2026-01-20 13:13:16\n    事件：黄泓翔解决了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：索尼jira评论添加 resolve",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T14:13:27.967+0900",
+        "updated": "2026-01-20T14:13:27.967+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039711",
+        "id": "7039711",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "时间：2026-01-20 13:13:16\n    事件：黄泓翔解决了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：索尼jira评论添加 resolve",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T14:13:42.964+0900",
+        "updated": "2026-01-20T14:13:42.964+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039800",
+        "id": "7039800",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "时间：2026-01-20 13:50:50\n    事件：黄泓翔激活了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：激活测试1",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T14:50:58.378+0900",
+        "updated": "2026-01-20T14:50:58.378+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039803",
+        "id": "7039803",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "时间：2026-01-20 13:50:50\n    事件：黄泓翔激活了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：激活测试1",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T14:50:59.724+0900",
+        "updated": "2026-01-20T14:50:59.724+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039956",
+        "id": "7039956",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "外部禅道更新历史：\n    时间：2026-01-20 15:01:50\n    事件：黄泓翔解决了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：设计如此",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T16:05:12.417+0900",
+        "updated": "2026-01-20T16:05:12.417+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7039959",
+        "id": "7039959",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "外部禅道更新历史：\n    时间：2026-01-20 15:01:50\n    事件：黄泓翔解决了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：设计如此",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T16:05:13.746+0900",
+        "updated": "2026-01-20T16:05:13.746+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7040042",
+        "id": "7040042",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "外部禅道更新历史：\n    时间：2026-01-20 15:50:40\n    事件：黄泓翔激活了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：service manual start&nbsp;",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T16:50:59.172+0900",
+        "updated": "2026-01-20T16:50:59.172+0900"
+      },
+      {
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7480822/comment/7040045",
+        "id": "7040045",
+        "author": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "body": "外部禅道更新历史：\n    时间：2026-01-20 15:50:40\n    事件：黄泓翔激活了Bug [#3924::Pseudo Bug11|https://otypm.dangbei.net/index.php?m=bug&f=view&id=3924]\n    备注：service manual start&nbsp;",
+        "updateAuthor": {
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/user?username=51060Q0062",
+          "name": "51060Q0062",
+          "key": "JIRAUSER277904",
+          "avatarUrls": {
+            "48x48": "https://www.tool.sony.biz/tv-jira/secure/useravatar?avatarId=10122",
+            "24x24": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://www.tool.sony.biz/tv-jira/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Huang Hongxiang (SSVE hongxiang.huang)",
+          "active": true,
+          "timeZone": "Asia/Tokyo"
+        },
+        "created": "2026-01-20T16:51:00.456+0900",
+        "updated": "2026-01-20T16:51:00.456+0900"
+      }
+    ],
+    "jira_issue_links": [
+      {
+        "id": "1336202",
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issueLink/1336202",
+        "type": {
+          "id": "10002",
+          "name": "Duplicate",
+          "inward": "is duplicated by",
+          "outward": "duplicates",
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issueLinkType/10002"
+        },
+        "outwardIssue": {
+          "id": "7546816",
+          "key": "DM20GN6-57912",
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7546816",
+          "fields": {
+            "summary": "Pseudo Bug",
+            "status": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/status/6",
+              "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/images/icons/statuses/closed.png",
+              "name": "Closed",
+              "id": "6",
+              "statusCategory": {
+                "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "success",
+                "name": "Done"
+              }
+            },
+            "priority": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/priority/4",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/images/icons/priorities/minor.svg",
+              "name": "Minor",
+              "id": "4"
+            },
+            "issuetype": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issuetype/1",
+              "id": "1",
+              "description": "A problem which impairs or prevents the functions of the product.",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/secure/viewavatar?size=xsmall&avatarId=38403&avatarType=issuetype",
+              "name": "Bug",
+              "subtask": false,
+              "avatarId": 38403
+            }
+          }
+        }
+      },
+      {
+        "id": "1338490",
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issueLink/1338490",
+        "type": {
+          "id": "10002",
+          "name": "Duplicate",
+          "inward": "is duplicated by",
+          "outward": "duplicates",
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issueLinkType/10002"
+        },
+        "inwardIssue": {
+          "id": "7521011",
+          "key": "DM15GN1-49635",
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7521011",
+          "fields": {
+            "summary": "Pseudo Bug11",
+            "status": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/status/10000",
+              "description": "",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/images/icons/statuses/assigned.png",
+              "name": "Assigned",
+              "id": "10000",
+              "statusCategory": {
+                "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "default",
+                "name": "To Do"
+              }
+            },
+            "priority": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/priority/4",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/images/icons/priorities/minor.svg",
+              "name": "Minor",
+              "id": "4"
+            },
+            "issuetype": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issuetype/1",
+              "id": "1",
+              "description": "A problem which impairs or prevents the functions of the product.",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/secure/viewavatar?size=xsmall&avatarId=38403&avatarType=issuetype",
+              "name": "Bug",
+              "subtask": false,
+              "avatarId": 38403
+            }
+          }
+        }
+      },
+      {
+        "id": "1446866",
+        "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issueLink/1446866",
+        "type": {
+          "id": "10501",
+          "name": "Synchronizes",
+          "inward": "(CAUTION - OVERWRITE!) synchronizes to",
+          "outward": "(CAUTION - OVERWRITE!) synchronizes to",
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issueLinkType/10501"
+        },
+        "inwardIssue": {
+          "id": "7521011",
+          "key": "DM15GN1-49635",
+          "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issue/7521011",
+          "fields": {
+            "summary": "Pseudo Bug11",
+            "status": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/status/10000",
+              "description": "",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/images/icons/statuses/assigned.png",
+              "name": "Assigned",
+              "id": "10000",
+              "statusCategory": {
+                "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "default",
+                "name": "To Do"
+              }
+            },
+            "priority": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/priority/4",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/images/icons/priorities/minor.svg",
+              "name": "Minor",
+              "id": "4"
+            },
+            "issuetype": {
+              "self": "https://www.tool.sony.biz/tv-jira/rest/api/2/issuetype/1",
+              "id": "1",
+              "description": "A problem which impairs or prevents the functions of the product.",
+              "iconUrl": "https://www.tool.sony.biz/tv-jira/secure/viewavatar?size=xsmall&avatarId=38403&avatarType=issuetype",
+              "name": "Bug",
+              "subtask": false,
+              "avatarId": 38403
+            }
+          }
+        }
+      }
+    ],
+    "jira_assignee": "Xu Zhaoyang ( SSVE )",
+    "jira_released_package_version": "PKG1.1.1.1",
+    "jira_defect_info": "***Details\r\n [Symptom Details]\r\n [Confirmed Set Qty]\r\n [Expected Result]\r\n***Procedure\r\n [Initial Situation]\r\n [Operation/State]\r\n***Recovery Method\r\n [Operation/State]\r\n [Probability to Recover]\r\n***Environmental Condition\r\n [Environmental Condition]\r\n [Connected Equipment]\r\n [Signal Condition]",
+    "jira_resolved_version": "sss",
+    "zentao_id": "3924",
+    "zentao_prod_id": "44",
+    "zentao_prod_name": "索尼儿童模式",
+    "zentao_status": "active",
+    "zentao_resolution": "",
+    "zentao_assignee": [
+      "huanghongxiang"
+    ],
+    "zentao_history": {
+      "33755": {
+        "id": "33755",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "opened",
+        "date": "2026-01-16 09:53:30",
+        "comment": "",
+        "extra": "",
+        "read": "1",
+        "history": []
+      },
+      "33867": {
+        "id": "33867",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "resolved",
+        "date": "2026-01-16 22:38:12",
+        "comment": "",
+        "extra": "fixed",
+        "read": "1",
+        "appendLink": "",
+        "history": [
+          {
+            "id": "52013",
+            "action": "33867",
+            "field": "resolution",
+            "old": "",
+            "new": "fixed",
+            "diff": ""
+          },
+          {
+            "id": "52014",
+            "action": "33867",
+            "field": "resolvedBuild",
+            "old": "",
+            "new": "trunk",
+            "diff": ""
+          },
+          {
+            "id": "52015",
+            "action": "33867",
+            "field": "resolvedBy",
+            "old": "",
+            "new": "huanghongxiang",
+            "diff": ""
+          },
+          {
+            "id": "52016",
+            "action": "33867",
+            "field": "resolvedDate",
+            "old": "0000-00-00 00:00:00",
+            "new": "2026-01-16 22:38:12",
+            "diff": ""
+          },
+          {
+            "id": "52017",
+            "action": "33867",
+            "field": "status",
+            "old": "active",
+            "new": "resolved",
+            "diff": ""
+          },
+          {
+            "id": "52018",
+            "action": "33867",
+            "field": "confirmed",
+            "old": "0",
+            "new": "1",
+            "diff": ""
+          },
+          {
+            "id": "52019",
+            "action": "33867",
+            "field": "assignedTo",
+            "old": "黄泓翔",
+            "new": "huanghongxiang",
+            "diff": ""
+          }
+        ]
+      },
+      "33897": {
+        "id": "33897",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "activated",
+        "date": "2026-01-17 23:04:02",
+        "comment": "test",
+        "extra": "",
+        "read": "1",
+        "history": []
+      },
+      "33898": {
+        "id": "33898",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "resolved",
+        "date": "2026-01-17 23:12:25",
+        "comment": "",
+        "extra": "bydesign",
+        "read": "1",
+        "appendLink": "",
+        "history": [
+          {
+            "id": "52079",
+            "action": "33898",
+            "field": "resolution",
+            "old": "",
+            "new": "bydesign",
+            "diff": ""
+          },
+          {
+            "id": "52080",
+            "action": "33898",
+            "field": "resolvedBy",
+            "old": "",
+            "new": "huanghongxiang",
+            "diff": ""
+          },
+          {
+            "id": "52081",
+            "action": "33898",
+            "field": "resolvedDate",
+            "old": "0000-00-00 00:00:00",
+            "new": "2026-01-17 23:12:25",
+            "diff": ""
+          },
+          {
+            "id": "52082",
+            "action": "33898",
+            "field": "status",
+            "old": "active",
+            "new": "resolved",
+            "diff": ""
+          }
+        ]
+      },
+      "33899": {
+        "id": "33899",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "activated",
+        "date": "2026-01-17 23:18:25",
+        "comment": "",
+        "extra": "",
+        "read": "1",
+        "history": []
+      },
+      "33902": {
+        "id": "33902",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "resolved",
+        "date": "2026-01-18 01:09:13",
+        "comment": "",
+        "extra": "bydesign",
+        "read": "1",
+        "appendLink": "",
+        "history": [
+          {
+            "id": "52083",
+            "action": "33902",
+            "field": "resolution",
+            "old": "",
+            "new": "bydesign",
+            "diff": ""
+          },
+          {
+            "id": "52084",
+            "action": "33902",
+            "field": "resolvedBy",
+            "old": "",
+            "new": "huanghongxiang",
+            "diff": ""
+          },
+          {
+            "id": "52085",
+            "action": "33902",
+            "field": "resolvedDate",
+            "old": "0000-00-00 00:00:00",
+            "new": "2026-01-18 01:09:13",
+            "diff": ""
+          },
+          {
+            "id": "52086",
+            "action": "33902",
+            "field": "status",
+            "old": "active",
+            "new": "resolved",
+            "diff": ""
+          }
+        ]
+      },
+      "34089": {
+        "id": "34089",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "activated",
+        "date": "2026-01-20 13:02:43",
+        "comment": "重新激活同来同步索尼jira",
+        "extra": "",
+        "read": "1",
+        "history": []
+      },
+      "34092": {
+        "id": "34092",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "resolved",
+        "date": "2026-01-20 13:13:16",
+        "comment": "索尼jira评论添加 resolve",
+        "extra": "fixed",
+        "read": "1",
+        "appendLink": "",
+        "history": [
+          {
+            "id": "52357",
+            "action": "34092",
+            "field": "resolution",
+            "old": "",
+            "new": "fixed",
+            "diff": ""
+          },
+          {
+            "id": "52358",
+            "action": "34092",
+            "field": "resolvedBuild",
+            "old": "",
+            "new": "trunk",
+            "diff": ""
+          },
+          {
+            "id": "52359",
+            "action": "34092",
+            "field": "resolvedDate",
+            "old": "",
+            "new": "2026-01-20 13:12:55",
+            "diff": ""
+          },
+          {
+            "id": "52360",
+            "action": "34092",
+            "field": "status",
+            "old": "active",
+            "new": "resolved",
+            "diff": ""
+          },
+          {
+            "id": "52361",
+            "action": "34092",
+            "field": "resolvedBy",
+            "old": "",
+            "new": "huanghongxiang",
+            "diff": ""
+          }
+        ]
+      },
+      "34110": {
+        "id": "34110",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "activated",
+        "date": "2026-01-20 13:50:50",
+        "comment": "激活测试1",
+        "extra": "",
+        "read": "1",
+        "history": [
+          {
+            "id": "52384",
+            "action": "34110",
+            "field": "status",
+            "old": "resolved",
+            "new": "active",
+            "diff": ""
+          },
+          {
+            "id": "52385",
+            "action": "34110",
+            "field": "activatedDate",
+            "old": "2026-01-20 13:02:43",
+            "new": "2026-01-20 13:50:50",
+            "diff": ""
+          },
+          {
+            "id": "52386",
+            "action": "34110",
+            "field": "activatedCount",
+            "old": "3",
+            "new": "4",
+            "diff": ""
+          },
+          {
+            "id": "52387",
+            "action": "34110",
+            "field": "resolution",
+            "old": "fixed",
+            "new": "",
+            "diff": ""
+          },
+          {
+            "id": "52388",
+            "action": "34110",
+            "field": "resolvedDate",
+            "old": "2026-01-20 13:12:55",
+            "new": "0000-00-00",
+            "diff": ""
+          },
+          {
+            "id": "52389",
+            "action": "34110",
+            "field": "resolvedBy",
+            "old": "huanghongxiang",
+            "new": "",
+            "diff": ""
+          },
+          {
+            "id": "52390",
+            "action": "34110",
+            "field": "resolvedBuild",
+            "old": "trunk",
+            "new": "",
+            "diff": ""
+          },
+          {
+            "id": "52391",
+            "action": "34110",
+            "field": "closedDate",
+            "old": "",
+            "new": "0000-00-00",
+            "diff": ""
+          }
+        ]
+      },
+      "34134": {
+        "id": "34134",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "resolved",
+        "date": "2026-01-20 15:01:50",
+        "comment": "设计如此",
+        "extra": "bydesign",
+        "read": "1",
+        "appendLink": "",
+        "history": [
+          {
+            "id": "52414",
+            "action": "34134",
+            "field": "resolution",
+            "old": "",
+            "new": "bydesign",
+            "diff": ""
+          },
+          {
+            "id": "52415",
+            "action": "34134",
+            "field": "resolvedDate",
+            "old": "",
+            "new": "2026-01-20 15:01:40",
+            "diff": ""
+          },
+          {
+            "id": "52416",
+            "action": "34134",
+            "field": "status",
+            "old": "active",
+            "new": "resolved",
+            "diff": ""
+          },
+          {
+            "id": "52417",
+            "action": "34134",
+            "field": "resolvedBy",
+            "old": "",
+            "new": "huanghongxiang",
+            "diff": ""
+          }
+        ]
+      },
+      "34145": {
+        "id": "34145",
+        "objectType": "bug",
+        "objectID": "3924",
+        "product": ",44,",
+        "project": "0",
+        "actor": "huanghongxiang",
+        "action": "activated",
+        "date": "2026-01-20 15:50:40",
+        "comment": "service manual start&nbsp;",
+        "extra": "",
+        "read": "1",
+        "history": [
+          {
+            "id": "52427",
+            "action": "34145",
+            "field": "status",
+            "old": "resolved",
+            "new": "active",
+            "diff": ""
+          },
+          {
+            "id": "52428",
+            "action": "34145",
+            "field": "activatedDate",
+            "old": "2026-01-20 13:50:50",
+            "new": "2026-01-20 15:50:40",
+            "diff": ""
+          },
+          {
+            "id": "52429",
+            "action": "34145",
+            "field": "activatedCount",
+            "old": "4",
+            "new": "5",
+            "diff": ""
+          },
+          {
+            "id": "52430",
+            "action": "34145",
+            "field": "resolution",
+            "old": "bydesign",
+            "new": "",
+            "diff": ""
+          },
+          {
+            "id": "52431",
+            "action": "34145",
+            "field": "resolvedDate",
+            "old": "2026-01-20 15:01:40",
+            "new": "0000-00-00",
+            "diff": ""
+          },
+          {
+            "id": "52432",
+            "action": "34145",
+            "field": "resolvedBy",
+            "old": "huanghongxiang",
+            "new": "",
+            "diff": ""
+          },
+          {
+            "id": "52433",
+            "action": "34145",
+            "field": "closedDate",
+            "old": "",
+            "new": "0000-00-00",
+            "diff": ""
+          }
+        ]
+      }
+    }
+  }
+]

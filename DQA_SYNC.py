@@ -1,7 +1,6 @@
 # DQA_SYPC.py
 import sys
 import os
-import threading
 
 # ========== 原有环境适配逻辑 ==========
 if getattr(sys, "frozen", False):
@@ -12,8 +11,8 @@ else:
     sys.path.append(lib_path)
 
 # ========== 原有UI导入逻辑 ==========
-from ui import Win as MainWin
-from control import Controller as MainController
+from ui.ui_main import Win as MainWin
+from control.control import Controller as MainController
 
 # ========== 原有UI初始化逻辑 ==========
 app = MainWin(MainController())

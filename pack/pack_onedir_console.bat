@@ -10,7 +10,7 @@ echo %ENTRY_DIR%
 :: Start packaging the program
 echo Packaging %PROGRAM_NAME%.exe...
 cd "%ENTRY_DIR%"
-echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
+echo y | pyinstaller --onedir --noupx --clean --log-level INFO --noconfirm ^
 --name %OUTPUT_EXE_NAME% ^
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
 --hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 ^
@@ -19,8 +19,8 @@ echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
 --hidden-import=asyncio --hidden-import=threading --hidden-import=ctypes ^
 --hidden-import=psutil ^
 --add-data "portal.py;." ^
---add-data "service_manager.py;." ^
---add-data "system_setting_ui.py;." ^
+--add-data "utils/service_manager.py;." ^
+--add-data "ui/ui_system_setting.py;." ^
 --add-data "libmirror/mstr.py;." ^
 --add-data "libmirror/mconfig.py;." ^
 --add-data "libmirror/mio.py;." ^

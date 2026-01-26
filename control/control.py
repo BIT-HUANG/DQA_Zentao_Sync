@@ -1,11 +1,11 @@
 from time import sleep
 from utils import services, common
-from service_manager import start_services, stop_services, get_service_status
+from utils.service_manager import start_services, stop_services, get_service_status
 import threading
 import json
 from urllib.request import HTTPError
 import tkinter.messagebox as messagebox
-from system_setting_ui import SystemSettingUI
+from ui.ui_system_setting import SystemSettingUI
 import sys
 import os
 
@@ -224,7 +224,7 @@ class Controller:
                     fail_count += 1
 
             # ✅ 同步完成：保存JSON文件 + 显示最终结果提示
-            common.save_data_to_json(self.ui.row_history_map,file_name="table_create_zentao_data.json")
+            common.save_data_to_json(self.ui.row_history_map, file_name="../table_create_zentao_data.json")
             final_msg = f"✅ 同步完成！成功:{success_count}条，失败:{fail_count}条，数据已保存！"
             self.ui.run_in_main_thread(self.ui.show_tooltip, final_msg)
 
@@ -296,7 +296,7 @@ class Controller:
                 return
 
             # 3. 保存JSON文件
-            save_success, save_msg = common.save_data_to_json(table_all_data,file_name="table_default_data.json")
+            save_success, save_msg = common.save_data_to_json(table_all_data, file_name="../table_default_data.json")
             print(save_msg)
             self.ui.run_in_main_thread(self.ui.show_tooltip, save_msg)
 
@@ -375,7 +375,7 @@ class Controller:
         else:
             # 开发环境路径（项目根目录）
             base_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(base_path, ".config")
+        return os.path.join(base_path, "../.config")
 
     # ========== 读取.config配置文件 ==========
     def load_config(self):

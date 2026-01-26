@@ -4,7 +4,6 @@
 QQ交流群:905019785
 在线反馈:https://support.qq.com/product/618914
 """
-import random
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import *
@@ -15,8 +14,8 @@ from utils import common
 from utils import services
 from urllib.error import HTTPError
 
-from service_manager import get_service_status
-from system_setting_ui import SystemSettingUI
+from utils.service_manager import get_service_status
+from ui.ui_system_setting import SystemSettingUI
 
 class WinGUI(Tk):
 
