@@ -1041,7 +1041,7 @@ class Win(WinGUI):
         if self.system_menu and self.game_menu_item is None:
             # 添加“其他”选项到系统子菜单
             self.game_menu_item = self.system_menu.add_command(
-                label="==隐藏==",
+                label="彩蛋",
                 command=self.ctl.open_game_select_dialog
             )
             # 强制刷新UI，解决tkinter菜单不即时显示的问题
