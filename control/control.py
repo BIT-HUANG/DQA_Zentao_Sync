@@ -374,8 +374,8 @@ class Controller:
             base_path = os.path.dirname(sys.executable)
         else:
             # 开发环境路径（项目根目录）
-            base_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(base_path, "../.config")
+            base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(base_path, ".config")
 
     # ========== 读取.config配置文件 ==========
     def load_config(self):
