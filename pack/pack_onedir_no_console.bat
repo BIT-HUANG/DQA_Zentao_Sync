@@ -10,7 +10,7 @@ echo %ENTRY_DIR%
 :: Start packaging the program
 echo Packaging %PROGRAM_NAME%.exe (no console mode)...
 cd "%ENTRY_DIR%"
-echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm --noconsole ^
+echo y | pyinstaller --onedir --noupx --clean --log-level INFO --noconfirm --noconsole ^
 --name %OUTPUT_EXE_NAME% ^
 --hidden-import=json --hidden-import=colorama --hidden-import=jira --hidden-import=translate --hidden-import=openpyxl ^
 --hidden-import=flask --hidden-import=flask.json --hidden-import=werkzeug --hidden-import=jinja2 ^
@@ -18,6 +18,9 @@ echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm --no
 --hidden-import=ngrok --hidden-import=ngrok._ffi --hidden-import=ngrok._impl --hidden-import=ngrok.api ^
 --hidden-import=asyncio --hidden-import=threading --hidden-import=ctypes ^
 --hidden-import=psutil ^
+--hidden-import=pygame --hidden-import=pygame.font --hidden-import=pygame.mixer --hidden-import=pygame.event ^
+--add-data "data;data" ^
+--add-data "resources;./resources" ^
 --add-data "portal.py;." ^
 --add-data "utils/service_manager.py;." ^
 --add-data "ui/ui_system_setting.py;." ^

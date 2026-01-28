@@ -20,7 +20,7 @@ echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm --no
 --hidden-import=psutil ^
 --hidden-import=pygame --hidden-import=pygame.font --hidden-import=pygame.mixer --hidden-import=pygame.event ^
 --add-data "data;data" ^
---add-data "resources;resources" ^
+--add-data "resources;./resources" ^
 --add-data "portal.py;." ^
 --add-data "utils/service_manager.py;." ^
 --add-data "ui/ui_system_setting.py;." ^

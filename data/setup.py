@@ -4,7 +4,7 @@ __author__ = 'justinarmstrong'
 This module initializes the display and creates dictionaries of resources.
 """
 
-import os
+import os,sys
 import pygame as pg
 from . import tools
 from . import constants as c
@@ -22,6 +22,14 @@ SFX = None
 def init_game():
     """游戏核心初始化函数 → 封装所有Pygame初始化、窗口创建、资源加载逻辑"""
     global SCREEN, SCREEN_RECT, FONTS, MUSIC, GFX, SFX  # 声明使用全局变量
+    # ========== 新增：PyInstaller 路径适配（关键） ==========
+    # 当 exe 运行时，_MEIPASS 是 PyInstaller 自动创建的临时目录（存放嵌入的资源）
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS  # exe 内部资源的根路径
+    else:
+        base_path = os.path.abspath(".")  # 开发环境下的项目根路径
+    # 拼接 resources 绝对路径（适配 exe 内部和开发环境）
+    resources_path = os.path.join(base_path, "resources")
     # 原所有顶级执行代码，全部移入此函数内
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pg.init()
@@ -30,7 +38,7 @@ def init_game():
     SCREEN = pg.display.set_mode(c.SCREEN_SIZE)
     SCREEN_RECT = SCREEN.get_rect()
     # 资源加载（字体、音乐、图像、音效）
-    FONTS = tools.load_all_fonts(os.path.join("resources","fonts"))
-    MUSIC = tools.load_all_music(os.path.join("resources","music"))
-    GFX   = tools.load_all_gfx(os.path.join("resources","graphics"))
-    SFX   = tools.load_all_sfx(os.path.join("resources","sound"))
+    FONTS = tools.load_all_fonts(os.path.join(resources_path,"fonts"))
+    MUSIC = tools.load_all_music(os.path.join(resources_path,"music"))
+    GFX   = tools.load_all_gfx(os.path.join(resources_path,"graphics"))
+    SFX   = tools.load_all_sfx(os.path.join(resources_path,"sound"))

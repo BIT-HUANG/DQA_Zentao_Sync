@@ -3,12 +3,12 @@ setlocal
 
 :: Define source directory and target directory
 set PROGRAM_NAME=DQA_SYNC
-set OUTPUT_EXE_NAME=DQA_SYNC_CONSOLE
+set OUTPUT_EXE_NAME=DQA_SYNC_NO_CONSOLE
 set ENTRY_DIR=%~dp0..\
 echo %ENTRY_DIR%
 
 :: Start packaging the program
-echo Packaging %PROGRAM_NAME%.exe...
+echo Packaging %PROGRAM_NAME%.exe (no console mode)...
 cd "%ENTRY_DIR%"
 echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
 --name %OUTPUT_EXE_NAME% ^
@@ -18,6 +18,9 @@ echo y | pyinstaller --onefile --noupx --clean --log-level INFO --noconfirm ^
 --hidden-import=ngrok --hidden-import=ngrok._ffi --hidden-import=ngrok._impl --hidden-import=ngrok.api ^
 --hidden-import=asyncio --hidden-import=threading --hidden-import=ctypes ^
 --hidden-import=psutil ^
+--hidden-import=pygame --hidden-import=pygame.font --hidden-import=pygame.mixer --hidden-import=pygame.event ^
+--add-data "data;data" ^
+--add-data "resources;./resources" ^
 --add-data "portal.py;." ^
 --add-data "utils/service_manager.py;." ^
 --add-data "ui/ui_system_setting.py;." ^
