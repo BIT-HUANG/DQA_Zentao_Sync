@@ -19,8 +19,7 @@ echo y | pyinstaller --onedir --noupx --clean --log-level INFO --noconfirm ^
 --hidden-import=asyncio --hidden-import=threading --hidden-import=ctypes ^
 --hidden-import=psutil ^
 --hidden-import=pygame --hidden-import=pygame.font --hidden-import=pygame.mixer --hidden-import=pygame.event ^
---add-data "bonus/mario/data;data" ^
---add-data "bonus/mario/resources;./resources" ^
+--add-data "bonus/mario;bonus/mario" ^
 --add-data "portal.py;." ^
 --add-data "utils/service_manager.py;." ^
 --add-data "ui/ui_system_setting.py;." ^

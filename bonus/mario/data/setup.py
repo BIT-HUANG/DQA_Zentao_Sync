@@ -26,20 +26,18 @@ def init_game():
 
     # ========== 新增：PyInstaller 路径适配（关键） ==========
     # 当 exe 运行时，_MEIPASS 是 PyInstaller 自动创建的临时目录（存放嵌入的资源）
-    # 1. 优先判断是否是PyInstaller打包后的环境（exe运行）
     if hasattr(sys, '_MEIPASS'):
-        # 打包后：resources/data 直接在exe解压的临时目录（sys._MEIPASS）根目录
+        # 打包后环境：sys._MEIPASS 是exe解压根目录 → 拼接 bonus/mario/xxx
         base_path = sys._MEIPASS
-        resources_path = os.path.normpath(os.path.join(base_path, "resources"))
-        data_path = os.path.normpath(os.path.join(base_path, "data"))
+        resources_path = os.path.normpath(os.path.join(base_path, "bonus/mario/resources"))
+        data_path = os.path.normpath(os.path.join(base_path, "bonus/mario/data"))
     else:
-        # 开发环境：从当前setup.py所在的data目录 → 上级（bonus/mario）→ resources目录
-        current_script_dir = os.path.dirname(os.path.abspath(__file__))  # data目录（bonus/mario/data）
-        # 拼接resources路径：data目录向上一级（bonus/mario）→ resources文件夹
-        resources_relative_path = os.path.join(current_script_dir, "../resources")
-        resources_path = os.path.normpath(resources_relative_path)
-        # 开发环境的data路径：直接用当前脚本所在的data目录（bonus/mario/data）
-        data_path = current_script_dir
+        # 开发环境：从当前setup.py所在目录（bonus/mario/data）向上拼接
+        current_script_dir = os.path.dirname(os.path.abspath(__file__))  # 开发环境下是 bonus/mario/data
+        # 方式1：直接拼接上级目录的 bonus/mario（通用，推荐）
+        # （如果setup.py本身就在bonus/mario/data下，也可以简化为：）
+        resources_path = os.path.normpath(os.path.join(current_script_dir, "../resources"))
+        data_path = current_script_dir  # 开发环境下data就是当前脚本目录
 
 
     # 原所有顶级执行代码，全部移入此函数内
