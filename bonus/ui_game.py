@@ -10,7 +10,7 @@ from bonus.bn_snake import GameSnakeWindow
 from bonus.bn_2048 import Game2048Window
 from bonus.bn_tetris import GameTetrisWindow
 # 导入超级玛丽核心启动函数（复刻mario_level_1.py的核心逻辑）
-from data.main import main as mario_main
+from bonus.mario.data.main import main as mario_main
 #========mario module import end========
 
 

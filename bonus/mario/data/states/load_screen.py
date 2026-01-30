@@ -1,6 +1,6 @@
 __author__ = 'justinarmstrong'
 
-from .. import setup, tools
+from .. import tools
 from .. import constants as c
 from .. import game_sound
 from ..components import info

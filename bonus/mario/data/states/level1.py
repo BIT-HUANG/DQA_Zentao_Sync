@@ -73,8 +73,8 @@ class Level1(tools._State):
     def setup_ground(self):
         """Creates collideable, invisible rectangles over top of the ground for
         sprites to walk on"""
-        ground_rect1 = collider.Collider(0, c.GROUND_HEIGHT,    2953, 60)
-        ground_rect2 = collider.Collider(3048, c.GROUND_HEIGHT,  635, 60)
+        ground_rect1 = collider.Collider(0, c.GROUND_HEIGHT, 2953, 60)
+        ground_rect2 = collider.Collider(3048, c.GROUND_HEIGHT, 635, 60)
         ground_rect3 = collider.Collider(3819, c.GROUND_HEIGHT, 2735, 60)
         ground_rect4 = collider.Collider(6647, c.GROUND_HEIGHT, 2300, 60)
 
@@ -158,8 +158,8 @@ class Level1(tools._State):
         self.powerup_group = pg.sprite.Group()
         self.brick_pieces_group = pg.sprite.Group()
 
-        brick1  = bricks.Brick(858,  365)
-        brick2  = bricks.Brick(944,  365)
+        brick1  = bricks.Brick(858, 365)
+        brick2  = bricks.Brick(944, 365)
         brick3  = bricks.Brick(1030, 365)
         brick4  = bricks.Brick(3299, 365)
         brick5  = bricks.Brick(3385, 365)
@@ -459,9 +459,9 @@ class Level1(tools._State):
 
             elif checkpoint.name == 'secret_mushroom' and self.mario.y_vel < 0:
                 mushroom_box = coin_box.Coin_box(checkpoint.rect.x,
-                                        checkpoint.rect.bottom - 40,
+                                                 checkpoint.rect.bottom - 40,
                                         '1up_mushroom',
-                                        self.powerup_group)
+                                                 self.powerup_group)
                 mushroom_box.start_bump(self.moving_score_list)
                 self.coin_box_group.add(mushroom_box)
 
@@ -774,17 +774,17 @@ class Level1(tools._State):
                     brick.kill()
                     self.brick_pieces_group.add(
                         bricks.BrickPiece(brick.rect.x,
-                                               brick.rect.y - (brick.rect.height/2),
-                                               -2, -12),
+                                          brick.rect.y - (brick.rect.height/2),
+                                          -2, -12),
                         bricks.BrickPiece(brick.rect.right,
-                                               brick.rect.y - (brick.rect.height/2),
-                                               2, -12),
+                                          brick.rect.y - (brick.rect.height/2),
+                                          2, -12),
                         bricks.BrickPiece(brick.rect.x,
-                                               brick.rect.y,
-                                               -2, -6),
+                                          brick.rect.y,
+                                          -2, -6),
                         bricks.BrickPiece(brick.rect.right,
-                                               brick.rect.y,
-                                               2, -6))
+                                          brick.rect.y,
+                                          2, -6))
                 else:
                     setup.SFX['bump'].play()
                     if brick.coin_total > 0:
@@ -1267,7 +1267,7 @@ class Level1(tools._State):
         self.game_info[c.SCORE] += 100
         self.moving_score_list.append(
             score.Score(enemy.rect.centerx - self.viewport.x,
-                        enemy.rect.y,100))
+                        enemy.rect.y, 100))
         fireball.kill()
         enemy.kill()
         self.sprites_about_to_die_group.add(enemy, fireball)
