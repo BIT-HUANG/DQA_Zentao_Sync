@@ -65,7 +65,8 @@ class WinGUI(Tk):
     def __init__(self):
         super().__init__()
         self.__win()
-
+        self.table_vbar = None  # 垂直滚动条
+        self.table_hbar = None  # 水平滚动条
         # 服务状态标签
         self.service_status_label = tk.Label(
             self,
@@ -158,7 +159,7 @@ class WinGUI(Tk):
         self.title("DQA 同步工具")
         # 设置窗口大小、居中
         width = 1280
-        height = 800
+        height = 640
         screenwidth = self.winfo_screenwidth()
         screenheight = self.winfo_screenheight()
         geometry = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
@@ -192,15 +193,23 @@ class WinGUI(Tk):
         hbar.config(command=widget.xview)
         hbar.place(relx=x / pw, rely=(y + h) / ph, relwidth=w / pw, anchor='sw')
 
-    def create_bar(self,master, widget,is_vbar,is_hbar, x, y, w, h, pw, ph):
-        vbar, hbar = None, None
+    def create_bar(self, master, widget, is_vbar, is_hbar, x, y, w, h, pw, ph):
+        # ======== 核心修复1：先销毁旧的滚动条（如果存在） ========
+        if self.table_vbar and self.table_vbar.winfo_exists():
+            self.table_vbar.destroy()
+        if self.table_hbar and self.table_hbar.winfo_exists():
+            self.table_hbar.destroy()
+        # ==========================================================
+
+        # 重新初始化滚动条
+        self.table_vbar, self.table_hbar = None, None
         if is_vbar:
-            vbar = Scrollbar(master)
-            self.v_scrollbar(vbar, widget, x, y, w, h, pw, ph)
+            self.table_vbar = Scrollbar(master)  # 赋值给全局实例变量
+            self.v_scrollbar(self.table_vbar, widget, x, y, w, h, pw, ph)
         if is_hbar:
-            hbar = Scrollbar(master, orient="horizontal")
-            self.h_scrollbar(hbar, widget, x, y, w, h, pw, ph)
-        self.scrollbar_autohide(vbar, hbar, widget)
+            self.table_hbar = Scrollbar(master, orient="horizontal")  # 赋值给全局实例变量
+            self.h_scrollbar(self.table_hbar, widget, x, y, w, h, pw, ph)
+        self.scrollbar_autohide(self.table_vbar, self.table_hbar, widget)
 
     # ========== 窗口大小变化事件，刷新表格尺寸 ==========
     def on_window_resize(self, event):
@@ -217,22 +226,19 @@ class WinGUI(Tk):
             self.tk_table_table_1.place(x=20, y=75, width=table_w, height=table_h)
             # 重新创建滚动条
             self.create_bar(self, self.tk_table_table_1, True, True, 20,75,table_w,table_h,win_w,win_h)
-            # 更新输入框宽度
-            self.tk_input_jql.place(x=100, y=20, width=win_w - 340, height=30)
-            # 更新按钮位置
-            self.tk_button_button_search.place(x=win_w - 200, y=20, width=80, height=30)
-            self.tk_button_button_update.place(x=win_w - 110, y=20, width=80, height=30)
-            # ========== 禅道创建区域 跟随窗口拉伸自动适配位置 ==========
-            # 固定位置：窗口右下角、表格下方，间距统一20px，完美对齐
-            base_x = win_w - 300
-            base_y = win_h - 50
-            self.tk_label_zentao_create.place(x=base_x - 190, y=base_y, width=80, height=30) # label
-            self.tk_button_del_record.place(x=base_x - 110, y=base_y, width=100, height=30)    # 删除按钮
-            self.tk_button_add_record.place(x=base_x, y=base_y, width=100, height=30)         # 添加按钮
-            self.tk_button_submit_create.place(x=base_x + 110, y=base_y, width=100, height=30)# 提交按钮
-            # ========== 服务站是区域 跟随窗口拉伸自动适配位置 ==========
-            # 固定位置：窗口左下角、表格下方，间距统一20px，完美对齐
-            self.service_status_label.place(x=0, y=base_y, width=800, height=25)
+            #==========新布局================
+            base_y = win_h - 40
+            #==========新布局表格上方=====================
+            self.tk_label_zentao_create.place(x= 20, y=20, width=80, height=30)  # label
+            self.tk_button_del_record.place(x=100, y=20, width=100, height=30)  # 删除按钮
+            self.tk_button_add_record.place(x=220, y=20, width=100, height=30)  # 添加按钮
+            self.tk_button_submit_create.place(x=340, y=20, width=100, height=30)  # 提交按钮
+            self.service_status_label.place(x=500, y=20, width=800, height=30) # 服务状态
+            #==========新布局表格下方=====================
+            self.tk_label_label_1.place(x=20, y=base_y, width=80, height=30) # jql标签
+            self.tk_input_jql.place(x=100, y=base_y, width=win_w - 340, height=30) # jql输入框
+            self.tk_button_button_search.place(x=win_w - 200, y=base_y, width=80, height=30) #jql查询按钮
+            self.tk_button_button_update.place(x=win_w - 110, y=base_y, width=80, height=30) # jql更新按钮
 
     def __tk_label_label_1(self,parent):
         label = Label(parent,text="JQL： ",anchor="center", )
@@ -248,7 +254,7 @@ class WinGUI(Tk):
             tk_table.column(text, anchor='w', width=width, stretch=False)  # stretch 不自动拉伸
 
         tk_table.place(x=20, y=75, width=1200, height=665)
-        self.create_bar(parent, tk_table,True, True,20, 75, 1200,665,1280,800)
+        # self.create_bar(parent, tk_table,True, True,20, 75, 1200,665,1280,800)
 
         # ========== 绑定表格单元格点击事件 ==========
         tk_table.bind('<ButtonRelease-1>', self.show_history_detail)
@@ -262,7 +268,7 @@ class WinGUI(Tk):
         return btn
 
     def __tk_button_button_update(self,parent):
-        btn = Button(parent, text="更新所有", takefocus=False,)
+        btn = Button(parent, text="更新备注", takefocus=False,)
         btn.place(x=1050, y=20, width=80, height=30)
         return btn
 
