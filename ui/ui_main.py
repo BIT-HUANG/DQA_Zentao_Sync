@@ -970,7 +970,6 @@ class WinGUI(Tk):
             self.show_tooltip(f"✅ 成功删除 {del_count} 条记录，保存失败：{save_msg}")
     # ========== 禅道创建-添加记录 核心方法结束 ==========
 
-
     # ========== 主线程调用UI方法的工具函数 ==========
     def run_in_main_thread(self, func, *args, **kwargs):
         """优化版：支持位置参数 + 关键字参数"""
