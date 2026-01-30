@@ -6,7 +6,7 @@ import json
 from urllib.request import HTTPError
 import tkinter.messagebox as messagebox
 from ui.ui_system_setting import SystemSettingUI
-from ui.ui_game import GameUI
+from bonus.ui_game import GameUI
 import sys
 import os
 
