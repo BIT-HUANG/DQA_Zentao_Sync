@@ -1,17 +1,16 @@
 import tkinter as tk
 from tkinter import ttk
-
-#========mario module import========
 import threading
+import asyncio
 import pygame as pg
 from tkinter import messagebox
 from bonus.bn_breakout import GameBreakoutWindow
 from bonus.bn_snake import GameSnakeWindow
 from bonus.bn_2048 import Game2048Window
 from bonus.bn_tetris import GameTetrisWindow
-# 导入超级玛丽核心启动函数（复刻mario_level_1.py的核心逻辑）
 from bonus.mario.data.main import main as mario_main
-#========mario module import end========
+from bonus.flappybird.src.flappy import Flappy
+
 
 
 class GameUI:
@@ -20,6 +19,7 @@ class GameUI:
         self.about_dialog = None  # 原弹窗引用
         self.game_window = None  # 游戏窗口引用
         self.mario_thread = None  # mario线程标记（避免重复启动）
+        self.flappy_thread = None  # flappybird线程标记（避免重复启动）
 
     def create_game_select_dialog(self):
         """创建关于弹窗（保持原有逻辑不变）"""
@@ -52,6 +52,7 @@ class GameUI:
         content_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 
         # 修改Breakout按钮的绑定函数
+        ttk.Button(content_frame, text="Flappy", command=self.open_flappy_game).pack(padx=5, pady=5)
         ttk.Button(content_frame, text="Mario", command=self.open_mario_game).pack(padx=5, pady=5)
         ttk.Button(content_frame, text="Tetris", command=self.open_tetris_game).pack(padx=5, pady=5)
         ttk.Button(content_frame, text="2048", command=self.open_2048_game).pack(padx=5, pady=5)
@@ -59,7 +60,35 @@ class GameUI:
         ttk.Button(content_frame, text="Snake", command=self.open_snake_game).pack(padx=5, pady=5)
         ttk.Button(content_frame, text="关闭", command=self.on_close_game_select).pack(padx=5, pady=5)
 
-    # ========== open_mario_game 直接内嵌启动逻辑 ==========
+    def open_flappy_game(self):
+        """打开Flappy游戏（异步函数放到独立线程运行，不阻塞tkinter）"""
+        # 1. 关闭游戏选择弹窗
+        self.on_close_game_select()
+
+        # 2. 防止重复启动
+        if self.flappy_thread and self.flappy_thread.is_alive():
+            messagebox.showinfo("提示", "Flappy游戏已在运行中！")
+            return
+
+        # 3. 定义Flappy启动函数（封装异步逻辑）
+        def run_flappy():
+            try:
+                # 原始项目的核心逻辑：运行异步的 start() 方法
+                flappy_game = Flappy()
+                asyncio.run(flappy_game.start())
+            except Exception as e:
+                # 捕获异常并弹窗提示
+                messagebox.showerror("游戏运行异常", f"Flappy运行出错：\n{str(e)}")
+            finally:
+                # 清理资源（如果Flappy用了pygame，补充pg.quit()；根据实际情况调整）
+                # pg.quit()  # 如果Flappy基于pygame，打开这行
+                # 重置线程标记
+                self.flappy_thread = None
+
+        # 4. 新开线程运行Flappy（daemon=True：tkinter关闭时线程自动退出）
+        self.flappy_thread = threading.Thread(target=run_flappy, daemon=True)
+        self.flappy_thread.start()
+
     def open_mario_game(self):
         """打开超级玛丽游戏（内嵌启动逻辑，新开线程不阻塞tkinter）"""
         # 1. 关闭原有游戏选择弹窗（保留原有UI交互）
